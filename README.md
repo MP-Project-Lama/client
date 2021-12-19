@@ -26,10 +26,6 @@
 
 
 
-# UML Diagram 
-
-![uml](./diagrams/uml.png)
-
 
 
 # Router Routes
@@ -50,6 +46,11 @@
  
 
 
+# UML Diagram 
+
+![uml](./diagrams/uml.png)
+
+
 ## Components
 
 * Signup 
@@ -67,10 +68,28 @@
 * Profile
 
 
+# Wireframe Design 
+
+![home](./diagrams/home.png)
+
+![register/login](./diagrams/register.png)
+
+![blog](./diagrams/blog.png)
+
+![explore](./diagrams/explore.png)
+
+![profile](./diagrams/profile.png)
+
+![dm](./diagrams/dm.png)
+
+
+
+
+
 # Links
 
 #### Trello 
-You can visit My Trello [Here](https://trello.com/b/v5XlqqjM/mp-project-lama)
+You can visit my Trello [Here](https://trello.com/b/v5XlqqjM/mp-project-lama)
 
 #### Git
 - [Client repository Link](https://github.com/MP-Project-Lama/client)
