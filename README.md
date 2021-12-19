@@ -9,7 +9,7 @@
 # Router Routes
 
 | Path              | Component         |   permissions     |                           Behavior                                               |               
-| :---              |     :---:         |     :---:         |                             ---:                                                 |
+| :---              |     :---:         |     :---:         |                             :---:                                                |
 | /                 |     Home          |      Public       |    Home Page, About , Concat                                                     |
 | /signup           |     Signup        |      Public       |    Signup form, navigate to the login form                                       |
 | /login            |     Login         |      Public       |    Login form, navigate to the home page                                         |
@@ -31,13 +31,15 @@
 * Home 
 * Blog
    - Post
-* Explre
+* Explore
   - Collection
     - DirectMessage
   - Designer
   - Material
 
 * Profile
+
+
 
 ### Trello 
 => https://trello.com/b/v5XlqqjM/mp-project-lama
