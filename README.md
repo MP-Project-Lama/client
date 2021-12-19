@@ -55,6 +55,7 @@
 * Signup 
 * Login 
 * Home 
+* NavBar
 * Blog
    - Post
 * Explore
