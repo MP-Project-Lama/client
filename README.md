@@ -67,6 +67,15 @@
 * Profile
 
 
+# Links
 
-### Trello 
-=> https://trello.com/b/v5XlqqjM/mp-project-lama
+#### Trello 
+You can visit [My Trello Here](https://trello.com/b/v5XlqqjM/mp-project-lama)
+
+#### Git
+- [Client repository Link](https://github.com/MP-Project-Lama/client)
+- [Server repository Link](https://github.com/MP-Project-Lama/server)
+- [Deployed App Link ](https://github.com/MP-Project-Lama/server)
+
+#### Slides
+ You can display [my project presentation here](https://github.com/MP-Project-Lama/server)
