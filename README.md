@@ -70,7 +70,7 @@
 # Links
 
 #### Trello 
-You can visit [My Trello Here](https://trello.com/b/v5XlqqjM/mp-project-lama)
+You can visit My Trello [Here](https://trello.com/b/v5XlqqjM/mp-project-lama)
 
 #### Git
 - [Client repository Link](https://github.com/MP-Project-Lama/client)
@@ -78,4 +78,4 @@ You can visit [My Trello Here](https://trello.com/b/v5XlqqjM/mp-project-lama)
 - [Deployed App Link ](https://github.com/MP-Project-Lama/server)
 
 #### Slides
- You can display [my project presentation here](https://github.com/MP-Project-Lama/server)
+ You can display my presentation slides [here](https://github.com/MP-Project-Lama/server)
