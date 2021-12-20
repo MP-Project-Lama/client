@@ -73,14 +73,18 @@
 #### Home Page
 ![home](./diagrams/home.png)
 
+#### Login/Register Page
 ![register/login](./diagrams/register.png)
 
+#### Blog Page
 ![blog](./diagrams/blog.png)
-
+ #### Explore Page
 ![explore](./diagrams/explore.png)
 
+#### Profile Page
 ![profile](./diagrams/profile.png)
-
+ 
+ #### Direct Message Room
 ![dm](./diagrams/dm.png)
 
 
