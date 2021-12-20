@@ -70,6 +70,7 @@
 
 # Wireframe Design 
 
+#### Home Page
 ![home](./diagrams/home.png)
 
 ![register/login](./diagrams/register.png)
