@@ -1,7 +1,9 @@
 # client
+# Tuwaiq - Masterpiece-Project
 
+# Description
 
-# Masterpiece-Project
+this is client side for fashion site , built with React.js , it's a platform that gathers fashion designers with their clients , and let them share their experiences , ideas in a timeline blog 
 
 ## User Story: 
 - *signe up* : As an anon you can sign up in the platform so that you can navigate through the app . 
