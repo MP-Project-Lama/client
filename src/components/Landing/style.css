@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Amatic+SC&family=Amiri:wght@700&family=Architects+Daughter&family=Cinzel:wght@500&family=Francois+One&family=Handlee&family=Lobster&family=Mali:wght@200;300&family=Mulish&family=Neucha&family=Quicksand:wght@300&family=Roboto+Mono:wght@100&family=Sawarabi+Mincho&family=Source+Sans+3&display=swap');
+.home-bg{
+    display: block;
+   
+   
+}
+.home-bg img{
+width: 1850px ;
+height: 700px;
+margin: 15px;
+justify-content: center;
+}
+.about{
+    margin: 70px;
+    display: flex;
+    flex-direction: row;
+}
+.about-section{
+    width: 40%;
+    padding-right: 60px;
+    font-size: 30px;
+
+}
+.about-section p{
+    font-family: 'Quicksand', sans-serif;
+}
+.about-pic{
+    width: 250px;
+}
+.about-pic img{
+height: 1000px;
+}
+
+.concat{
+    margin: 40px;
+
+}
+hr{
+  border-color:rgba(180, 180, 180, 0.274);
+}
+.concat h3{
+    font-size: 25px;
+}
+.concat a{
+    font-size: 20px;
+    color: dimgrey;
+}
+.concat-input{
+    width: 390px;
+    height: 40px;
+    font-family: 'Quicksand', sans-serif;
+    text-align: center;
+    font-size: 20px;
+}
+
+.concat-submit{
+    width: 160px;
+    background-color: black;
+        font-size: 20px;
+
+    font-family: 'Quicksand', sans-serif;
+    color: white;
+    height: 40px;
+}
+.concat-form{
+
+}
