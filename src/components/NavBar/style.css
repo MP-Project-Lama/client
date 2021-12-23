@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Acme&family=Amatic+SC&family=Amiri:wght@700&family=Architects+Daughter&family=Cinzel:wght@500&family=Francois+One&family=Handlee&family=Lobster&family=Mali:wght@200;300&family=Mulish&family=Neucha&family=Quicksand:wght@300&family=Roboto+Mono:wght@100&family=Sawarabi+Mincho&family=Source+Sans+3&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Amatic+SC&family=Amiri:wght@700&family=Architects+Daughter&family=Barlow:wght@100&family=Cinzel:wght@500&family=Francois+One&family=Handlee&family=Lobster&family=Mali:wght@200;300&family=Mulish&family=Neucha&family=Quicksand:wght@300&family=Roboto+Mono:wght@100&family=Sawarabi+Mincho&family=Source+Sans+3&display=swap');
 *{
     margin: 0;
     padding: 0;
@@ -10,6 +10,7 @@
      display: flex;
     flex-direction: row;
     justify-content:space-evenly;
+    align-items: flex-end;
     list-style-type: none;
     padding: 50px;
    
@@ -17,13 +18,14 @@
 }
 .navBar a{
      text-decoration: none;
-     font-size: 20px;
+     font-size: 23px;
      color: black;
-    font-family: 'Quicksand', sans-serif;
+   font-family: 'Barlow', sans-serif;
 
 
 
 }
 .navBar a:hover{
+
 }
 

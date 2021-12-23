@@ -9,21 +9,18 @@ import "./style.css";
 
 const Registration = () => {
   const navigate = useNavigate();
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [users, setUsers] = useState([]);
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [identity, setIdentity] = useState("");
+  const [message, setMessage] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-
-
-
 
   const state = useSelector((state) => {
     return {
       token: state.Login.token,
-
     };
   });
 
@@ -38,8 +35,7 @@ const Registration = () => {
     setUsers(res.data);
   };
 
-  const signup = async (e) => {
-    e.preventDefault();
+  const signup = async () => {
     let exist = false;
     users.filter((user) => {
       if (user.email === email || user.username === username) {
@@ -48,6 +44,7 @@ const Registration = () => {
       }
     });
     if (exist) {
+      console.log("exist");
       Swal.fire({
         title: "Email or Username Already Exist ",
         showClass: {
@@ -72,83 +69,125 @@ const Registration = () => {
     }
   };
 
-
-const login = async () => {
-  try {
-    const result = await axios.post(`${process.env.REACT_APP_BASE_URL}/login`, {
-      identity: identity,
-      password: password,
-    });
-    dispatch(
-      signIn({
-        role: result.data.result.role,
-        token: result.data.token,
-        user: result.data.result,
-      })
-    );
-    navigate("/");
-  } catch (error) {
-    console.log(error);
-  }
-};  
-
+  const login = async () => {
+    try {
+      const result = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/login`,
+        {
+          identity: identity,
+          password: loginPassword,
+        }
+      );
+console.log(result);
+      dispatch(
+        signIn({
+          role: result.data.result.role,
+          token: result.data.token,
+          user: result.data.result,
+          
+        })
+      );
+      if (result.res.status == 201) {
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error.response.data);
+      if (error.response.status == 404){
+        Swal.fire({
+          title: error.response.data.message,
+          showClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+        });
+      }
+      if (error.response.status == 403){
+        Swal.fire({
+          title: error.response.data.message,
+          showClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+        });
+      }
+      if (error.response.status == 404) {
+        Swal.fire({
+          title: error.response.data.message,
+          showClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+        });
+      }
+    }
+  };
+  const flipCard = () => {
+    document.querySelector("#flipper").classList.toggle("flip");
+  };
   return (
-    <div>
+    <div className="flip-container">
       {!state.token ? (
-        <div>
-          <form className="signupForm">
-            <input
-              type="text"
-              placeholder="username"
-              required
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder="Email"
-              required
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              className="password"
-              required
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <input
-              type="submit"
-              className="password"
-              name="submit"
-              value="Signup"
-              onSubmit={(e) => {
-                signup();
-              }}
-            />
-          </form>
-          <div>
+        <div className="flipper" id="flipper">
+          <div className="front">
+            <h2 className="title"> Login </h2>
             <input
               type="email"
               name="email"
               placeholder="Email or Username"
               required
-              className="email"
+              className="inputs"
               onChange={(e) => setIdentity(e.target.value)}
             />
             <input
               type="password"
               name="password"
               placeholder="Password"
-              className="password"
+              className="inputs"
               required
               onChange={(e) => setLoginPassword(e.target.value)}
             />
             <input
               type="submit"
               value="login"
-              className="loginBtn"
+              className="signup-submit"
               onClick={login}
             />
+            <p className="flipbutton" onClick={flipCard}>
+              Not a member? Sign up here
+            </p>
+          </div>
+          <div className="back">
+            <h2 className="title">Register</h2>
+            <input
+              type="text"
+              placeholder="username"
+              className="inputs"
+              required
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Email"
+              className="inputs"
+              required
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              className="inputs"
+              required
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <input
+              type="submit"
+              className="signup-submit"
+              name="submit"
+              value="Signup"
+              onClick={() => {
+                signup();
+              }}
+            />
+            <p className="flipbutton" onClick={flipCard}>
+              Are you a member? Login here
+            </p>
           </div>
         </div>
       ) : (

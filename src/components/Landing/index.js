@@ -54,6 +54,7 @@ const Home = () => {
             value="SUBSCRIBE"
             className="concat-submit"
           />
+          
         </form>
       </div>
     </div>
