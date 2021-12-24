@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import NavBar from '../NavBar';
+import NavBar from "../NavBar";
 import "./style.css";
+import { Link } from "react-router-dom";
 
 const Blog = () => {
-const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
   const state = useSelector((state) => {
     return {
       token: state.Login.token,
     };
   });
-  
-  
 
-
-useEffect(() => {  
-  getThePosts();
-}, [])
+  useEffect(() => {
+    getThePosts();
+  }, []);
 
   /// get the posts
   const getThePosts = async () => {
@@ -33,32 +31,33 @@ useEffect(() => {
     }
   };
 
+  return (
+    <div className="blog-container">
+      <NavBar />
+      <div className="blog-header">
+        <img src="https://en.vogue.me/wp-content/uploads/2016/12/Fashion.jpg" />
+        <h2>Blog</h2>
+      </div>
 
+      
 
-    return (
-      <div className="blog-container">
-        <NavBar />
-        <div className="blog-header">
-          <img src="https://en.vogue.me/wp-content/uploads/2016/12/Fashion.jpg" />
-          <h2>Blog</h2>
-        </div>
-
-        {posts.map((post) => {
-          return (
-            <div className="post">
+      {posts.map((post) => {
+        return (
+          <div className="post" key={post._id}>
+            <Link to={`/post/${post._id}`}>
               <ul>
                 <li key={post._id}>
                   <img src={post.media.map((img) => img.img1)} />
                   <h3> {post.title} </h3>
-                  
                 </li>
-                <hr/>
+                <hr />
               </ul>
-            </div>
-          );
-        })}
-      </div>
-    );
-}
+            </Link>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
 
-export default Blog
+export default Blog;

@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router";
 import Home from "./components/Landing";
 import Registration from "./components/Registration"
 import Blog from "./components/Blog";
+import Post from "./components/Post";
 import Explore from "./components/Explore";
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/post/:id" element={<Post />} />
         <Route path="/explore" element={<Explore />} />
       </Routes>
     </div>
