@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Amatic+SC&family=Amiri:wght@700&family=Architects+Daughter&family=Barlow:wght@100&family=Cinzel:wght@500&family=EB+Garamond&family=Francois+One&family=Handlee&family=Libre+Baskerville:wght@700&family=Lobster&family=Mali:wght@200;300&family=Mulish&family=Neucha&family=Quicksand:wght@300&family=Roboto+Mono:wght@100&family=Sawarabi+Mincho&family=Source+Sans+3&display=swap');*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.blog-container{
+    width: 100%;
+
+}
+
+.blog-header{
+    width: 100%;
+  
+}
+.blog-header img{
+    width: 100%;
+    position: relative;
+}
+.post {
+    width: 60%;
+    margin: 60px 40px;
+}
+.post li {
+    display: flex;
+    flex-direction: row;
+}
+.post img {
+    width: 550px;
+   height: 400px;
+}
+.post h3{
+    font-family: 'EB Garamond', serif;
+    font-size: 40px;
+    margin: 10px 50px;
+
+}
+.post hr{
+    width: 1000px;
+    margin: 70px 30px;
+}
