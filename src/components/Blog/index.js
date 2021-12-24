@@ -1,10 +1,62 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import axios from "axios";
 import NavBar from '../NavBar';
+import "./style.css";
+
 const Blog = () => {
+const [posts, setPosts] = useState([]);
+  const state = useSelector((state) => {
+    return {
+      token: state.Login.token,
+    };
+  });
+  
+  
+
+
+useEffect(() => {  
+  getThePosts();
+}, [])
+
+  /// get the posts
+  const getThePosts = async () => {
+    try {
+      const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/blog`, {
+        headers: {
+          Authorization: `Bearer ${state.token}`,
+        },
+      });
+      setPosts(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+
     return (
-      <div>
+      <div className="blog-container">
         <NavBar />
-        hi , im the blog
+        <div className="blog-header">
+          <img src="https://en.vogue.me/wp-content/uploads/2016/12/Fashion.jpg" />
+          <h2>Blog</h2>
+        </div>
+
+        {posts.map((post) => {
+          return (
+            <div className="post">
+              <ul>
+                <li key={post._id}>
+                  <img src={post.media.map((img) => img.img1)} />
+                  <h3> {post.title} </h3>
+                  
+                </li>
+                <hr/>
+              </ul>
+            </div>
+          );
+        })}
       </div>
     );
 }

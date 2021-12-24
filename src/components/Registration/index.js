@@ -87,30 +87,32 @@ console.log(result);
           
         })
       );
-      if (result.res.status == 201) {
         navigate("/");
-      }
+      
     } catch (error) {
       console.log(error.response.data);
       if (error.response.status == 404){
+        setMessage(error.response.data.message)
         Swal.fire({
-          title: error.response.data.message,
+          title: message,
           showClass: {
             popup: "animate__animated animate__fadeOutUp",
           },
         });
       }
       if (error.response.status == 403){
+        setMessage(error.response.data.message);
         Swal.fire({
-          title: error.response.data.message,
+          title: message,
           showClass: {
             popup: "animate__animated animate__fadeOutUp",
           },
         });
       }
       if (error.response.status == 404) {
+        setMessage(error.response.data.message);
         Swal.fire({
-          title: error.response.data.message,
+          title: message,
           showClass: {
             popup: "animate__animated animate__fadeOutUp",
           },
