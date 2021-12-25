@@ -91,7 +91,7 @@ console.log(result);
       
     } catch (error) {
       console.log(error.response.data);
-      if (error.response.status == 404){
+      if (error.response.status === 404){
         setMessage(error.response.data.message)
         Swal.fire({
           title: message,
@@ -100,7 +100,7 @@ console.log(result);
           },
         });
       }
-      if (error.response.status == 403){
+      if (error.response.status === 403){
         setMessage(error.response.data.message);
         Swal.fire({
           title: message,
@@ -109,7 +109,7 @@ console.log(result);
           },
         });
       }
-      if (error.response.status == 404) {
+      if (error.response.status === 404) {
         setMessage(error.response.data.message);
         Swal.fire({
           title: message,
@@ -144,6 +144,7 @@ console.log(result);
           text: "Confirm your Email to Reset the Passwrd",
           confirmButtonColor: "#E07A5F",
         });
+        navigate("/verify/:id");
       } catch (error) {
         Swal.fire({
           icon: "error",

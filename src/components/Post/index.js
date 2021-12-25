@@ -8,10 +8,13 @@ import NavBar from "../NavBar";
 const Post = () => {
   const { id } = useParams();
   const [post, setPost] = useState([]);
+  const [comments, setComments] = useState([]);
+   const [comment, setComment] = useState([]);
 
   const state = useSelector((state) => {
     return {
       token: state.Login.token,
+      user: state.Login.user,
     };
   });
 
@@ -34,34 +37,94 @@ const Post = () => {
       console.log(error);
     }
   };
-
+/// to display all post's comments
+  const getTheComments = async ()=> {
+    try {
+      const comments = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/comments/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+          },
+        }
+      );
+      setComments(comments.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+//// to add comment 
+ const addComment = async () => {
+   try{
+await axios.post(
+     `${process.env.REACT_APP_BASE_URL}/comment`,
+     {
+       comment,
+       postID: id,
+     },
+     {
+       headers: {
+         Authorization: `Bearer ${state.token}`,
+       },
+     }
+   );
+   getTheComments();
+   } catch (error) {
+     console.log(error);
+   }
+   
+ };
   return (
     <>
       {!state.token ? (
         <div>
-          <h2>you have to Registr to be able to go there</h2>
+          <h2>
+            <Link to="/registration">
+              you have to Registr to be able to go there
+            </Link>
+          </h2>
         </div>
       ) : (
         <>
           <NavBar />
-          <div className="post-page">
-            {post.map((element, i) => {
-              return (
-                <>
-                  <div className="post-container">
-                    <h2 key={i}>{element.title}</h2>
-                    <h4>{element.createdBy}</h4>
-                    <img key={i} src={element.media.map((img) => img.img1)} />
+
+          {post.map((element, i) => {
+            return (
+              <>
+                <div className="post-page">
+                  <div key={element._id} className="post-container">
+                    <h2>{element.title}</h2>
+                    {/* <h4> hello there{element.createdBy}</h4> */}
+                    {/* <h4> {element.createdAt}</h4> */}
+                    <img
+                      src={element.media.map((img) => img.img1)}
+                      alt="post-img"
+                    />
                     <p>{element.desc.map((part) => part.part1)}</p>
-                    <img key={i} src={element.media.map((img) => img.img2)} />
+                    <img
+                      src={element.media.map((img) => img.img2)}
+                      alt="post-img"
+                    />
                     <p>{element.desc.map((part) => part.part2)}</p>
-                    <img key={i} src={element.media.map((img) => img.img3)} />
+                    <img
+                      src={element.media.map((img) => img.img3)}
+                      alt="post-img"
+                    />
                     <p>{element.desc.map((part) => part.part3)}</p>
+                    <textArea
+                      onChange={(e) => setComment(e.target.value)}
+                      className="comment-area"
+                    >
+                      Share us your comment ...
+                    </textArea>
+                    <button id="add" onClick={() => addComment()}>
+                      Add
+                    </button>
                   </div>
-                </>
-              );
-            })}
-          </div>
+                </div>
+              </>
+            );
+          })}
         </>
       )}
     </>

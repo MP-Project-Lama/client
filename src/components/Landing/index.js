@@ -30,7 +30,10 @@ const Home = () => {
           </p>
         </div>
         <div className="about-pic">
-          <img src="https://www.dior.com/couture/var/dior/storage/images/pushs-editos/folder-cruise-22-women/217c09a2975x1998/28006280-1-eng-GB/217c09a2975x1998_1440_1200.jpg" />
+          <img
+            src="https://www.dior.com/couture/var/dior/storage/images/pushs-editos/folder-cruise-22-women/217c09a2975x1998/28006280-1-eng-GB/217c09a2975x1998_1440_1200.jpg"
+            alt="home-img"
+          />
         </div>
       </div>
 
@@ -54,7 +57,6 @@ const Home = () => {
             value="SUBSCRIBE"
             className="concat-submit"
           />
-          
         </form>
       </div>
     </div>
