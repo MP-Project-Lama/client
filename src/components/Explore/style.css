@@ -1,0 +1,45 @@
+
+
+.collection-section {
+
+    display: flex;
+    flex-direction: row;
+}
+.collection-section img {
+     width: 350px;
+    height: 500px;
+}
+.collBtn{
+  display:block;
+}
+
+.designers-section {
+display: flex;
+ flex-direction: row;
+}
+.designers-card img { 
+    width: 350px;
+    height: 350px;
+}
+/* .designers-section {
+    display: flex;
+    flex-direction: row;
+
+} */
+
+/* .collection-section{
+    border: 1px solid black;
+}
+
+.category-section{
+     border: 1px solid black;
+}
+
+.men-section{
+     border: 1px solid black;
+
+}
+
+img {
+
+} */

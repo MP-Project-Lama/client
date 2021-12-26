@@ -1,67 +1,112 @@
-import React, { useEffect, useState } from 'react'
-import NavBar from '../NavBar';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import NavBar from "../NavBar";
+import axios from "axios";
+import "./style.css";
+import { Link } from "react-router-dom";
 const Explore = () => {
-  const [users , setUsers] = useState([]);
+  const [designers, setDesigners] = useState([]);
   const [collections, setCollections] = useState([]);
+  const [category, setCategory] = useState("");
+  const [weddingCollections, setWeddingCollections] = useState([]);
+  const [menCollections, setMenCollections] = useState([]);
 
 
+  useEffect(() => {
+    getTheDesignrs();
+    getAllCollections();
+    getWeddingCollections();
+    getMenCollections();
+  }, []);
 
-useEffect(()=> {
-getAllUsers();
-getAllCollections();
-},[])
+  const getTheDesignrs = async () => {
+    const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/designers`);
+    setDesigners(res.data);
+  };
 
+  ///
+  const getAllCollections = async () => {
+    const res = await axios.get(
+      `${process.env.REACT_APP_BASE_URL}/collections`
+    );
+    setCollections(res.data);
+  };
 
-   const getAllUsers = async () => {
-     const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/users`);
-     setUsers(res.data);
-   };
+  // / get the wedding collections 
+  const getWeddingCollections = async () => {
+    const category = "Wedding"
+    const res = await axios.post(
+      `${process.env.REACT_APP_BASE_URL}/collections`,{
+        category
+      }
+    );
+    setWeddingCollections(res.data);
+  };
 
-   ///
-   const getAllCollections = async () => {
-     const res = await axios.get(
-       `${process.env.REACT_APP_BASE_URL}/collections`
-     );
-     setCollections(res.data);
-   };
+  /// get men collections 
+  const getMenCollections = async () => {
+    const category = "Men";
+    const res = await axios.post(
+      `${process.env.REACT_APP_BASE_URL}/collections`,
+      {
+        category,
+      }
+    );
+    setMenCollections(res.data);
+  };
 
-
-    return (
-      <div>
+  return (
+    <>
+      <div className="explore">
         <NavBar />
         hi i'm the Explore
-        {users.map((designer)=> {
-          return (
-            <>
-              <div className="collection-section">
-                <div key={designer._id}></div>
+        <div className="collection-section">
+          <h3> RunWay</h3>
+          {collections.map((coll) => {
+            return (
+              <div className="collection-crad" key={coll._id}>
+                <img
+                  src={coll.media.map((look) => look.look1)}
+                  alt="collection"
+                />
               </div>
-              <div className="designers-section">
-                <img src={designer.photos.map((pic) => pic.headerBg)} />
+            );
+          })}
+        </div>
+        <div className="collBtn">
+          <button id="collBtn">Explore Colletions</button>
+        </div>
+        <div className="designers-section">
+          <h3>Our Designers</h3>
+          {designers.map((designer) => {
+            return (
+              <div className="designers-card">
+                <img src={designer.photos.map((photo) => photo.headerBg)} />
               </div>
-              <div className="category-section">
-                {collections.map((coll)=> {
-                  return (
-                    <>
-                      <img src={designer} />
-                    </>
-                  );
-                })}
-              
+            );
+          })}
+        </div>
+        <div className="wedding-section">
+          {weddingCollections.map((coll) => {
+            return (
+              <div className="wedding-card">
+                <img src={coll.media.map((look) => look.look1)} />
               </div>
-              <div className="runway-section"></div>
-              <div className="material-section"></div>
-            </>
-          );
-        })}
-       
-        
-          
-        
-        
+            );
+          })}
+        </div>
+        <div className="wedding-section">
+          {menCollections.map((coll) => {
+            return (
+              <div className="wedding-card">
+                <img src={coll.media.map((look) => look.look1)} />
+              </div>
+            );
+          })}
+        </div>
       </div>
-    );
-}
+    </>
+  );
+};
+
 
 export default Explore;
