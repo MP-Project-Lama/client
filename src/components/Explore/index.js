@@ -94,14 +94,18 @@ const Explore = () => {
             );
           })}
         </div>
-        <div className="wedding-section">
+        <div className="men-section">
           {menCollections.map((coll) => {
             return (
-              <div className="wedding-card">
+              <div className="men-card">
                 <img src={coll.media.map((look) => look.look1)} />
+
               </div>
             );
           })}
+        </div>
+        <div className="">
+
         </div>
       </div>
     </>
