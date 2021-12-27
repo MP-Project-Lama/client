@@ -91,7 +91,7 @@ console.log(result);
       
     } catch (error) {
       console.log(error.response.data);
-      if (error.response.status == 404){
+      if (error.response.status === 404){
         setMessage(error.response.data.message)
         Swal.fire({
           title: message,
@@ -100,7 +100,7 @@ console.log(result);
           },
         });
       }
-      if (error.response.status == 403){
+      if (error.response.status === 403){
         setMessage(error.response.data.message);
         Swal.fire({
           title: message,
@@ -109,7 +109,7 @@ console.log(result);
           },
         });
       }
-      if (error.response.status == 404) {
+      if (error.response.status === 404) {
         setMessage(error.response.data.message);
         Swal.fire({
           title: message,
@@ -123,6 +123,39 @@ console.log(result);
   const flipCard = () => {
     document.querySelector("#flipper").classList.toggle("flip");
   };
+
+  const resetPassword = async () => {
+    const { value: email } = await Swal.fire({
+      title: "Reset Password",
+      input: "email",
+      inputPlaceholder: "Enter your email address",
+      showCancelButton: true,
+      confirmButtonColor: "#E07A5F",
+      cancelButtonText: "Cancel",
+      reverseButtons: true,
+    });
+    if (email) {
+      try {
+        await axios.post(`${process.env.REACT_APP_BASE_URL}/check`, {
+          email,
+        });
+        Swal.fire({
+          icon: "success",
+          text: "Confirm your Email to Reset the Passwrd",
+          confirmButtonColor: "#E07A5F",
+        });
+        navigate("/verify/:id");
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          text: "Somthing went Wrong!",
+          confirmButtonColor: "#E07A5F",
+        });
+      }
+    }
+  };
+
+
   return (
     <div className="flip-container">
       {!state.token ? (
@@ -151,6 +184,7 @@ console.log(result);
               className="signup-submit"
               onClick={login}
             />
+            <p onClick={resetPassword}>forgot your password?</p>
             <p className="flipbutton" onClick={flipCard}>
               Not a member? Sign up here
             </p>
