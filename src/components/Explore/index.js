@@ -1,23 +1,18 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "../NavBar";
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
 import axios from "axios";
-import "./style.css";
-import { Link } from "react-router-dom";
+import NavBar from '../NavBar'
+import ImageUploader from "react-images-upload";
 import { storage } from "../firebase";
-import Swal from "sweetalert2";
+
 
 const Explore = () => {
-  const [designers, setDesigners] = useState([]);
   const [collections, setCollections] = useState([]);
+  const [designers, setDesigners] = useState([]);
   const [weddingCollections, setWeddingCollections] = useState([]);
   const [menCollections, setMenCollections] = useState([]);
-  const [images, setImages] = useState([]);
-  const [progress, setProgress] = useState(0);
   const [urls, setUrls] = useState([]);
-  const [description, setDescription] = useState("");
 
-  //
   const state = useSelector((state) => {
     return {
       token: state.Login.token,
@@ -25,27 +20,31 @@ const Explore = () => {
     };
   });
 
+  ///
   useEffect(() => {
-    getTheDesignrs();
+    console.log(state.role.role);
     getAllCollections();
+    getTheDesignrs();
     getWeddingCollections();
     getMenCollections();
   }, []);
 
-  const getTheDesignrs = async () => {
-    const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/designers`);
-    setDesigners(res.data);
-  };
-
-  ///
+  /// get all the collections
   const getAllCollections = async () => {
     const res = await axios.get(
       `${process.env.REACT_APP_BASE_URL}/collections`
     );
     setCollections(res.data);
   };
+  
 
-  // / get the wedding collections
+  /// get all designers
+  const getTheDesignrs = async () => {
+    const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/designers`);
+    setDesigners(res.data);
+  };
+  /// get Wedding Collections:
+
   const getWeddingCollections = async () => {
     const category = "Wedding";
     const res = await axios.post(
@@ -57,7 +56,7 @@ const Explore = () => {
     setWeddingCollections(res.data);
   };
 
-  /// get men collections
+  //// get men collections
   const getMenCollections = async () => {
     const category = "Men";
     const res = await axios.post(
@@ -68,22 +67,23 @@ const Explore = () => {
     );
     setMenCollections(res.data);
   };
-  ////
-  const handleChange = (e) => {
-
-    const { target : { value }, } = e;
-
-    // for (let i = 0; i < e.target.files.length; i++) {
-    //   const newImg = e.target.files[i];
-    //   newImg["id"] = Math.random();
-    //   setCollections((prevState) => [...prevState, newImg]);
+  //////
+    const onDrop = (file) => {
+    setCollections(file)
     }
-  
+    const handleChange = (e) => {
+      // const { target : { value }, } = e;
+
+      for (let i = 0; i < e.target.files.length; i++) {
+        const newImg = e.target.files[i];
+        newImg["id"] = Math.random();
+        setCollections((prevState) => [...prevState, newImg]);
+      }
+    }
   const handleUpload = (image) => {
     // console.log("image :", image);
-
     const promises = [];
-    images.map((image) => {
+    collections.map((image) => {
       const uploadTask = storage.ref(`images/${image.name}`).put(image);
       promises.push(uploadTask);
       uploadTask.on(
@@ -92,7 +92,7 @@ const Explore = () => {
           const progress = Math.round(
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100
           );
-          setProgress(progress)
+          // setProgress(progress)
         },
         (error) => {
           console.log(error);
@@ -109,73 +109,77 @@ const Explore = () => {
         }
       );
     });
-    Promise.all(promises).then(()=> console.log("images have been uploaded")).catch((error)=> console.log(error))
+    Promise.all(promises)
+      .then(() => console.log("images have been uploaded"))
+      .catch((error) => console.log(error));
   };
-
-  console.log("image: ", images);
-  console.log(state);
-
   return (
     <>
-      <div className="explore">
+      <div>
         <NavBar />
-        {state.role.role == "Designer" ? (
+        {console.log(state.role)}
+        {state.role.role === "Designer" && (
           <div>
-            <input type="file" multiple onChange={handleChange} />
-            <button onClick={handleUpload}> upload </button>
+            hello here
+            <input type="file" multiple />
+            <ImageUploader
+              withIcon={false}
+              withPreview={true}
+              label="Upload imgaes here"
+              buttonText="Upload "
+              buttonClassName="imagesUploadBtn"
+              onChange={onDrop}
+              imgExtension={[".jpg"]}
+              maxFileSize={5242880}
+            />
           </div>
-        ) : (
-          ""
         )}
-        hi i'm the Explore
-        <div className="collection-section">
-          <h3> RunWay</h3>
-          {collections.map((coll) => {
-            return (
-              <div className="collection-crad" key={coll._id}>
-                <img
-                  src={coll.media.map((look) => look.look1)}
-                  alt="collection"
-                />
-              </div>
-            );
-          })}
+        <div>
+          <div className="collection-section">
+            <h3>- Collections - </h3>
+            {collections.map((coll) => {
+              return (
+                <div className="collections-slidshow" key={coll._id}>
+                  <img
+                    src={coll.media.map((look) =>
+                      look.look2.map((look) => look.img1)
+                    )}
+                    alt="collection"
+                  />
+
+                  <h4> {coll.createdBy.username}</h4>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="designers-section">
+            <h3>- Our Designers - </h3>
+            {designers.map((designer) => {
+              return (
+                <div className="designers-slideshow">
+                  <img
+                    src={designer.photos.map((img) => img.headerBg)}
+                    alt="designer"
+                  />
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="wedding-section">
+            {/*  here  will show the wedding collections */}
+          </div>
+
+          <div className="men-section">
+            {/*  here  will show the men collections */}
+          </div>
+
+          <div></div>
         </div>
-        <div className="collBtn">
-          <button id="collBtn">Explore Colletions</button>
-        </div>
-        <div className="designers-section">
-          <h3>Our Designers</h3>
-          {designers.map((designer) => {
-            return (
-              <div className="designers-card">
-                <img src={designer.photos.map((photo) => photo.headerBg)} />
-              </div>
-            );
-          })}
-        </div>
-        <div className="wedding-section">
-          {weddingCollections.map((coll) => {
-            return (
-              <div className="wedding-card">
-                <img src={coll.media.map((look) => look.look1)} />
-              </div>
-            );
-          })}
-        </div>
-        <div className="men-section">
-          {menCollections.map((coll) => {
-            return (
-              <div className="men-card">
-                <img src={coll.media.map((look) => look.look1)} />
-              </div>
-            );
-          })}
-        </div>
-        <div className=""></div>
       </div>
     </>
   );
-};
+}
 
-export default Explore;
+export default Explore
