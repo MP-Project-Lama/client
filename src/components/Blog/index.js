@@ -35,7 +35,7 @@ const Blog = () => {
     <div className="blog-container">
       <NavBar />
       <div className="blog-header">
-        <img src="https://en.vogue.me/wp-content/uploads/2016/12/Fashion.jpg" />
+        <img  src="https://en.vogue.me/wp-content/uploads/2016/12/Fashion.jpg" />
         <h2>Blog</h2>
       </div>
 

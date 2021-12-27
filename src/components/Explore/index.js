@@ -1,15 +1,29 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../NavBar";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import "./style.css";
 import { Link } from "react-router-dom";
+import { storage } from "../firebase";
+import Swal from "sweetalert2";
+
 const Explore = () => {
   const [designers, setDesigners] = useState([]);
   const [collections, setCollections] = useState([]);
-  const [category, setCategory] = useState("");
   const [weddingCollections, setWeddingCollections] = useState([]);
   const [menCollections, setMenCollections] = useState([]);
+  const [images, setImages] = useState([]);
+  const [progress, setProgress] = useState(0);
+  const [urls, setUrls] = useState([]);
+  const [description, setDescription] = useState("");
 
+  //
+  const state = useSelector((state) => {
+    return {
+      token: state.Login.token,
+      role: state.Login.role,
+    };
+  });
 
   useEffect(() => {
     getTheDesignrs();
@@ -31,18 +45,19 @@ const Explore = () => {
     setCollections(res.data);
   };
 
-  // / get the wedding collections 
+  // / get the wedding collections
   const getWeddingCollections = async () => {
-    const category = "Wedding"
+    const category = "Wedding";
     const res = await axios.post(
-      `${process.env.REACT_APP_BASE_URL}/collections`,{
-        category
+      `${process.env.REACT_APP_BASE_URL}/collections`,
+      {
+        category,
       }
     );
     setWeddingCollections(res.data);
   };
 
-  /// get men collections 
+  /// get men collections
   const getMenCollections = async () => {
     const category = "Men";
     const res = await axios.post(
@@ -53,11 +68,65 @@ const Explore = () => {
     );
     setMenCollections(res.data);
   };
+  ////
+  const handleChange = (e) => {
+
+    const { target : { value }, } = e;
+
+    // for (let i = 0; i < e.target.files.length; i++) {
+    //   const newImg = e.target.files[i];
+    //   newImg["id"] = Math.random();
+    //   setCollections((prevState) => [...prevState, newImg]);
+    }
+  
+  const handleUpload = (image) => {
+    // console.log("image :", image);
+
+    const promises = [];
+    images.map((image) => {
+      const uploadTask = storage.ref(`images/${image.name}`).put(image);
+      promises.push(uploadTask);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setProgress(progress)
+        },
+        (error) => {
+          console.log(error);
+        },
+        async () => {
+          await storage
+            .ref("images")
+            .child(image.name)
+            .getDownloadURL()
+            .then((urls) => {
+              setUrls((prevState) => [...prevState, urls]);
+              console.log(image);
+            });
+        }
+      );
+    });
+    Promise.all(promises).then(()=> console.log("images have been uploaded")).catch((error)=> console.log(error))
+  };
+
+  console.log("image: ", images);
+  console.log(state);
 
   return (
     <>
       <div className="explore">
         <NavBar />
+        {state.role.role == "Designer" ? (
+          <div>
+            <input type="file" multiple onChange={handleChange} />
+            <button onClick={handleUpload}> upload </button>
+          </div>
+        ) : (
+          ""
+        )}
         hi i'm the Explore
         <div className="collection-section">
           <h3> RunWay</h3>
@@ -99,18 +168,14 @@ const Explore = () => {
             return (
               <div className="men-card">
                 <img src={coll.media.map((look) => look.look1)} />
-
               </div>
             );
           })}
         </div>
-        <div className="">
-
-        </div>
+        <div className=""></div>
       </div>
     </>
   );
 };
-
 
 export default Explore;
