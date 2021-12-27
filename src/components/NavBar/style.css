@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Acme&family=Amatic+SC&family=Amiri:wght@700&family=Architects+Daughter&family=Cinzel:wght@500&family=Francois+One&family=Handlee&family=Lobster&family=Mali:wght@200;300&family=Mulish&family=Neucha&family=Quicksand:wght@300&family=Roboto+Mono:wght@100&family=Sawarabi+Mincho&family=Source+Sans+3&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Acme&family=Amatic+SC&family=Amiri:wght@700&family=Architects+Daughter&family=Barlow:wght@100&family=Cinzel:wght@500&family=Francois+One&family=Handlee&family=Lobster&family=Mali:wght@200;300&family=Mulish&family=Neucha&family=Quicksand:wght@300&family=Roboto+Mono:wght@100&family=Sawarabi+Mincho&family=Source+Sans+3&display=swap');
-*{
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap');*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -14,18 +14,31 @@
     list-style-type: none;
     padding: 50px;
    
-
 }
 .navBar a{
      text-decoration: none;
-     font-size: 23px;
-     color: black;
-   font-family: 'Barlow', sans-serif;
-
-
-
+ font-size: 23px;
+ color: black;
+font-family: 'Raleway', sans-serif;
+font-weight: bold;
+position: relative;
 }
-.navBar a:hover{
+.navBar a:after{
+     content: '';
+position: absolute;
+width: 100%;
+  transform: scaleX(0);
+  height: 3px;
+  bottom: 0;
+  left: 0;
+  background-color: #000000;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+  margin-top: 10px;
+}
 
+.navBar a:hover:after{
+    transform: scaleX(1);
+  transform-origin: bottom left;
 }
 
