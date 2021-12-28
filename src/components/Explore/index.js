@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import axios from "axios";
-import NavBar from '../NavBar'
+import NavBar from "../NavBar";
 import ImageUploader from "react-images-upload";
 import { storage } from "../firebase";
-
+import "./style.css";
+import { Link } from "react-router-dom";
 
 const Explore = () => {
   const [collections, setCollections] = useState([]);
@@ -12,6 +13,8 @@ const Explore = () => {
   const [weddingCollections, setWeddingCollections] = useState([]);
   const [menCollections, setMenCollections] = useState([]);
   const [urls, setUrls] = useState([]);
+  const [progress, setProgress] = useState(0);
+  const [images, setImages] = useState([]);
 
   const state = useSelector((state) => {
     return {
@@ -22,7 +25,6 @@ const Explore = () => {
 
   ///
   useEffect(() => {
-    console.log(state.role.role);
     getAllCollections();
     getTheDesignrs();
     getWeddingCollections();
@@ -36,7 +38,6 @@ const Explore = () => {
     );
     setCollections(res.data);
   };
-  
 
   /// get all designers
   const getTheDesignrs = async () => {
@@ -55,7 +56,6 @@ const Explore = () => {
     );
     setWeddingCollections(res.data);
   };
-
   //// get men collections
   const getMenCollections = async () => {
     const category = "Men";
@@ -68,22 +68,22 @@ const Explore = () => {
     setMenCollections(res.data);
   };
   //////
-    const onDrop = (file) => {
-    setCollections(file)
+  const onDrop = (file) => {
+    setCollections(file);
+  };
+  const handleChange = (e) => {
+    // console.log(e);
+    for (let i = 0; i < e.target.files.length; i++) {
+      const newImg = e.target.files[i];
+      newImg["id"] = Math.random();
+      setImages((prevState) => [...prevState, newImg]);
     }
-    const handleChange = (e) => {
-      // const { target : { value }, } = e;
-
-      for (let i = 0; i < e.target.files.length; i++) {
-        const newImg = e.target.files[i];
-        newImg["id"] = Math.random();
-        setCollections((prevState) => [...prevState, newImg]);
-      }
-    }
+  };
   const handleUpload = (image) => {
-    // console.log("image :", image);
+    // console.log(images);
+
     const promises = [];
-    collections.map((image) => {
+    images.map((image) => {
       const uploadTask = storage.ref(`images/${image.name}`).put(image);
       promises.push(uploadTask);
       uploadTask.on(
@@ -92,7 +92,7 @@ const Explore = () => {
           const progress = Math.round(
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100
           );
-          // setProgress(progress)
+          setProgress(progress);
         },
         (error) => {
           console.log(error);
@@ -104,25 +104,47 @@ const Explore = () => {
             .getDownloadURL()
             .then((urls) => {
               setUrls((prevState) => [...prevState, urls]);
-              console.log(image);
+              console.log("image:===", image);
+              console.log("urls:===", urls);
             });
         }
       );
     });
+
     Promise.all(promises)
       .then(() => console.log("images have been uploaded"))
       .catch((error) => console.log(error));
+  };
+
+  // const createLook = async ()=> {
+  //   try{
+
+  //   }
+  // }
+  const addCollection = async () => {
+    try {
+      await axios.post(`${process.env.REACT_APP_BASE_URL}/collection`, {
+        media: urls,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    getAllCollections();
   };
   return (
     <>
       <div>
         <NavBar />
-        {console.log(state.role)}
+
         {state.role.role === "Designer" && (
           <div>
-            hello here
-            <input type="file" multiple />
-            <ImageUploader
+            {/* <input type="file" multiple onChange={handleChange} />
+            <button onClick={handleUpload}> Upload</button> */}
+            <button>
+              <Link to="/collection"> Add Collection </Link>
+            </button>
+
+            {/* <ImageUploader
               withIcon={false}
               withPreview={true}
               label="Upload imgaes here"
@@ -131,7 +153,7 @@ const Explore = () => {
               onChange={onDrop}
               imgExtension={[".jpg"]}
               maxFileSize={5242880}
-            />
+            /> */}
           </div>
         )}
         <div>
@@ -141,9 +163,13 @@ const Explore = () => {
               return (
                 <div className="collections-slidshow" key={coll._id}>
                   <img
-                    src={coll.media.map((look) =>
-                      look.look2.map((look) => look.img1)
-                    )}
+                    src={
+                      coll.media &&
+                      coll.media.length &&
+                      coll.media.map((look) =>
+                        look.look2.map((look) => look.img1)
+                      )
+                    }
                     alt="collection"
                   />
 
@@ -180,6 +206,6 @@ const Explore = () => {
       </div>
     </>
   );
-}
+};
 
-export default Explore
+export default Explore;
