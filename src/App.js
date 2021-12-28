@@ -6,6 +6,7 @@ import Blog from "./components/Blog";
 import Post from "./components/Post";
 import Explore from "./components/Explore";
 import Verification from "./components/Verification";
+import AddCollection from "./components/addCollection";
 function App() {
   return (
     <div className="App">
@@ -16,6 +17,7 @@ function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/post/:id" element={<Post />} />
         <Route path="/explore" element={<Explore />} />
+        <Route path="/collection" element={<AddCollection />} />
       </Routes>
     </div>
   );

@@ -1,7 +1,6 @@
 
 
 .collection-section {
-
     display: flex;
     flex-direction: row;
 }
@@ -17,7 +16,7 @@
 display: flex;
  flex-direction: row;
 }
-.designers-card img { 
+.designers-section img { 
     width: 350px;
     height: 350px;
 }
