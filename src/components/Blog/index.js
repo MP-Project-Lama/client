@@ -10,6 +10,7 @@ const Blog = () => {
   const state = useSelector((state) => {
     return {
       token: state.Login.token,
+      role : state.Login.role
     };
   });
 
@@ -35,11 +36,15 @@ const Blog = () => {
     <div className="blog-container">
       <NavBar />
       <div className="blog-header">
-        <img  src="https://en.vogue.me/wp-content/uploads/2016/12/Fashion.jpg" />
+        <img src="https://en.vogue.me/wp-content/uploads/2016/12/Fashion.jpg"/>
         <h2>Blog</h2>
       </div>
 
-      
+      {state.role.role === "Designer" && (
+        <button>
+          <Link to="/post"> Add Post </Link>
+        </button>
+      )}
 
       {posts.map((post) => {
         return (
@@ -47,6 +52,7 @@ const Blog = () => {
             <Link to={`/post/${post._id}`}>
               <ul>
                 <li key={post._id}>
+                 
                   <img src={post.media.map((img) => img.img1)} />
                   <h3> {post.title} </h3>
                 </li>

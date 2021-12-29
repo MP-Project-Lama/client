@@ -7,6 +7,8 @@ import Post from "./components/Post";
 import Explore from "./components/Explore";
 import Verification from "./components/Verification";
 import AddCollection from "./components/addCollection";
+import AddPost from "./components/addPost";
+
 function App() {
   return (
     <div className="App">
@@ -16,6 +18,7 @@ function App() {
         <Route path="/verify/:id" element={<Verification />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/post/:id" element={<Post />} />
+        <Route path="/post" element={<AddPost />} />
         <Route path="/explore" element={<Explore />} />
         <Route path="/collection" element={<AddCollection />} />
       </Routes>

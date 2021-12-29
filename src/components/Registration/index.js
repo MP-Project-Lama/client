@@ -5,6 +5,8 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { useAlert } from "react-alert";
+
 import "./style.css";
 
 const Registration = () => {
@@ -17,6 +19,7 @@ const Registration = () => {
   const [identity, setIdentity] = useState("");
   const [message, setMessage] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const alert = useAlert();
 
   const state = useSelector((state) => {
     return {
@@ -25,16 +28,7 @@ const Registration = () => {
   });
 
   ///
-  useEffect(() => {
-    getAllUsers();
-    console.log(users);
-  }, []);
-
-  const getAllUsers = async () => {
-    const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/users`);
-    setUsers(res.data);
-  };
-
+ 
   const signup = async () => {
     let exist = false;
     users.filter((user) => {
@@ -45,11 +39,10 @@ const Registration = () => {
     });
     if (exist) {
       console.log("exist");
-      Swal.fire({
-        title: "Email or Username Already Exist ",
-        showClass: {
-          popup: "animate__animated animate__fadeOutUp",
-        },
+      
+      alert.show('Email or username Already Exist !', {
+        timeout: 5000,
+        type: 'info',
       });
     } else {
       try {
@@ -78,44 +71,37 @@ const Registration = () => {
           password: loginPassword,
         }
       );
-console.log(result);
+      console.log(result);
       dispatch(
         signIn({
           role: result.data.result.role,
           token: result.data.token,
           user: result.data.result,
-          
         })
       );
-        navigate("/");
-      
+      navigate("/");
     } catch (error) {
       console.log(error.response.data);
-      if (error.response.status === 404){
-        setMessage(error.response.data.message)
-        Swal.fire({
-          title: message,
-          showClass: {
-            popup: "animate__animated animate__fadeOutUp",
-          },
-        });
-      }
-      if (error.response.status === 403){
-        setMessage(error.response.data.message);
-        Swal.fire({
-          title: message,
-          showClass: {
-            popup: "animate__animated animate__fadeOutUp",
-          },
-        });
-      }
       if (error.response.status === 404) {
         setMessage(error.response.data.message);
-        Swal.fire({
-          title: message,
-          showClass: {
-            popup: "animate__animated animate__fadeOutUp",
-          },
+        alert.show(message, {
+          timeout: 5000,
+          type: "error",
+        });
+      }
+      if (error.response.status === 403) {
+        setMessage(error.response.data.message);
+        alert.show(message, {
+          timeout: 5000,
+          type: "error",
+        });
+      }
+
+      if (error.response.status === 400) {
+        setMessage(error.response.data.message);
+        alert.show(message, {
+          timeout: 5000,
+          type: "error",
         });
       }
     }
@@ -139,22 +125,23 @@ console.log(result);
         await axios.post(`${process.env.REACT_APP_BASE_URL}/check`, {
           email,
         });
-        Swal.fire({
-          icon: "success",
-          text: "Confirm your Email to Reset the Passwrd",
-          confirmButtonColor: "#E07A5F",
+       
+        alert.show('Confirm your email to reset the password', {
+          timeout: 5000,
+          type: "success",
         });
         navigate("/verify/:id");
       } catch (error) {
-        Swal.fire({
-          icon: "error",
-          text: "Somthing went Wrong!",
-          confirmButtonColor: "#E07A5F",
+        
+        alert.show('Somthing Went Wrong !', {
+          timeout: 5000,
+          type: 'error',
         });
       }
     }
   };
 
+  ///
 
   return (
     <div className="flip-container">

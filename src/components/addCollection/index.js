@@ -14,6 +14,7 @@ const AddCollection = () => {
   const [images, setImages] = useState([]);
   const [progress, setProgress] = useState(0);
   
+  
 
 
   const state = useSelector((state) => {
@@ -23,9 +24,7 @@ const AddCollection = () => {
       role: state.Login.role,
     };
   });
-console.log(state);
   const handleChange = (e) => {
-    // console.log(e);
     for (let i = 0; i < e.target.files.length; i++) {
       const newImg = e.target.files[i];
       newImg["id"] = Math.random();
@@ -73,8 +72,18 @@ console.log(state);
     try {
       const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/look`, {
         look: urls,
+      },
+        {
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+          },
       });
       setLooks((prevState) => [...prevState, res.data]);
+     setUrls([]);
+     setImages([]);
+      
+      const files = document.getElementById("files")
+      files.value= [];
       console.log("look has been added", res.data);
      
     } catch (error) {
@@ -84,15 +93,24 @@ console.log(state);
 
   const addCollection = async () => {
     try {
-      await axios.post(`${process.env.REACT_APP_BASE_URL}/collection`, {
-        title,
-        desc,
-        material,
-        category,
-        media: looks,
-        // craetedBy : state.token
-      });
-      console.log("collection has been added " );
+      await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/collection`,
+        {
+          title,
+          desc,
+          material,
+          category,
+          media: looks,
+          // craetedBy: state.token,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+          },
+        }
+      );
+      
+      console.log("collection has been added" );
 
     
     } catch (error) {
@@ -134,7 +152,8 @@ console.log(state);
               onChange={(e) => setMaterial(e.target.value)}
             />
           </div>
-          <input type="file" multiple onChange={handleChange} />
+          <input id="files" type="file" multiple onChange={handleChange} />
+
           <button onClick={handleUpload}> Upload</button>
           <button onClick={createLook}> Add look </button>
           <div>
