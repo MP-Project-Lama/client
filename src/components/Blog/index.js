@@ -10,7 +10,8 @@ const Blog = () => {
   const state = useSelector((state) => {
     return {
       token: state.Login.token,
-      role : state.Login.role
+      role : state.Login.role,
+      user: state.Login.user
     };
   });
 
@@ -55,6 +56,7 @@ const Blog = () => {
                  
                   <img src={post.media.map((img) => img.img1)} />
                   <h3> {post.title} </h3>
+                 
                 </li>
                 <hr />
               </ul>
