@@ -17,9 +17,9 @@ const Post = () => {
       user: state.Login.user,
     };
   });
-
   useEffect(() => {
     getThePost();
+    
   }, []);
 
   const getThePost = async () => {
@@ -33,10 +33,12 @@ const Post = () => {
         }
       );
       setPost(res.data);
+
     } catch (error) {
       console.log(error);
     }
   };
+  
 /// to display all post's comments
   const getTheComments = async ()=> {
     try {
@@ -49,6 +51,7 @@ const Post = () => {
         }
       );
       setComments(comments.data);
+     
     } catch (error) {
       console.log(error);
     }
@@ -94,29 +97,30 @@ await axios.post(
                 <div className="post-page">
                   <div key={element._id} className="post-container">
                     <h2>{element.title}</h2>
-                    {/* <h4> hello there{element.createdBy}</h4> */}
-                    {/* <h4> {element.createdAt}</h4> */}
-                    <img
-                      src={element.media.map((img) => img.img1)}
-                      alt="post-img"
-                    />
+
+                    
+                    <img src={element.media.map((img) => img)} alt="post-img" />
                     <p>{element.desc.map((part) => part.part1)}</p>
-                    <img
-                      src={element.media.map((img) => img.img2)}
-                      alt="post-img"
-                    />
+                    <img src={element.media.map((img) => img)} alt="post-img" />
                     <p>{element.desc.map((part) => part.part2)}</p>
                     <img
                       src={element.media.map((img) => img.img3)}
                       alt="post-img"
                     />
                     <p>{element.desc.map((part) => part.part3)}</p>
+                    {/* {state.user._id === post.createdBy._id && (
+                      <div> 
+                        <button>Delete post </button>
+                      </div>
+                    )} */}
+
                     <textArea
                       onChange={(e) => setComment(e.target.value)}
                       className="comment-area"
                     >
                       Share us your comment ...
                     </textArea>
+                   
                     <button id="add" onClick={() => addComment()}>
                       Add
                     </button>
