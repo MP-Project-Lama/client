@@ -32,7 +32,6 @@ const Blog = () => {
       console.log(error);
     }
   };
-
   return (
     <div className="blog-container">
       <NavBar />
@@ -53,10 +52,8 @@ const Blog = () => {
             <Link to={`/post/${post._id}`}>
               <ul>
                 <li key={post._id}>
-                 
-                  <img src={post.media.map((img) => img.img1)} />
+                  <img src={post.media[0]} />
                   <h3> {post.title} </h3>
-                 
                 </li>
                 <hr />
               </ul>
