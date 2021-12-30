@@ -107,10 +107,12 @@ const Explore = () => {
             {designers.map((designer) => {
               return (
                 <div key={designer._id} className="designers-slideshow">
-                  <img
-                    src={designer.photos.map((img) => img.headerBg)}
-                    alt="designer"
-                  />
+                  <Link to={`/designer/${designer._id}`}>
+                    <img
+                      src={designer.photos.map((img) => img.headerBg)}
+                      alt="designer"
+                    />
+                  </Link>
                 </div>
               );
             })}
