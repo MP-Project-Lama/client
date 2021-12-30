@@ -19,6 +19,7 @@ const Post = () => {
   });
   useEffect(() => {
     getThePost();
+    getTheComments();
     
   }, []);
 
@@ -77,6 +78,7 @@ await axios.post(
    }
    
  };
+//  console.log(comments.createdBy._id);
   return (
     <>
       {!state.token ? (
@@ -124,6 +126,15 @@ await axios.post(
                     <button id="add" onClick={() => addComment()}>
                       Add
                     </button>
+
+                    {comments.map((comment)=> {
+                     return (
+                       <div>
+                         <p>{comment.comment}</p>
+                         
+                       </div>
+                     );
+                    })}
                   </div>
                 </div>
               </>
