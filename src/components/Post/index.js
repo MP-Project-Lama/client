@@ -79,7 +79,6 @@ const Post = () => {
   };
 
   /// soft delete to the post by creator
-  console.log(state.token);
   const deleteThePost = async () => {
     try {
       Swal.fire({
@@ -124,6 +123,8 @@ const Post = () => {
       console.log(error);
     }
   };
+
+
 
   const deleteComment = async (comID) => {
     try {
@@ -198,12 +199,14 @@ const Post = () => {
                     <img src={element.media[1]} alt="post-img" />
                     <p>{element.desc.map((part) => part.part2)}</p>
                     <img src={element.media[3]} alt="post-img" />
-
                     <p>{element.desc.map((part) => part.part3)}</p>
 
                     {state.user._id === element.createdBy._id && (
                       <div>
                         <button onClick={deleteThePost}>Delete post </button>
+                        <button>
+                          <Link to={`/edit/${id}`}> Edit </Link>
+                        </button>
                       </div>
                     )}
 
@@ -224,17 +227,15 @@ const Post = () => {
                           <ul>
                             <li key={comment._id}>
                               <p>{comment.comment}</p>
-                              {state.user._id === comment.createdBy._id ||
-                                state.role.role === "Designer" ||
-                                (state.role.role === "Admin" && (
-                                  <div>
-                                    <button
-                                      onClick={() => deleteComment(comment._id)}
-                                    >
-                                      Delete comment
-                                    </button>
-                                  </div>
-                                ))}
+                              {state.user._id === comment.createdBy._id && (
+                                <div>
+                                  <button
+                                    onClick={() => deleteComment(comment._id)}
+                                  >
+                                    Delete comment
+                                  </button>
+                                </div>
+                              )}
                             </li>
                           </ul>
                         </div>
