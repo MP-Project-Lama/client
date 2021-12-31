@@ -82,10 +82,7 @@ const Explore = () => {
             <h3>- Collections - </h3>
             {collections.map((coll) => {
               return (
-                <div
-                  className="collections-slidshow"
-                  key={coll._id}
-                >
+                <div className="collections-slidshow" key={coll._id}>
                   <img
                     src={
                       coll.media &&
@@ -94,7 +91,6 @@ const Explore = () => {
                     }
                     alt="collection"
                   />
-                 
 
                   <h4> {coll.createdBy.username}</h4>
                 </div>
@@ -110,7 +106,7 @@ const Explore = () => {
                   <Link to={`/designer/${designer._id}`}>
                     <img
                       src={designer.photos.map((img) => img.headerBg)}
-                      alt="designer"
+                      alt="designer photo"
                     />
                   </Link>
                 </div>
