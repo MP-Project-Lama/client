@@ -6,6 +6,9 @@ import ImageUploader from "react-images-upload";
 import { storage } from "../firebase";
 import "./style.css";
 import { Link } from "react-router-dom";
+// import Splide from "@splidejs/splide";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+
 
 const Explore = () => {
   const [collections, setCollections] = useState([]);
@@ -65,6 +68,12 @@ const Explore = () => {
     setMenCollections(res.data);
   };
 
+  //// splide settings
+  // new Splide(".splide", {
+  //   type: "loop",
+  //   perPage: 3,
+  // });
+
   return (
     <>
       <div>
@@ -93,6 +102,14 @@ const Explore = () => {
                   />
 
                   <h4> {coll.createdBy.username}</h4>
+                  <Splide>
+                    <SplideSlide>
+                      <img src="image1.jpg" alt="Image 1" />
+                    </SplideSlide>
+                    <SplideSlide>
+                      <img src="image2.jpg" alt="Image 2" />
+                    </SplideSlide>
+                  </Splide>
                 </div>
               );
             })}
