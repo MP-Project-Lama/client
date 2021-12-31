@@ -196,7 +196,7 @@ const Post = () => {
                     <p>{element.desc.map((part) => part.part1)}</p>
                     <img src={element.media[1]} alt="post-img" />
                     <p>{element.desc.map((part) => part.part2)}</p>
-                    <img src={element.media[3]} alt="post-img" />
+                    <img src={element.media[2]} alt="post-img" />
                     <p>{element.desc.map((part) => part.part3)}</p>
 
                     {state.user._id === element.createdBy._id && (

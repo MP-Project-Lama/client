@@ -6,9 +6,7 @@ import ImageUploader from "react-images-upload";
 import { storage } from "../firebase";
 import "./style.css";
 import { Link } from "react-router-dom";
-// import Splide from "@splidejs/splide";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
-
 
 const Explore = () => {
   const [collections, setCollections] = useState([]);
@@ -78,7 +76,23 @@ const Explore = () => {
     <>
       <div>
         <NavBar />
-
+        {/* <video
+          autoplay
+          playsInline
+          muted
+          src="https://lv-vod.fl.freecaster.net/vod/louisvuitton/gJjgomc5Ra_HD.mp4"
+          loop="loop"
+          tabIndex="-1"
+          aria-hidden="true"
+        ></video> */}
+        <video
+          playsinline=""
+          src="https://lv-vod.fl.freecaster.net/vod/louisvuitton/gJjgomc5Ra_HD.mp4"
+          loop="loop"
+          tabindex="-1"
+          aria-hidden="true"
+          class="lv-video-loop__video"
+        ></video>
         {state.role.role === "Designer" && (
           <div>
             <button>
@@ -92,24 +106,26 @@ const Explore = () => {
             {collections.map((coll) => {
               return (
                 <div className="collections-slidshow" key={coll._id}>
-                  <img
-                    src={
-                      coll.media &&
-                      coll.media.length &&
-                      coll.media.map((look) => look.look)
-                    }
-                    alt="collection"
-                  />
-
-                  <h4> {coll.createdBy.username}</h4>
-                  <Splide>
+                  <Splide
+                    options={{
+                      rewind: true,
+                      width: 800,
+                      gap: "1rem",
+                    }}
+                  >
                     <SplideSlide>
-                      <img src="image1.jpg" alt="Image 1" />
-                    </SplideSlide>
-                    <SplideSlide>
-                      <img src="image2.jpg" alt="Image 2" />
+                      <img
+                        src={
+                          coll.media &&
+                          coll.media.length &&
+                          coll.media.map((look) => look.look)
+                        }
+                        alt="collection"
+                      />
                     </SplideSlide>
                   </Splide>
+
+                  <h4> {coll.createdBy.username}</h4>
                 </div>
               );
             })}

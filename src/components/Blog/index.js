@@ -36,12 +36,16 @@ const Blog = () => {
     <div className="blog-container">
       <NavBar />
       <div className="blog-header">
-        <img src="https://en.vogue.me/wp-content/uploads/2016/12/Fashion.jpg" />
-        <h2>Blog</h2>
+        <div className="header-img">
+          <img src="https://en.vogue.me/wp-content/uploads/2016/12/Fashion.jpg" />
+        </div>
+        <div className="heaer-blog">
+          <h2>- Blog - </h2>
+        </div>
       </div>
 
       {state.role.role === "Designer" && (
-        <button>
+        <button className="addPost">
           <Link to="/post"> Add Post </Link>
         </button>
       )}

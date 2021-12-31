@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Acme&family=Amatic+SC&family=Amiri:wght@700&family=Architects+Daughter&family=Cinzel:wght@500&family=Francois+One&family=Handlee&family=Lobster&family=Mali:wght@200;300&family=Mulish&family=Neucha&family=Quicksand:wght@300&family=Roboto+Mono:wght@100&family=Sawarabi+Mincho&family=Source+Sans+3&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Acme&family=Amatic+SC&family=Amiri:wght@700&family=Architects+Daughter&family=Barlow:wght@100&family=Cinzel:wght@500&family=Francois+One&family=Handlee&family=Lobster&family=Mali:wght@200;300&family=Mulish&family=Neucha&family=Quicksand:wght@300&family=Roboto+Mono:wght@100&family=Sawarabi+Mincho&family=Source+Sans+3&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cardo&family=Nanum+Myeongjo&display=swap');
 .home-bg {
   display: block;
 }
@@ -20,8 +21,15 @@
   padding-right: 60px;
   font-size: 33px;
 }
-.about-section p {
-     font-family: 'Barlow', sans-serif;
+.fashiondary {
+
+font-family: 'Cardo', serif;
+font-size: 40px;
+margin-top: 70px;
+}
+.fashiondary span {
+  font-weight: bolder;
+  color: #B9944E;
 }
 .about-pic {
   width: 250px;
@@ -29,7 +37,23 @@
 .about-pic img {
   height: 1000px;
 }
+.about-blog{
+  width: 40%;
+  
 
+}
+.about-p{
+font-family: 'Cardo', serif;
+font-size: 40px;
+margin-top: 70px;
+}
+.blogPic{
+  width: 250px;
+ margin: 130px 0px;
+}
+.blogPic img{
+height: 1000px;
+}
 .concat {
   margin: 40px;
 }
