@@ -6,9 +6,8 @@ import "./style.css";
 import NavBar from "../NavBar";
 
 const Designer = () => {
-  const [designer, setDesigner] = useState([]);
+  const [designer, setDesigner] = useState(null);
   const { id } = useParams();
-  ///
 
   const state = useSelector((state) => {
     return {
@@ -16,14 +15,11 @@ const Designer = () => {
     };
   });
 
-  ///
-
   useEffect(() => {
     getTheDesignr();
     console.log(designer);
   }, []);
 
-  
   const getTheDesignr = async () => {
     try {
       const res = await axios.get(
@@ -34,6 +30,8 @@ const Designer = () => {
           },
         }
       );
+
+      console.log("designer", res.data);
       setDesigner(res.data);
     } catch (error) {
       console.log(error);
@@ -42,53 +40,44 @@ const Designer = () => {
   return (
     <>
       <div>
-        {designer &&
-          designer.length &&
-          designer.map((ele) => {
-            return (
-              <div key={ele._id}>
-                <NavBar />
-                <div className="designer-header">
-                  <img src={ele.photos.map((img) => img.headerBg)} />
-                </div>
-                <div className="about-designer">
-                  <p>{ele.about}</p>
-                  <img src={ele.photos.aboutImg} />
-                </div>
-                <div className="concat-designer">
-                  <div>
-                      <ul>
+        <NavBar />
+        {designer && (
+          <div>
+            <h4> hello</h4>
+            <div key={designer._id}>
+              <div className="designer-header">
+                <img src={designer.photos.map((img) => img.headerBg)} />
+              </div>
+              <div className="about-designer">
+                <p>{designer.about}</p>
+                <img src={designer.photos.aboutImg} />
+              </div>
+
+              <div className="concat-designer">
+                <div>
+                  <ul>
                     <li>
                       <button> My Collections</button>
                     </li>
+
                     <li>
                       <button> My Shows </button>
                     </li>
                     <button> Message Me </button>
                   </ul>
-                  </div>
-                </div>
-
-                <div className="designer-overview">
-                  <div>
-                  
-                      <img src={ele.imgArr.map((img) => img.img1)} />
-                 
-                      <img src={ele.imgArr.map((img) => img.img2)} />
-                  
-                      <img src={ele.imgArr.map((img) => img.img3)} />
-                  
-                      <img src={ele.imgArr.map((img) => img.img4)} />
-                    
-                      <img src={ele.imgArr.map((img) => img.img5)} />
-                   
-                      <img src={ele.imgArr.map((img) => img.img6)} />
-                    
-                  </div>
                 </div>
               </div>
-            );
-          })}
+
+              <div className="designer-overview">
+                <div>
+                  {/* {designer.photos.imgArr.map((img) => (
+                    <img src={img} />
+                  ))} */}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

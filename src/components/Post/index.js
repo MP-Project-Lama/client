@@ -124,8 +124,6 @@ const Post = () => {
     }
   };
 
-
-
   const deleteComment = async (comID) => {
     try {
       Swal.fire({
