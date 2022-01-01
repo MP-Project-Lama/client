@@ -58,6 +58,12 @@ const Blog = () => {
                 <li key={post._id}>
                   <img src={post.media[0]} />
                   <h3> {post.title} </h3>
+                  <div>
+                    <h4 className="creator">
+                    
+                      <span> By:</span> {post.createdBy.username}
+                    </h4>
+                  </div>
                 </li>
                 <hr />
               </ul>

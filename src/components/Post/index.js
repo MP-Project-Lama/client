@@ -170,6 +170,7 @@ const Post = () => {
     }
   };
 
+  console.log(post);
   return (
     <>
       {!state.token ? (
@@ -191,6 +192,12 @@ const Post = () => {
                 <div className="post-page">
                   <div key={i} className="post-container">
                     <h2>{element.title}</h2>
+                    <h4 className="byCreator">
+                      By:
+                      <Link to={`/designer/${element.createdBy._id}`}>
+                        {element.createdBy.username.toUpperCase()}{" "}
+                      </Link>
+                    </h4>
 
                     <img src={element.media[0]} alt="post-img" />
                     <p>{element.desc.map((part) => part.part1)}</p>
@@ -198,42 +205,54 @@ const Post = () => {
                     <p>{element.desc.map((part) => part.part2)}</p>
                     <img src={element.media[2]} alt="post-img" />
                     <p>{element.desc.map((part) => part.part3)}</p>
+                    <h4 className="byCreator">
+                      By:
+                      <Link to={`/designer/${element.createdBy._id}`}>
+                        {element.createdBy.username.toUpperCase()}
+                      </Link>
+                    </h4>
 
                     {state.user._id === element.createdBy._id && (
                       <div>
-                        <button onClick={deleteThePost}>Delete post </button>
-                        <button>
+                        <button onClick={deleteThePost} className="delPost">
+                          Delete Post
+                        </button>
+                        <button className="editBtn">
                           <Link to={`/edit/${id}`}> Edit </Link>
                         </button>
                       </div>
                     )}
-
-                    <textArea
-                      onChange={(e) => setComment(e.target.value)}
-                      className="comment-area"
-                    >
-                      Share us your comment ...
-                    </textArea>
-
-                    <button id="add" onClick={() => addComment()}>
-                      Add
-                    </button>
+                    <div className="comment-section">
+                      <textArea
+                        onChange={(e) => setComment(e.target.value)}
+                        className="comment-area"
+                      >
+                        Share us your comment ...
+                      </textArea>
+                      <button id="add" onClick={() => addComment()}>
+                        Add
+                      </button>
+                    </div>
 
                     {comments.map((comment) => {
                       return (
-                        <div>
+                        <div className="comSec">
                           <ul>
                             <li key={comment._id}>
-                              <p>{comment.comment}</p>
-                              {state.user._id === comment.createdBy._id && (
-                                <div>
+                              <div className="comment">
+                               
+                                  <img src={comment.createdBy.avatar} />
+                                  <h4>{comment.createdBy.username} </h4>
+                                
+                                <p>{comment.comment}</p>
+                                {state.user._id === comment.createdBy._id && (
                                   <button
                                     onClick={() => deleteComment(comment._id)}
                                   >
                                     Delete comment
                                   </button>
-                                </div>
-                              )}
+                                )}
+                              </div>
                             </li>
                           </ul>
                         </div>
