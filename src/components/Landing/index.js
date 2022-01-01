@@ -11,22 +11,18 @@ const Home = () => {
       <div className="home-bg">
         <img
           src="https://www.dior.com/couture/var/dior/storage/images/25778945/17-eng-GB/cdc-femme-gift-for-her6_1440_1200.jpg"
-          alt="background"
+          alt="background img"
         />
       </div>
 
       <div className="about">
         <div className="about-section">
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum
+          <p className="fashiondary">
+            <span>FASHIONDARY</span> is an Arabian platform , that gather
+            fashion designers in one place , one site and one click ... discover
+            the latest fashion trends , and stay tuned for the shows , Our
+            mission is to be the global platform for luxury fashion, connecting
+            creators, curators and consumers.
           </p>
         </div>
         <div className="about-pic">
@@ -34,6 +30,21 @@ const Home = () => {
             src="https://www.dior.com/couture/var/dior/storage/images/pushs-editos/folder-cruise-22-women/217c09a2975x1998/28006280-1-eng-GB/217c09a2975x1998_1440_1200.jpg"
             alt="home-img"
           />
+        </div>
+      </div>
+      <div className="about">
+        <div className="blogPic">
+          <img
+            src="https://www.dior.com/couture/var/dior/storage/images/horizon/news-savoir-faire/folder-news-and-events/cruise-2022-womens-campaign/slider-2/6/28406730-3-int-EN/6_1440_1200.jpg"
+            alt="home-img"
+          />
+        </div>
+        <div className="about-blog">
+          <p className="about-p">
+            <span>Our Blog</span> is our magazine , that covers many topics
+            including fashion , beauty , cultures , runway , and many fashion
+            advices introduction by Our designers for your elegance
+          </p>
         </div>
       </div>
 

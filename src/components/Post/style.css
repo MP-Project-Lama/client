@@ -1,36 +1,139 @@
 @import url("https://fonts.googleapis.com/css2?family=Acme&family=Amatic+SC&family=Amiri:wght@700&family=Architects+Daughter&family=Barlow:wght@100&family=Cinzel:wght@500&family=EB+Garamond&family=Francois+One&family=Handlee&family=Libre+Baskerville:wght@700&family=Lobster&family=Mali:wght@200;300&family=Mulish&family=Neucha&family=Quicksand:wght@300&family=Roboto+Mono:wght@100&family=Sawarabi+Mincho&family=Source+Sans+3&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Acme&family=Amatic+SC&family=Amiri:wght@700&family=Architects+Daughter&family=Barlow:wght@100&family=Cinzel:wght@500&family=EB+Garamond&family=Francois+One&family=Handlee&family=Libre+Baskerville:wght@700&family=Lobster&family=Mali:wght@200;300&family=Mulish&family=Neucha&family=Quicksand:wght@300&family=Roboto+Mono:wght@100&family=Sawarabi+Mincho&family=Source+Sans+3&family=Zilla+Slab:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Acme&family=Amatic+SC&family=Amiri:wght@700&family=Architects+Daughter&family=Barlow:wght@100&family=Cinzel:wght@500&family=Dosis:wght@200&family=EB+Garamond&family=Francois+One&family=Handlee&family=Libre+Baskerville:wght@700&family=Lobster&family=Mali:wght@200;300&family=Mulish&family=Neucha&family=Quicksand:wght@300&family=Roboto+Mono:wght@100&family=Sawarabi+Mincho&family=Source+Sans+3&family=Zilla+Slab:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Acme&family=Amatic+SC&family=Amiri:wght@700&family=Architects+Daughter&family=Barlow:wght@100&family=Cinzel:wght@500&family=EB+Garamond&family=Francois+One&family=Handlee&family=Libre+Baskerville:wght@700&family=Lobster&family=Mali:wght@200;300&family=Mulish&family=Neucha&family=Quicksand:wght@300&family=Roboto+Mono:wght@100&family=Sawarabi+Mincho&family=Source+Sans+3&family=Zilla+Slab:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Acme&family=Amatic+SC&family=Amiri:wght@700&family=Architects+Daughter&family=Barlow:wght@100&family=Cinzel:wght@500&family=Dosis:wght@200&family=EB+Garamond&family=Francois+One&family=Handlee&family=Libre+Baskerville:wght@700&family=Lobster&family=Mali:wght@200;300&family=Mulish&family=Neucha&family=Quicksand:wght@300&family=Roboto+Mono:wght@100&family=Sawarabi+Mincho&family=Source+Sans+3&family=Zilla+Slab:wght@300&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Cardo&family=Montserrat:wght@100&family=Nanum+Myeongjo&family=Roboto:wght@100;300&display=swap');
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-.post-container{
-    margin: 90px 20%;
+.post-container {
+  margin: 90px 20%;
 }
 .post-container h2 {
   font-size: 40px;
   font-family: "EB Garamond", serif;
-  color: #B9944E;
+  color: #b9944e;
   margin-bottom: 200px;
 }
-.post-container img{
-    width: 900px;
-    height: 900px;
-   
+.post-container img {
+  width: 900px;
+  height: 900px;
 }
-.post-container p{
-    margin: 30px 0 ;
-    font-size: 30px;
-   font-family: 'Dosis', sans-serif;
-   font-weight: bold;
-   color: rgb(41, 41, 41);
+.post-container p {
+  margin: 30px 0;
+  font-size: 30px;
+  font-family: "Dosis", sans-serif;
+  font-weight: bold;
+  color: rgb(41, 41, 41);
 }
-.comment-area{
-    border: 1px solid rgb(148, 148, 148);
-    width: 700px;
-    font-family: 'Dosis', sans-serif;
-    font-size: 20px;
-    
+.comment-area {
+  border: 1px solid rgb(148, 148, 148);
+  width: 700px;
+  font-family: "Dosis", sans-serif;
+  font-size: 20px;
+}
+.byCreator {
+  font-family: "Montserrat", sans-serif;
+  font-size: 25px;
+  margin-bottom: 30px;
+}
+.byCreator a {
+  color: #b9944e;
+  margin-left: 15px;
+}
+.delPost {
+  width: 250px;
+  height: 60px;
+  margin-top: 50px;
+  margin-left: 50px;
+  background: none;
+  font-size: 20px;
+  font-family: "Raleway", sans-serif;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+}
+.delPost:hover {
+  background: #000;
+  border: none;
+  color: #ffff;
+}
+.editBtn {
+  width: 200px;
+  height: 60px;
+  margin-top: 50px;
+  margin-left: 50px;
+  background: none;
+  font-size: 20px;
+  font-family: "Raleway", sans-serif;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+}
+.editBtn a {
+  color: black;
+  font-size: 20px;
+  text-decoration: none;
+  font-family: "Raleway", sans-serif;
+}
+.editBtn:hover {
+  background: #000;
+  border: none;
+  color: #ffff;
+}
+.editBtn a:hover {
+  color: #ffff;
+}
+.comment-section textarea {
+  margin-top: 90px;
+  border-radius: 20px;
+  color: rgb(138, 138, 138);
+  padding: 20px 30px;
+  font-size: 22px;
+}
+#add {
+  width: 80px;
+  height: 35px;
+  margin-top: 50px;
+  margin-left: 50px;
+  background: #000;
+  color: #fff;
+  font-size: 19px;
+  font-family: "Raleway", sans-serif;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+}
+#add:hover {
+  background: none;
+  border: 1px solid #000;
+  color: #000;
+}
+
+.comment {
+  background-color: #eaeaec;
+  width: 700px;
+  border-radius: 10px;
+  padding: 20px;
+}
+.comment img{
+width: 60px;
+height: 60px;
+border-radius: 100px;
+}
+.comment h4{
+  padding-left: 70px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 22px;
+  color: #5c5c5e;
+
+}
+
+.comSec{
+  margin-top: 40px;
+}
+.comSec ul{
+   list-style-type: none;
+   margin-bottom: 30px;
 }
