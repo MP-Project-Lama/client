@@ -37,39 +37,63 @@ const Designer = () => {
       console.log(error);
     }
   };
+  console.log(designer);
   return (
     <>
-      <div>
+      <div className="desPage">
         <NavBar />
         {designer && (
           <div>
-            <h4> hello</h4>
             <div key={designer._id}>
               <div className="designer-header">
                 <img src={designer.photos.map((img) => img.headerBg)} />
+                <h1> {designer.username.toUpperCase()}</h1>
               </div>
               <div className="about-designer">
-                <p>{designer.about}</p>
-                <img src={designer.photos.aboutImg} />
+                <div className="about-img">
+                  <img src={designer.photos.map((img) => img.aboutImg)} />
+                </div>
+                <div className="about-p">
+                  <p>{designer.about}</p>
+                </div>
               </div>
 
               <div className="concat-designer">
                 <div>
-                  <ul>
-                    <li>
-                      <button> My Collections</button>
-                    </li>
+                  <img src={designer.photos.map((img) => img.concatBg)} />
+                  <div className="concatBtns">
+                    <ul>
+                      <li>
+                        <button> My Collections</button>
+                      </li>
 
-                    <li>
-                      <button> My Shows </button>
-                    </li>
-                    <button> Message Me </button>
-                  </ul>
+                      <li>
+                        <button> My Shows </button>
+                      </li>
+                      <button> Message Me </button>
+                    </ul>
+                  </div>
                 </div>
               </div>
 
               <div className="designer-overview">
                 <div>
+                  {designer.photos.map((ele) => {
+                    return (
+                      <div className="designerImgs">
+                        {ele.imgArr.map((img) => {
+                          return (
+                            <div className="designerImgs">
+                              <img src={img.img1} />
+                              <img src={img.img2} /> <img src={img.img3} />
+                              <img src={img.img4} /> <img src={img.img5} />
+                              <img src={img.img6} />
+                            </div>
+                          );
+                        })}
+                      </div>
+                    );
+                  })}
                   {/* {designer.photos.imgArr.map((img) => (
                     <img src={img} />
                   ))} */}

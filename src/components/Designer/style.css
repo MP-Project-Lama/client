@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.designer-header img {
+  width: 100%;
+  position: relative;
+}
+.designer-header h1 {
+    margin: 0;
+  position: absolute;
+  line-height: 1.2;
+  display: block;
+  width: 100%;
+  top: 80%;
+  left: 25%;
+font-size: 200px;
+font-family: 'Oswald', sans-serif;
+color: #fff;
+}
+.about-designer {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+
+}
+.about-p {
+    width: 30%;
+
+}
+.about-p p{
+width: 90%;
+margin: 30px;
+font-size: 40px;
+
+}
+.about-img {
+    width: 55%;
+}
+.about-img img{
+    margin: 0;
+    width: 100%;
+}
+.concat-designer {
+    width: 100%;
+    position: relative;
+}
+.concat-designer img {
+    width: 100%;
+  
+}
+.concatBtns {
+ position: absolute;
+  line-height: 1.2;
+  display: block;
+  width: 100%;
+  top: 23%;
+  left: 27%;
+}
+.concatBtns ul {
+    list-style-type: none;
+}
+.concatBtns button {
+    width: 900px;
+    height: 134px;
+    margin: 40px 0;
+    border: 10px solid black;
+    font-family: 'Oswald', sans-serif;
+    font-size: 70px;
+}
+.designer-overview {
+    width: 100%;
+}
+.designerImgs {
+    width: 100%;
+     display: flex;
+    flex-direction: row;
+}
+.designerImgs img{
+    width: 30%;
+    height: 80%;
+  
+}

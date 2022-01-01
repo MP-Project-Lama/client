@@ -65,13 +65,14 @@ const Explore = () => {
     );
     setMenCollections(res.data);
   };
+  //  tabindex="-1"
+  //           aria-hidden="true"
+  //           class="lv-video-loop__video"
+  //         >
+      //  playsinline=""
+      //  loop="loop"
 
-  //// splide settings
-  // new Splide(".splide", {
-  //   type: "loop",
-  //   perPage: 3,
-  // });
-
+  
   return (
     <>
       <div>
@@ -85,17 +86,17 @@ const Explore = () => {
           tabIndex="-1"
           aria-hidden="true"
         ></video> */}
-        <video
-          playsinline=""
-          src="https://lv-vod.fl.freecaster.net/vod/louisvuitton/gJjgomc5Ra_HD.mp4"
-          loop="loop"
-          tabindex="-1"
-          aria-hidden="true"
-          class="lv-video-loop__video"
-        ></video>
+        <div className="headerVideo">
+          <video controls autoPlay loop aria-hidden="true" muted name="media">
+            <source
+              src="https://lv-vod.fl.freecaster.net/vod/louisvuitton/gJjgomc5Ra_HD.mp4"
+              type="video/mp4"
+            />
+          </video>
+        </div>
         {state.role.role === "Designer" && (
           <div>
-            <button>
+            <button className="addPost">
               <Link to="/collection"> Add Collection </Link>
             </button>
           </div>
@@ -103,32 +104,33 @@ const Explore = () => {
         <div>
           <div className="collection-section">
             <h3>- Collections - </h3>
-            {collections.map((coll) => {
-              return (
-                <div className="collections-slidshow" key={coll._id}>
-                  <Splide
-                    options={{
-                      rewind: true,
-                      width: 800,
-                      gap: "1rem",
-                    }}
-                  >
-                    <SplideSlide>
-                      <img
-                        src={
-                          coll.media &&
-                          coll.media.length &&
-                          coll.media.map((look) => look.look)
-                        }
-                        alt="collection"
-                      />
-                    </SplideSlide>
-                  </Splide>
-
-                  <h4> {coll.createdBy.username}</h4>
-                </div>
-              );
-            })}
+            <div className="collections">
+              {collections.map((coll) => {
+                return (
+                  <div className="collections-slidshow" key={coll._id}>
+                    
+                    <Splide
+                      options={{
+                        rewind: true,
+                        width: 800,
+                        gap: "1rem",
+                      }}
+                    >
+                      <SplideSlide>
+                        <img
+                          src={
+                            coll.media &&
+                            coll.media.length &&
+                            coll.media.map((look) => look.look)
+                          }
+                          alt="collection"
+                        />
+                      </SplideSlide>
+                    </Splide>
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
           <div className="designers-section">
