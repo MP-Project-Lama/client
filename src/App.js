@@ -12,7 +12,7 @@ import AddPost from "./components/addPost";
 import EditPost from "./components/editPost";
 import Designer from "./components/Designer";
 import EditCollection from "./components/editCollection";
-
+import DirectMessage from "./components/directMessage";
 function App() {
   return (
     <div className="App">
@@ -29,6 +29,7 @@ function App() {
         <Route path="/coll/edit/:id" element={<EditCollection />} />
         <Route path="/collection" element={<AddCollection />} />
         <Route path="/designer/:id" element={<Designer />} />
+        <Route path="/directmessage" element={<DirectMessage />} />
       </Routes>
     </div>
   );
