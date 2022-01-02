@@ -42,7 +42,6 @@ const Explore = () => {
         }
       }
     });
-    console.log(collectionsArr);
     setCollections(collectionsArr);
   };
 
@@ -50,7 +49,6 @@ const Explore = () => {
   const getTheDesignrs = async () => {
     const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/designers`);
     setDesigners(res.data);
-    console.log(res.data);
 
   };
   /// get Wedding Collections:
@@ -102,7 +100,6 @@ const Explore = () => {
             <h3>- Collections - </h3>
             <div className="collections">
               {collections.map((coll) => {
-                console.log(coll);
                 return (
                   <div className="collections-slidshow" key={coll._id}>
                     <Link to={`/collection/${coll._id}`}>
