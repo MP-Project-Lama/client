@@ -69,23 +69,14 @@ const Explore = () => {
   //           aria-hidden="true"
   //           class="lv-video-loop__video"
   //         >
-      //  playsinline=""
-      //  loop="loop"
+  //  playsinline=""
+  //  loop="loop"
 
-  
   return (
     <>
       <div>
         <NavBar />
-        {/* <video
-          autoplay
-          playsInline
-          muted
-          src="https://lv-vod.fl.freecaster.net/vod/louisvuitton/gJjgomc5Ra_HD.mp4"
-          loop="loop"
-          tabIndex="-1"
-          aria-hidden="true"
-        ></video> */}
+
         <div className="headerVideo">
           <video controls autoPlay loop aria-hidden="true" muted name="media">
             <source
@@ -108,25 +99,26 @@ const Explore = () => {
               {collections.map((coll) => {
                 return (
                   <div className="collections-slidshow" key={coll._id}>
-                    
-                    <Splide
-                      options={{
-                        rewind: true,
-                        width: 800,
-                        gap: "1rem",
-                      }}
-                    >
-                      <SplideSlide>
-                        <img
-                          src={
-                            coll.media &&
-                            coll.media.length &&
-                            coll.media.map((look) => look.look)
-                          }
-                          alt="collection"
-                        />
-                      </SplideSlide>
-                    </Splide>
+                    <Link to={`/collection/${coll._id}`}>
+                      <Splide
+                        options={{
+                          rewind: true,
+                          width: 800,
+                          gap: "1rem",
+                        }}
+                      >
+                        <SplideSlide>
+                          <img
+                            src={
+                              coll.media &&
+                              coll.media.length &&
+                              coll.media.map((look) => look.look)
+                            }
+                            alt="collection"
+                          />
+                        </SplideSlide>
+                      </Splide>
+                    </Link>
                   </div>
                 );
               })}

@@ -5,11 +5,13 @@ import Registration from "./components/Registration"
 import Blog from "./components/Blog";
 import Post from "./components/Post";
 import Explore from "./components/Explore";
+import Collection from "./components/Collection";
 import Verification from "./components/Verification";
 import AddCollection from "./components/addCollection";
 import AddPost from "./components/addPost";
 import EditPost from "./components/editPost";
 import Designer from "./components/Designer";
+
 
 function App() {
   return (
@@ -23,6 +25,7 @@ function App() {
         <Route path="/post" element={<AddPost />} />
         <Route path="/edit/:id" element={<EditPost />} />
         <Route path="/explore" element={<Explore />} />
+        <Route path="/collection/:id" element={<Collection />} />
         <Route path="/collection" element={<AddCollection />} />
         <Route path="/designer/:id" element={<Designer />} />
       </Routes>
