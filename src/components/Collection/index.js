@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import NavBar from "../NavBar";
-import ImageUploader from "react-images-upload";
-import { storage } from "../firebase";
-import { Link, useParams , useNavigate} from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import "./style.css";
 import Swal from "sweetalert2";
 
@@ -62,22 +60,22 @@ const Collection = () => {
       }).then(async (result) => {
         if (result.isConfirmed) {
           await axios.put(
-        `${process.env.REACT_APP_BASE_URL}/del/${id}`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${state.token}`,
-          },
-        }
-      );
-       navigate("/explore");
-       Swal.fire({
+            `${process.env.REACT_APP_BASE_URL}/del/${id}`,
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${state.token}`,
+              },
+            }
+          );
+          navigate("/explore");
+          Swal.fire({
             title: "Post Has Been Deleted!",
             icon: "success",
             confirmButtonText: "OK",
             confirmButtonColor: "#E07A5F",
           });
-    }else if (result.dismiss === Swal.DismissReason.cancel) {
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
           Swal.fire({
             title: "Cancelled",
             icon: "error",
@@ -85,13 +83,12 @@ const Collection = () => {
             confirmButtonColor: "#E07A5F",
           });
         }
-          });
+      });
     } catch (error) {
       console.log(error);
     }
-  }
-  
- 
+  };
+
   ////
 
   return (
@@ -103,15 +100,13 @@ const Collection = () => {
       ) : (
         <div>
           <NavBar />
-          {collection.map((ele)=> {
+          {collection.map((ele) => {
             return (
               <div>
                 <div>
                   <h2> {ele.title}</h2>
                   <p> {ele.desc}</p>
                 </div>
-                {/* {console.log(ele.createdBy._id)}
-                {console.log(state.user._id)} */}
 
                 <div className="slideshow">
                   {ele.media.map((looks) => {
@@ -128,7 +123,15 @@ const Collection = () => {
                 </div>
                 {state.user._id === ele.createdBy._id && (
                   <div className="coll-control">
-                    <button className="editBtn">Edit</button>
+                    <button
+                      className="editBtn"
+                      onClick={() => {
+                        navigate(`/coll/edit/${id}`);
+                      }}
+                    >
+                      Edit
+                    </button>
+
                     <button onClick={moveCollectionToTrash} className="delPost">
                       Remove
                     </button>
@@ -141,6 +144,7 @@ const Collection = () => {
       )}
       ;
     </div>
-  );}
+  );
+};
 
 export default Collection;
