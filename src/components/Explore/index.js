@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import NavBar from "../NavBar";
-import ImageUploader from "react-images-upload";
-import { storage } from "../firebase";
 import "./style.css";
 import { Link } from "react-router-dom";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
@@ -11,6 +9,8 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 const Explore = () => {
   const [collections, setCollections] = useState([]);
   const [designers, setDesigners] = useState([]);
+  const [result, setResult] = useState([]);
+
   const [weddingCollections, setWeddingCollections] = useState([]);
   const [menCollections, setMenCollections] = useState([]);
 
@@ -34,18 +34,29 @@ const Explore = () => {
     const res = await axios.get(
       `${process.env.REACT_APP_BASE_URL}/collections`
     );
-    setCollections(res.data);
+    let collectionsArr = [];
+    res.data.map((ele) => {
+      if (ele.category !== "Men") {
+        if (ele.category !== "Weddings") {
+          collectionsArr.push(ele);
+        }
+      }
+    });
+    console.log(collectionsArr);
+    setCollections(collectionsArr);
   };
 
   /// get all designers
   const getTheDesignrs = async () => {
     const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/designers`);
     setDesigners(res.data);
+    console.log(res.data);
+
   };
   /// get Wedding Collections:
 
   const getWeddingCollections = async () => {
-    const category = "Wedding";
+    const category = "Weddings";
     const res = await axios.post(
       `${process.env.REACT_APP_BASE_URL}/collections`,
       {
@@ -65,27 +76,12 @@ const Explore = () => {
     );
     setMenCollections(res.data);
   };
-  //  tabindex="-1"
-  //           aria-hidden="true"
-  //           class="lv-video-loop__video"
-  //         >
-      //  playsinline=""
-      //  loop="loop"
-
   
   return (
     <>
       <div>
         <NavBar />
-        {/* <video
-          autoplay
-          playsInline
-          muted
-          src="https://lv-vod.fl.freecaster.net/vod/louisvuitton/gJjgomc5Ra_HD.mp4"
-          loop="loop"
-          tabIndex="-1"
-          aria-hidden="true"
-        ></video> */}
+
         <div className="headerVideo">
           <video controls autoPlay loop aria-hidden="true" muted name="media">
             <source
@@ -106,27 +102,29 @@ const Explore = () => {
             <h3>- Collections - </h3>
             <div className="collections">
               {collections.map((coll) => {
+                console.log(coll);
                 return (
                   <div className="collections-slidshow" key={coll._id}>
-                    
-                    <Splide
-                      options={{
-                        rewind: true,
-                        width: 800,
-                        gap: "1rem",
-                      }}
-                    >
-                      <SplideSlide>
-                        <img
-                          src={
-                            coll.media &&
-                            coll.media.length &&
-                            coll.media.map((look) => look.look)
-                          }
-                          alt="collection"
-                        />
-                      </SplideSlide>
-                    </Splide>
+                    <Link to={`/collection/${coll._id}`}>
+                      <Splide
+                        options={{
+                          rewind: true,
+                          width: 800,
+                          gap: "1rem",
+                        }}
+                      >
+                        <SplideSlide>
+                          <img
+                            src={
+                              coll.media &&
+                              coll.media.length &&
+                              coll.media.map((look) => look.look)
+                            }
+                            alt="collection"
+                          />
+                        </SplideSlide>
+                      </Splide>
+                    </Link>
                   </div>
                 );
               })}
@@ -150,11 +148,27 @@ const Explore = () => {
           </div>
 
           <div className="wedding-section">
-            {/*  here  will show the wedding collections */}
+            <h3>- Weddings - </h3>
+            {weddingCollections.map((collection) => {
+              return (
+                <div className="weddings">
+                  <img src={collection.media.map((look) => look.look)} />
+                </div>
+              );
+            })}
           </div>
 
           <div className="men-section">
             {/*  here  will show the men collections */}
+            <h3>- Men Collections - </h3>
+            {menCollections.map((collection) => {
+              return (
+                <div className="weddings">
+                  <img src={collection.media.map((look) => look.look)} />
+                  {/* {console.log(collection.media.map((look) => look.look))} */}
+                </div>
+              );
+            })}
           </div>
 
           <div></div>

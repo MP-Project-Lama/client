@@ -1,15 +1,17 @@
 import React from "react";
 import { Route, Routes } from "react-router";
 import Home from "./components/Landing";
-import Registration from "./components/Registration"
+import Registration from "./components/Registration";
 import Blog from "./components/Blog";
 import Post from "./components/Post";
 import Explore from "./components/Explore";
+import Collection from "./components/Collection";
 import Verification from "./components/Verification";
 import AddCollection from "./components/addCollection";
 import AddPost from "./components/addPost";
 import EditPost from "./components/editPost";
 import Designer from "./components/Designer";
+import EditCollection from "./components/editCollection";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
         <Route path="/post" element={<AddPost />} />
         <Route path="/edit/:id" element={<EditPost />} />
         <Route path="/explore" element={<Explore />} />
+        <Route path="/collection/:id" element={<Collection />} />
+        <Route path="/coll/edit/:id" element={<EditCollection />} />
         <Route path="/collection" element={<AddCollection />} />
         <Route path="/designer/:id" element={<Designer />} />
       </Routes>
