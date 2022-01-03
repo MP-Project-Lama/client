@@ -1,16 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import "./style.css";
 
 const NavBar = () => {
-
-const state = useSelector((state) => {
-  return {
-    token: state.Login.token,
-  };
-});
-
+  const state = useSelector((state) => {
+    return {
+      token: state.Login.token,
+      user: state.Login.user,
+    };
+  });
 
   return (
     <div>
@@ -29,8 +28,8 @@ const state = useSelector((state) => {
             <Link to="/">Home</Link>
           </li>
           {state.token ? (
-            <li>
-              <Link to="/">Profile</Link>
+            <li className="userProfile">
+              Hello :<Link to={`/user/${state.user._id}`} > {state.user.username}</Link>
             </li>
           ) : (
             <li>

@@ -3,6 +3,9 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { storage } from "../firebase";
+import { Button, Upload, Form, Select, Input } from "antd";
+import "antd/dist/antd.css";
+import { UploadOutlined } from "@ant-design/icons";
 import Swal from "sweetalert2";
 
 const EditPost = () => {
@@ -57,7 +60,7 @@ const EditPost = () => {
       {
         title,
         desc: [{ part1: firstDesc, part2: secDesc, part3: finalDesc }],
-        media: urls,
+        media: urls.length > 0 ? urls : post.media,
       },
       {
         headers: {
@@ -126,7 +129,7 @@ const EditPost = () => {
       {post.map((ele) => {
         return (
           <div>
-            <input
+            {/* <input
               type="text"
               placeholder={ele.title}
               required
@@ -156,7 +159,68 @@ const EditPost = () => {
             />
             <input id="files" type="file" multiple onChange={handleChange} />
             <button onClick={handleUpload}> Upload Images</button>
-            <button onClick={editPost}> Add Post </button>
+            <button onClick={editPost}> Add Post </button> */}
+
+            <Form
+              labelCol={{
+                span: 4,
+              }}
+              wrapperCol={{
+                span: 14,
+              }}
+            >
+              <Form.Item
+                label="Title"
+                name="Title"
+                onChange={(e) => setTitle(e.target.value)}
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your username!",
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+
+              <Form.Item label="introduction">
+                <Input.TextArea
+                  onChange={(e) => setFirstDesc(e.target.value)}
+                />
+              </Form.Item>
+              <Form.Item label="Description">
+                <Input.TextArea onChange={(e) => setSecDesc(e.target.value)} />
+              </Form.Item>
+              <Form.Item label="final">
+                <Input.TextArea
+                  onChange={(e) => setFinalDesc(e.target.value)}
+                />
+              </Form.Item>
+
+              <Form.Item label="Button">
+                <Upload
+                  multiple
+                  listType="picture"
+                  className="upload-list-inline"
+                >
+                  <Button onClick={handleChange} icon={<UploadOutlined />}>
+                    Upload files
+                  </Button>
+                </Upload>
+              </Form.Item>
+
+              <Form.Item label="Button">
+                <Button type="dashed" onClick={handleUpload}>
+                  Upload files
+                </Button>
+              </Form.Item>
+
+              <Form.Item label="Button">
+                <Button type="primary" onClick={editPost}>
+                  Add Post
+                </Button>
+              </Form.Item>
+            </Form>
           </div>
         );
       })}
