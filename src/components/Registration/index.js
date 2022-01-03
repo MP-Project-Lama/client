@@ -6,8 +6,10 @@ import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { useAlert } from "react-alert";
-
 import "./style.css";
+
+const popupTools = require("popup-tools");
+
 
 const Registration = () => {
   const navigate = useNavigate();
@@ -125,12 +127,13 @@ const Registration = () => {
         await axios.post(`${process.env.REACT_APP_BASE_URL}/check`, {
           email,
         });
+        
        
         alert.show('Confirm your email to reset the password', {
           timeout: 5000,
           type: "success",
         });
-        navigate("/verify/:id");
+        navigate("/reset/:id");
       } catch (error) {
         
         alert.show('Somthing Went Wrong !', {
@@ -141,6 +144,26 @@ const Registration = () => {
     }
   };
 
+ const googleLogin = () => {
+   popupTools.popup(
+     `${process.env.REACT_APP_BASE_URL}/auth/google`,
+     "Google Login",
+     { width: 400, height: 600 },
+     function (err, user) {
+       if (err) {
+         console.log(err);
+       } else {
+         
+    console.log(user);
+         }
+       }
+     
+   );
+ };
+
+
+
+
   ///
 
   return (
@@ -150,6 +173,7 @@ const Registration = () => {
           <div className="flipper" id="flipper">
             <div className="front">
               <h2 className="title"> Login </h2>
+              <button onClick={googleLogin}>Login with google </button>
               <input
                 type="email"
                 name="email"
@@ -159,6 +183,7 @@ const Registration = () => {
                 onChange={(e) => setIdentity(e.target.value)}
               />
               <input
+              
                 type="password"
                 name="password"
                 placeholder="Password"
@@ -172,13 +197,15 @@ const Registration = () => {
                 className="signup-submit"
                 onClick={login}
               />
-              <p onClick={resetPassword}>forgot your password?</p>
+              <p onClick={resetPassword}> forgot your password?</p>
+              
               <p className="flipbutton" onClick={flipCard}>
                 Not a member? Sign up here
               </p>
             </div>
             <div className="back">
               <h2 className="title">Register</h2>
+
               <input
                 type="text"
                 placeholder="username"
@@ -217,7 +244,7 @@ const Registration = () => {
         ) : (
           <div>
             <h1>
-              You Already Logged in , Go to <Link to="/"> Home </Link>{" "}
+              You Already Logged in , Go to <Link to="/"> Home </Link>
             </h1>
           </div>
         )}

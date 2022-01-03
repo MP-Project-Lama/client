@@ -5,6 +5,7 @@ import NavBar from "../NavBar";
 import "./style.css";
 import { Link } from "react-router-dom";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/splide/dist/css/splide.min.css";
 
 const Explore = () => {
   const [collections, setCollections] = useState([]);
@@ -149,7 +150,9 @@ const Explore = () => {
             {weddingCollections.map((collection) => {
               return (
                 <div className="weddings">
-                  <img src={collection.media.map((look) => look.look)} />
+                  <Link to={`/collection/${collection._id}`}>
+                    <img src={collection.media.map((look) => look.look)} />
+                  </Link>
                 </div>
               );
             })}
@@ -161,7 +164,9 @@ const Explore = () => {
             {menCollections.map((collection) => {
               return (
                 <div className="weddings">
-                  <img src={collection.media.map((look) => look.look)} />
+                  <Link to={`/collection/${collection._id}`}>
+                    <img src={collection.media.map((look) => look.look)} />
+                  </Link>
                   {/* {console.log(collection.media.map((look) => look.look))} */}
                 </div>
               );

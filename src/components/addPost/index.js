@@ -4,6 +4,9 @@ import axios from "axios";
 import "./style.css";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import { Button, Upload, Form, Select, Input } from "antd";
+import "antd/dist/antd.css";
+import { UploadOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router";
 
 const AddPost = () => {
@@ -111,7 +114,60 @@ const AddPost = () => {
   return (
     <div>
       <div>
-        <input
+        <Form
+          labelCol={{
+            span: 4,
+          }}
+          wrapperCol={{
+            span: 14,
+          }}
+        >
+          <Form.Item
+            label="Title"
+            name="Title"
+            onChange={(e) => setTitle(e.target.value)}
+            rules={[
+              {
+                required: true,
+                message: "Please input your username!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item label="introduction">
+            <Input.TextArea onChange={(e) => setFirstDesc(e.target.value)} />
+          </Form.Item>
+          <Form.Item label="Description">
+            <Input.TextArea onChange={(e) => setSecDesc(e.target.value)} />
+          </Form.Item>
+          <Form.Item label="final">
+            <Input.TextArea onChange={(e) => setFinalDesc(e.target.value)} />
+          </Form.Item>
+
+          <Form.Item label="Button">
+            <Upload multiple listType="picture" className="upload-list-inline">
+              <Button onClick={handleChange} icon={<UploadOutlined />}>
+                Upload files
+              </Button>
+            </Upload>
+          </Form.Item>
+
+          <Form.Item label="Button">
+            <Button type="dashed" onClick={handleUpload}>
+              Upload files
+            </Button>
+          </Form.Item>
+
+          <Form.Item label="Button">
+            <Button type="primary" onClick={addThePost}>
+              Add Post
+            </Button>
+          </Form.Item>
+        </Form>
+
+        {/* <input
           type="text"
           placeholder="Title"
           required
@@ -141,7 +197,7 @@ const AddPost = () => {
         />
         <input id="files" type="file" multiple onChange={handleChange} />
         <button onClick={handleUpload}> Upload Images</button>
-        <button onClick={addThePost}> Add Post </button>
+        <button onClick={addThePost}> Add Post </button> */}
       </div>
     </div>
   );

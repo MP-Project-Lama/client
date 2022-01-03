@@ -13,6 +13,8 @@ import EditPost from "./components/editPost";
 import Designer from "./components/Designer";
 import EditCollection from "./components/editCollection";
 import DirectMessage from "./components/directMessage";
+import Profile from "./components/Profile";
+import ResetPassword from "./components/resetPassword";
 function App() {
   return (
     <div className="App">
@@ -30,6 +32,8 @@ function App() {
         <Route path="/collection" element={<AddCollection />} />
         <Route path="/designer/:id" element={<Designer />} />
         <Route path="/directmessage" element={<DirectMessage />} />
+        <Route path="/user/:id" element={<Profile />} />
+        <Route path="/reset/:id" element={<ResetPassword />} />
       </Routes>
     </div>
   );

@@ -30,6 +30,9 @@
   font-family: "Raleway", sans-serif;
   position: relative;
 }
+.navBar a:hover {
+  color: black;
+}
 .navBar a:after {
   content: "";
   position: absolute;
@@ -45,6 +48,7 @@
 }
 
 .navBar a:hover:after {
+  
   transform: scaleX(1);
   transform-origin: bottom left;
 }
