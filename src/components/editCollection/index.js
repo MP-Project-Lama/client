@@ -3,6 +3,9 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { storage } from "../firebase";
+import { Button, Upload, Form, Select, Input } from "antd";
+import "antd/dist/antd.css";
+import { UploadOutlined } from "@ant-design/icons";
 import Swal from "sweetalert2";
 
 const EditCollection = () => {
@@ -54,7 +57,7 @@ const EditCollection = () => {
       {
         title,
         desc,
-        media: looks,
+        media: looks.length > 0 ? looks : collection.media,
         material,
         category,
       },
@@ -135,7 +138,7 @@ const EditCollection = () => {
         collection.map((looks) => {
           return (
             <div>
-              <input
+              {/* <input
                 type="text"
                 defaultValue={looks.title}
                 required
@@ -167,7 +170,87 @@ const EditCollection = () => {
 
               <input id="files" type="file" multiple onChange={handleChange} />
               <button onClick={handleUpload}> Upload Images</button>
-              <button onClick={editTheCollection}> Add Collection </button>
+              <button onClick={editTheCollection}> Add Collection </button> */}
+              <Form
+                labelCol={{
+                  span: 4,
+                }}
+                wrapperCol={{
+                  span: 14,
+                }}
+              >
+                <Form.Item
+                  label="Title"
+                  name="Title"
+                  onChange={(e) => setTitle(e.target.value)}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input your username!",
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+
+                <Form.Item label="Description">
+                  <Input.TextArea onChange={(e) => setDesc(e.target.value)} />
+                </Form.Item>
+                <Form.Item
+                  label="Category"
+                  name="Category"
+                  onChange={(e) => setCategory(e.target.value)}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please Enter The Category!",
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+
+                <Form.Item
+                  label="Material"
+                  name="Material"
+                  onChange={(e) => setMaterial(e.target.value)}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please Enter The Material!",
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+                <Form.Item label="Button">
+                  <Upload
+                    multiple
+                    listType="picture"
+                    className="upload-list-inline"
+                  >
+                    <Button onClick={handleChange} icon={<UploadOutlined />}>
+                      Upload files
+                    </Button>
+                  </Upload>
+                </Form.Item>
+
+                <Form.Item label="Button">
+                  <Button type="dashed" onClick={handleUpload}>
+                    Upload files
+                  </Button>
+                </Form.Item>
+
+                <Form.Item label="Button">
+                  <Button onClick={editLook}>Add look</Button>
+                </Form.Item>
+
+                <Form.Item label="Button">
+                  <Button type="primary" onClick={editTheCollection}>
+                    Edit the collection
+                  </Button>
+                </Form.Item>
+              </Form>
             </div>
           );
         })}

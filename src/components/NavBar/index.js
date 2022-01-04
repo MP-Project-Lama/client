@@ -1,17 +1,33 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useSelector} from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { signOut } from "../../reducers/Login";
+import "antd/dist/antd.css";
+import { Popconfirm, message, Button } from "antd";
 import "./style.css";
 
 const NavBar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-const state = useSelector((state) => {
-  return {
-    token: state.Login.token,
-  };
-});
+  const state = useSelector((state) => {
+    return {
+      token: state.Login.token,
+      user: state.Login.user,
+    };
+  });
 
+  ////
+  const text = "Are you sure to delete this task?";
 
+  function confirm() {
+    try {
+      dispatch(signOut());
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <div>
       <div>
@@ -29,8 +45,19 @@ const state = useSelector((state) => {
             <Link to="/">Home</Link>
           </li>
           {state.token ? (
-            <li>
-              <Link to="/">Profile</Link>
+            <li className="userProfile">
+              <Popconfirm
+                placement="bottomLeft"
+                title={text}
+                onConfirm={confirm}
+                okText="logout"
+                cancelText="No"
+              >
+                Hello :
+                <Link to={`/user/${state.user._id}`}>
+                  {state.user.username}
+                </Link>
+              </Popconfirm>
             </li>
           ) : (
             <li>
