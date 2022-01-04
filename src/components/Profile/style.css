@@ -1,11 +1,18 @@
 .profile {
     border: 1px solid black;
-    width: 70%;
+    width: 55%;
     margin: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
+   
+}
 
+.profile img {
+    width: 250px;
+    height: 250px;
 }
 .profile img {
-    width: 120px;
-    height: 120px;
+    border-radius: 180px;
 }

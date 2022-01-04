@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams  , useNavigate} from "react-router-dom";
 import "./style.css";
 import NavBar from "../NavBar";
 
 const Designer = () => {
   const [designer, setDesigner] = useState(null);
+  const [collection, setCollection] = useState([]);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const state = useSelector((state) => {
     return {
@@ -17,7 +19,6 @@ const Designer = () => {
 
   useEffect(() => {
     getTheDesignr();
-    console.log(designer);
   }, []);
 
   const getTheDesignr = async () => {
@@ -37,7 +38,25 @@ const Designer = () => {
       console.log(error);
     }
   };
-  console.log(designer);
+  ///
+
+  const getAllCollections = async () => {
+    const res = await axios.get(
+      `${process.env.REACT_APP_BASE_URL}/collections`
+    );
+    res.data.find((ele) => {
+      if (ele.createdBy._id ===  designer._id) {
+       
+       setCollection(ele.data)
+       
+      }
+     
+    });
+    console.log(collection);
+    
+  };
+
+
   return (
     <>
       <div className="desPage">
@@ -64,13 +83,16 @@ const Designer = () => {
                   <div className="concatBtns">
                     <ul>
                       <li>
-                        <button> My Collections</button>
+                        <button onClick={getAllCollections}> My Collections</button>
                       </li>
 
                       <li>
                         <button> My Shows </button>
                       </li>
-                      <button> Message Me </button>
+                      <button onClick={()=> navigate("/directmessage")}>
+                       
+                        Message Me
+                      </button>
                     </ul>
                   </div>
                 </div>

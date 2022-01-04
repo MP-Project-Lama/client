@@ -102,7 +102,6 @@ const Post = () => {
               },
             }
           );
-
           navigate("/blog");
           Swal.fire({
             title: "Post Has Been Deleted!",
@@ -170,7 +169,6 @@ const Post = () => {
     }
   };
 
-  console.log(post);
   return (
     <>
       {!state.token ? (
@@ -195,7 +193,7 @@ const Post = () => {
                     <h4 className="byCreator">
                       By:
                       <Link to={`/designer/${element.createdBy._id}`}>
-                        {element.createdBy.username.toUpperCase()}{" "}
+                        {element.createdBy.username.toUpperCase()}
                       </Link>
                     </h4>
 
@@ -217,8 +215,13 @@ const Post = () => {
                         <button onClick={deleteThePost} className="delPost">
                           Delete Post
                         </button>
-                        <button className="editBtn">
-                          <Link to={`/edit/${id}`}> Edit </Link>
+                        <button
+                          className="editBtn"
+                          onClick={() => {
+                            navigate(`/edit/${id}`);
+                          }}
+                        >
+                          Edit
                         </button>
                       </div>
                     )}
@@ -240,10 +243,9 @@ const Post = () => {
                           <ul>
                             <li key={comment._id}>
                               <div className="comment">
-                               
-                                  <img src={comment.createdBy.avatar} />
-                                  <h4>{comment.createdBy.username} </h4>
-                                
+                                <img src={comment.createdBy.avatar} />
+                                <h4>{comment.createdBy.username} </h4>
+
                                 <p>{comment.comment}</p>
                                 {state.user._id === comment.createdBy._id && (
                                   <button

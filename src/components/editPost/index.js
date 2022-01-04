@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { storage } from "../firebase";
-import { Button, Upload, Form, Select, Input } from "antd";
+import { Button, Upload, Form, Input } from "antd";
 import "antd/dist/antd.css";
 import { UploadOutlined } from "@ant-design/icons";
 import Swal from "sweetalert2";
@@ -19,6 +19,7 @@ const EditPost = () => {
   const [images, setImages] = useState([]);
   const [progress, setProgress] = useState(0);
   const navigate = useNavigate();
+   const fileList = [];
   ////
   const state = useSelector((state) => {
     return {
@@ -32,12 +33,13 @@ const EditPost = () => {
 
   useEffect(() => {
     getThePost();
+    
   }, []);
 
   ///
   const getThePost = async () => {
     try {
-      
+  
       const res = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/post/${id}`,
         {
@@ -51,7 +53,6 @@ const EditPost = () => {
       console.log(error);
     }
   };
-
   ///
 
   const editPost = async () => {
@@ -80,86 +81,56 @@ const EditPost = () => {
 
   ///
   const handleChange = (e) => {
-    for (let i = 0; i < e.target.files.length; i++) {
-      const newImg = e.target.files[i];
+    console.log(e.fileList, "<----");
+    for (let i = 0; i < e.fileList.length; i++) {
+      const newImg = e.fileList[i];
       newImg["id"] = Math.random();
       setImages((prevState) => [...prevState, newImg]);
     }
   };
 
-  const handleUpload = (image) => {
-    // console.log(images);
+ const handleUpload = (image) => {
+   const promises = [];
+   images.map((image) => {
+     const uploadTask = storage.ref(`images/${image.name}`).put(image);
+     promises.push(uploadTask);
+     uploadTask.on(
+       "state_changed",
+       (snapshot) => {
+         const progress = Math.round(
+           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+         );
+         setProgress(progress);
+       },
+       (error) => {
+         console.log(error);
+       },
+       async () => {
+         await storage
+           .ref("images")
+           .child(image.name)
+           .getDownloadURL()
+           .then((urls) => {
+             setUrls((prevState) => [...prevState, urls]);
+             console.log("image:===", image);
+             console.log("urls:===", urls);
+           })
+           .catch((err) => {
+             console.log("err firebase upload", err);
+           });
+       }
+     );
+   });
 
-    const promises = [];
-    images.map((image) => {
-      const uploadTask = storage.ref(`images/${image.name}`).put(image);
-      promises.push(uploadTask);
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress = Math.round(
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          );
-          setProgress(progress);
-        },
-        (error) => {
-          console.log(error);
-        },
-        async () => {
-          await storage
-            .ref("images")
-            .child(image.name)
-            .getDownloadURL()
-            .then((urls) => {
-              setUrls((prevState) => [...prevState, urls]);
-              console.log("image:===", image);
-              console.log("urls:===", urls);
-            });
-        }
-      );
-    });
-
-    Promise.all(promises)
-      .then(() => console.log("images have been uploaded"))
-      .catch((error) => console.log(error));
-  };
-
+   Promise.all(promises)
+     .then(() => console.log("images have been uploaded"))
+     .catch((error) => console.log("firebase promise error", error));
+ };
   return (
     <div>
       {post.map((ele) => {
         return (
           <div>
-            {/* <input
-              type="text"
-              placeholder={ele.title}
-              required
-              className="coll-input"
-              onChange={(e) => setTitle(e.target.value)}
-            />
-            <textarea
-              type="text"
-              placeholder={ele.firstDesc}
-              required
-              className="description-input"
-              onChange={(e) => setFirstDesc(e.target.value)}
-            />
-            <textarea
-              type="text"
-              placeholder={ele.secDesc}
-              required
-              className="description-input"
-              onChange={(e) => setSecDesc(e.target.value)}
-            />
-            <textarea
-              type="text"
-              placeholder={ele.finalDesc}
-              required
-              className="description-input"
-              onChange={(e) => setFinalDesc(e.target.value)}
-            />
-            <input id="files" type="file" multiple onChange={handleChange} />
-            <button onClick={handleUpload}> Upload Images</button>
-            <button onClick={editPost}> Add Post </button> */}
 
             <Form
               labelCol={{
@@ -202,17 +173,13 @@ const EditPost = () => {
                   multiple
                   listType="picture"
                   className="upload-list-inline"
+                  defaultFileList={[...fileList]}
+                  onChange={handleChange}
                 >
-                  <Button onClick={handleChange} icon={<UploadOutlined />}>
+                  <Button icon={<UploadOutlined />}>
                     Upload files
                   </Button>
                 </Upload>
-              </Form.Item>
-
-              <Form.Item label="Button">
-                <Button type="dashed" onClick={handleUpload}>
-                  Upload files
-                </Button>
               </Form.Item>
 
               <Form.Item label="Button">
