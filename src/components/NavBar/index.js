@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "../../reducers/Login";
 import "antd/dist/antd.css";
-import { Popconfirm, message, Button } from "antd";
+import { Popconfirm} from "antd";
 import "./style.css";
 
 const NavBar = () => {

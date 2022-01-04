@@ -18,6 +18,7 @@ const AddPost = () => {
   const [images, setImages] = useState([]);
   const [progress, setProgress] = useState(0);
   const navigate = useNavigate();
+   const fileList = [];
 
   ///
   const state = useSelector((state) => {
@@ -28,12 +29,13 @@ const AddPost = () => {
     };
   });
 
-  //////
+
 
   /////
   const handleChange = (e) => {
-    for (let i = 0; i < e.target.files.length; i++) {
-      const newImg = e.target.files[i];
+    console.log(e.fileList, "<----");
+    for (let i = 0; i < e.fileList.length; i++) {
+      const newImg = e.fileList[i];
       newImg["id"] = Math.random();
       setImages((prevState) => [...prevState, newImg]);
     }
@@ -41,7 +43,6 @@ const AddPost = () => {
 
   const handleUpload = (image) => {
     // console.log(images);
-
     const promises = [];
     images.map((image) => {
       const uploadTask = storage.ref(`images/${image.name}`).put(image);
@@ -66,15 +67,17 @@ const AddPost = () => {
               setUrls((prevState) => [...prevState, urls]);
               console.log("image:===", image);
               console.log("urls:===", urls);
+            })
+            .catch((err) => {
+              console.log("err firebase upload", err);
             });
         }
-        
       );
     });
 
     Promise.all(promises)
       .then(() => console.log("images have been uploaded"))
-      .catch((error) => console.log(error));
+      .catch((error) => console.log("firebase promise error", error));
   };
 
   /////
@@ -83,6 +86,7 @@ const AddPost = () => {
   const addThePost = async () => {
     console.log(firstDesc);
     try {
+      handleUpload();
       await axios.post(
         `${process.env.REACT_APP_BASE_URL}/post`,
         {
@@ -110,6 +114,7 @@ const AddPost = () => {
       console.log(error);
     }
   };
+ 
 
   return (
     <div>
@@ -135,7 +140,6 @@ const AddPost = () => {
           >
             <Input />
           </Form.Item>
-
           <Form.Item label="introduction">
             <Input.TextArea onChange={(e) => setFirstDesc(e.target.value)} />
           </Form.Item>
@@ -147,17 +151,15 @@ const AddPost = () => {
           </Form.Item>
 
           <Form.Item label="Button">
-            <Upload multiple listType="picture" className="upload-list-inline">
-              <Button onClick={handleChange} icon={<UploadOutlined />}>
-                Upload files
-              </Button>
-            </Upload>
-          </Form.Item>
-
-          <Form.Item label="Button">
-            <Button type="dashed" onClick={handleUpload}>
-              Upload files
-            </Button>
+          <Upload
+            multiple
+            listType="picture"
+            className="upload-list-inline"
+            defaultFileList={[...fileList]}
+            onChange={handleChange}
+          >
+            <Button icon={<UploadOutlined />}>Upload files</Button>
+          </Upload>
           </Form.Item>
 
           <Form.Item label="Button">
@@ -167,37 +169,6 @@ const AddPost = () => {
           </Form.Item>
         </Form>
 
-        {/* <input
-          type="text"
-          placeholder="Title"
-          required
-          className="coll-input"
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <textarea
-          type="text"
-          placeholder="first Description ...."
-          required
-          className="description-input"
-          onChange={(e) => setFirstDesc(e.target.value)}
-        />
-        <textarea
-          type="text"
-          placeholder="second Description ...."
-          required
-          className="description-input"
-          onChange={(e) => setSecDesc(e.target.value)}
-        />
-        <textarea
-          type="text"
-          placeholder=" third Description ...."
-          required
-          className="description-input"
-          onChange={(e) => setFinalDesc(e.target.value)}
-        />
-        <input id="files" type="file" multiple onChange={handleChange} />
-        <button onClick={handleUpload}> Upload Images</button>
-        <button onClick={addThePost}> Add Post </button> */}
       </div>
     </div>
   );

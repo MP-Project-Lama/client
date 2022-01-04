@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import io from "socket.io-client";
+import NavBar from "../NavBar";
 
 
 let socket;
@@ -40,25 +41,28 @@ useEffect(() => {
 }, [])
 
   const send = () => {
-    const messageContent = { username, content: message, room };
+    const messageContent = { username : state.user.username, content: message, room };
 
     socket.emit("send_message", messageContent);
     setMessagesList([...messagesList, messageContent]);
-    setMessage(" ");
+    
   };
 
   const connectRoom = () => {
     if (state.token) {
-      socket.emit("join_room", { username, room });
+      console.log(room);
+      socket.emit("join_room", { username: state.user.username, room });
       setLoggedIn(true);
       setRoom("");
     }
   };
+  
 
   return (
     <>
       {!loggedIn ? (
         <>
+        <NavBar/>
          <h3>you have to register to message the designer </h3>
         </>
       ) : (
