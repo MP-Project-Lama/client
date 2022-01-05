@@ -110,7 +110,6 @@ const Collection = () => {
 
                 <div className="slideshow">
                   {ele.media.map((looks) => {
-                    // {console.log(looks);}
                     return (
                       <div>
                         <img src={looks.look} />

@@ -89,18 +89,19 @@ const handleUpload = (image) => {
       <div className="profile">
         <div>
           <img src={user.avatar} alt="profile-pic" />
-          {/* <Upload onChange={(e) => setAvatar(e.target.files)}>
-            <Button icon={<UploadOutlined />} onClick={handleUpload}>
-              Edit avatar
-            </Button>
-          </Upload> */}
         </div>
-        {/* <img src={user.avatar}/> */}
-
         <h3>Username: {user.username}</h3>
         <h3> Email: {user.email}</h3>
-        <button> Edit Profile </button>
-        <button> Reset Password </button>
+        <p> {user.about}</p>
+        <button
+          onClick={() => {
+            navigate(`/edit/user/${id}`);
+          }}
+        >
+        
+          Edit Profile
+        </button>
+
         <button onClick={logout}> Logout </button>
       </div>
     </div>
