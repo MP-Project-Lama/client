@@ -5,13 +5,10 @@ import NavBar from "../NavBar";
 import "./style.css";
 import { Link } from "react-router-dom";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
-import "@splidejs/splide/dist/css/splide.min.css";
 
 const Explore = () => {
   const [collections, setCollections] = useState([]);
   const [designers, setDesigners] = useState([]);
-  const [result, setResult] = useState([]);
-
   const [weddingCollections, setWeddingCollections] = useState([]);
   const [menCollections, setMenCollections] = useState([]);
 
@@ -50,7 +47,6 @@ const Explore = () => {
   const getTheDesignrs = async () => {
     const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/designers`);
     setDesigners(res.data);
-
   };
   /// get Wedding Collections:
 
@@ -75,7 +71,7 @@ const Explore = () => {
     );
     setMenCollections(res.data);
   };
-  
+
   return (
     <>
       <div>
@@ -98,82 +94,126 @@ const Explore = () => {
         )}
         <div>
           <div className="collection-section">
-            <h3>- Collections - </h3>
+            <h3> Collections </h3>
+
             <div className="collections">
-              {collections.map((coll) => {
-                return (
-                  <div className="collections-slidshow" key={coll._id}>
-                    <Link to={`/collection/${coll._id}`}>
-                      <Splide
-                        options={{
-                          rewind: true,
-                          width: 800,
-                          gap: "1rem",
-                        }}
-                      >
-                        <SplideSlide>
-                          <img
-                            src={
-                              coll.media &&
-                              coll.media.length &&
-                              coll.media.map((look) => look.look)
-                            }
-                            alt="collection"
-                          />
-                        </SplideSlide>
-                      </Splide>
-                    </Link>
-                  </div>
-                );
-              })}
+              <Splide
+                options={{
+                  rewind: true,
+                  width: "100vw",
+                  height: "50vh",
+                  perPage: 3,
+                  autoplay: true,
+                }}
+              >
+                {collections.length &&
+                  collections.map((coll) => {
+                    return (
+                      <>
+                        {coll.media?.map((look) => {
+                          return (
+                            <SplideSlide>
+                              <Link to={`/collection/${coll._id}`}>
+                                <img
+                                  src={look?.look}
+                                  alt="Image 1"
+                                  style={{ width: "600px", height: "500px" }}
+                                />
+                              </Link>
+                            </SplideSlide>
+                          );
+                        })}
+                      </>
+                    );
+                  })}
+              </Splide>
             </div>
           </div>
 
           <div className="designers-section">
-            <h3>- Our Designers - </h3>
-            {designers.map((designer) => {
-              return (
-                <div key={designer._id} className="designers-slideshow">
-                  <Link to={`/designer/${designer._id}`}>
-                    <img
-                      src={designer.photos.map((img) => img.headerBg)}
-                      alt="designer photo"
-                    />
-                  </Link>
-                </div>
-              );
-            })}
+            <h3> Our Designers  </h3>
+            <Splide
+              options={{
+                rewind: true,
+                width: "100vw",
+                height: "50vh",
+                perPage: 3,
+                autoplay: true,
+              }}
+            >
+              {designers.map((designer) => {
+                return (
+               
+                  <SplideSlide>
+                    <Link to={`/designer/${designer._id}`}>
+                      <img
+                        src={designer.photos.map((img) => img.headerBg)}
+                        alt="designer photo"
+                        style={{ width: "600px", height: "500px" }}
+                      />
+                    </Link>
+                  </SplideSlide>
+                );
+              })}
+            </Splide>
           </div>
 
           <div className="wedding-section">
-            <h3>- Weddings - </h3>
-            {weddingCollections.map((collection) => {
-              return (
-                <div className="weddings">
-                  <Link to={`/collection/${collection._id}`}>
-                    <img src={collection.media.map((look) => look.look)} />
-                  </Link>
-                </div>
-              );
-            })}
+            <h3> Weddings  </h3>
+            <Splide
+              options={{
+                rewind: true,
+                width: "100vw",
+                height: "80vh",
+                perPage: 3,
+                autoplay: true,
+              }}
+            >
+              {weddingCollections.map((collection) => {
+                return (
+                 
+                  <SplideSlide>
+                    <Link to={`/collection/${collection._id}`}>
+                      <img
+                        src={collection.media.map((look) => look.look)}
+                        alt="designer photo"
+                        style={{ width: "600px", height: "500px" }}
+                      />
+                    </Link>
+                  </SplideSlide>
+                );
+              })}
+            </Splide>
           </div>
 
           <div className="men-section">
             {/*  here  will show the men collections */}
-            <h3>- Men Collections - </h3>
-            {menCollections.map((collection) => {
-              return (
-                <div className="weddings">
-                  <Link to={`/collection/${collection._id}`}>
-                    <img src={collection.media.map((look) => look.look)} />
-                  </Link>
-                  {/* {console.log(collection.media.map((look) => look.look))} */}
-                </div>
-              );
-            })}
+            <h3> Men Collections  </h3>
+            <Splide
+              options={{
+                rewind: true,
+                width: "100vw",
+                height: "80vh",
+                perPage: 3,
+                autoplay: true,
+              }}
+            >
+              {menCollections.map((collection) => {
+                return (
+              
+                  <SplideSlide>
+                    <Link to={`/collection/${collection._id}`}>
+                      <img
+                        src={collection.media.map((look) => look.look)}
+                        alt="look"
+                        style={{ width: "600px", height: "500px" }}
+                      />
+                    </Link>
+                  </SplideSlide>
+                );
+              })}
+            </Splide>
           </div>
-
-          <div></div>
         </div>
       </div>
     </>

@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 import { useAlert } from "react-alert";
 import ReactCodeInput from "react-verification-code-input";
-// import "./style.css";
+import "./style.css";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
@@ -83,7 +83,7 @@ const ResetPassword = () => {
 
   return (
     <>
-      <div>
+      <div className="resetCom">
         <h1 className="login"> Verify Your Account </h1>
         <h3> Enter the code here:</h3>
         <ReactCodeInput

@@ -1,35 +1,36 @@
-
-.headerVideo video{
-    width: 100%;
-    height: 20%;
+.headerVideo video {
+  width: 100%;
+  height: 20%;
 }
 
-.collection-section {
-    display: flex;
-    flex-direction: row;
+.header1 {
+  width: 100%;
 }
-.collection-section h3{
-    font-family: "Raleway", sans-serif;
-    text-align: center;
-    font-size: 50px;
-
-}
-.collection-section img {
-     width: 350px;
-    height: 500px;
-}
-.collBtn{
-  display:block;
+.collHeader {
+  position: relative;
 }
 
-.designers-section , .wedding-section ,.men-section {
-display: flex;
- flex-direction: row;
+.collTitle {
+  position: absolute;
 }
-.designers-section img , .wedding-section img , .men-section img{ 
-    width: 350px;
-    height: 350px;
+.collection-section  {
+    margin: 70px 0 ;
 }
-
-
-
+.collection-section h3,
+.designers-section h3,
+.wedding-section h3,
+.men-section h3 {
+  display: block;
+  font-family: "Raleway", sans-serif;
+  text-align: center;
+  font-size: 30px;
+}
+.collection-section img .designers-section img,
+.wedding-section img,
+.men-section img {
+  width: 350px;
+  height: 500px;
+}
+.collBtn {
+  display: block;
+}

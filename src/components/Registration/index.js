@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { signIn } from "../../reducers/Login";
+import PasswordChecklist from "react-password-checklist";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
+import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import { useAlert } from "react-alert";
 import "./style.css";
@@ -172,77 +174,82 @@ const Registration = () => {
         {!state.token ? (
           <div className="flipper" id="flipper">
             <div className="front">
-              {/* <div className="frontInner"> */}
-                <h2 className="title"> Login </h2>
-                <button onClick={googleLogin}>Login with google </button>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email or Username"
-                  required
-                  className="inputs"
-                  onChange={(e) => setIdentity(e.target.value)}
-                />
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  className="inputs"
-                  required
-                  onChange={(e) => setLoginPassword(e.target.value)}
-                />
-                <input
-                  type="submit"
-                  value="login"
-                  className="signup-submit"
-                  onClick={login}
-                />
-                <p onClick={resetPassword}> forgot your password?</p>
+              <h2 className="title"> Login </h2>
+              <button className="googleBtn" onClick={googleLogin}>
+                <FcGoogle id="fcGoogle" />
+                Login with google
+              </button>
+              <h2 id="or"> - OR -</h2>
+              <input
+                type="email"
+                name="email"
+                placeholder="Email or Username"
+                required
+                className="inputs"
+                onChange={(e) => setIdentity(e.target.value)}
+              />
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                className="inputs"
+                required
+                onChange={(e) => setLoginPassword(e.target.value)}
+              />
+              <div className="logBtn">
+              <input
+                type="submit"
+                value="login"
+                className="signup-submit"
+                onClick={login}
+              />
+              </div>
+              <p id="forgotID" onClick={resetPassword}> forgot your password?</p>
 
-                <p className="flipbutton" onClick={flipCard}>
-                  Not a member? Sign up here
-                </p>
-              {/* </div> */}
+              <p className="flipbutton" onClick={flipCard}>
+                Not a member? Sign up here
+              </p>
             </div>
             <div className="back">
-              {/* <div className="backInner"> */}
-                <h2 className="title">Register</h2>
+              <h2 className="title">Register</h2>
 
-                <input
-                  type="text"
-                  placeholder="username"
-                  className="inputs"
-                  required
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-                <input
-                  type="text"
-                  placeholder="Email"
-                  className="inputs"
-                  required
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <input
-                  type="password"
-                  placeholder="Password"
-                  className="inputs"
-                  required
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <input
-                  type="submit"
-                  className="signup-submit"
-                  name="submit"
-                  value="Signup"
-                  onClick={() => {
-                    signup();
-                  }}
-                />
-                <p className="flipbutton" onClick={flipCard}>
-                  Are you a member? Login here
-                </p>
+              <input
+                type="text"
+                placeholder="username"
+                className="inputs"
+                required
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Email"
+                className="inputs"
+                required
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                className="inputs"
+                required
+                onChange={(e) => setPassword(e.target.value)}
+              />
+                <div className="logBtn">
+              <input
+                type="submit"
+                className="signup-submit"
+                name="submit"
+                value="Signup"
+                onClick={() => {
+                  signup();
+                }}
+              />
               </div>
-            {/* </div> */}
+
+              <p className="flipbutton" onClick={flipCard}>
+                Are you a member? Login here
+              </p>
+            </div>
           </div>
         ) : (
           <div>

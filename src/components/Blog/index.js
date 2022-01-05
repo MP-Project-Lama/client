@@ -56,6 +56,7 @@ const Blog = () => {
             <ul>
               <Link to={`/post/${post._id}`}>
                 <li key={post._id}>
+                  {console.log(post.media)}
                   <img src={post.media[0]} />
                   <h3> {post.title} </h3>
                   <div>

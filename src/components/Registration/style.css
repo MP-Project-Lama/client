@@ -1,89 +1,112 @@
 @import url("https://fonts.googleapis.com/css2?family=Acme&family=Amatic+SC&family=Amiri:wght@700&family=Architects+Daughter&family=Barlow:wght@100&family=Cinzel:wght@500&family=Francois+One&family=Handlee&family=Lobster&family=Mali:wght@200;300&family=Mulish&family=Neucha&family=Quicksand:wght@300&family=Roboto+Mono:wght@100&family=Sawarabi+Mincho&family=Source+Sans+3&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Acme&family=Amatic+SC&family=Amiri:wght@700&family=Architects+Daughter&family=Barlow:wght@100&family=Cinzel:wght@500&family=Francois+One&family=Handlee&family=Libre+Baskerville:wght@700&family=Lobster&family=Mali:wght@200;300&family=Mulish&family=Neucha&family=Quicksand:wght@300&family=Roboto+Mono:wght@100&family=Sawarabi+Mincho&family=Source+Sans+3&display=swap');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@import url("https://fonts.googleapis.com/css2?family=Acme&family=Amatic+SC&family=Amiri:wght@700&family=Architects+Daughter&family=Barlow:wght@100&family=Cinzel:wght@500&family=Francois+One&family=Handlee&family=Libre+Baskerville:wght@700&family=Lobster&family=Mali:wght@200;300&family=Mulish&family=Neucha&family=Quicksand:wght@300&family=Roboto+Mono:wght@100&family=Sawarabi+Mincho&family=Source+Sans+3&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.registerCom{
-background-image: url("https://static.kendam.com/photos/full/a7f55e8ba12be2dcbe99711bb765b58a_3343.jpg");
+.registerCom {
+  background-image: url("https://static.kendam.com/photos/full/a7f55e8ba12be2dcbe99711bb765b58a_3343.jpg");
+}
 
+.flipper {
+  padding: 30px;
+  width: 55%;
+  position: relative;
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  margin: 10vh 30vh;
+  /* border: 1px solid black; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.flipper{
-    padding: 30px;
-    width: 55%;
-    height: 450px;
-    position: relative;
-    transition: 0.6s;
-    transform-style: preserve-3d;
-    perspective: 1000px;
-    margin: 10vh 30vh;
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-   align-items: center;
-}
- 
 
-.front ,.back{
- position: absolute;
+.front,
+.back {
+  position: absolute;
   width: 100%;
   height: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  
+  text-align: center;
 }
 .front {
-    z-index: 2;
-    transform: rotateY(0deg);
-    
-
+  z-index: 2;
+  transform: rotateY(0deg);
 }
-.back{
-    transform: rotateY(180deg);
+.back {
+  transform: rotateY(180deg);
 }
-.flip{
-    transform: rotateY(180deg);
+.flip {
+  transform: rotateY(180deg);
 }
 
-
-.inputs{
+.inputs {
+  text-align: center;
+  width: 60%;
+  height: 40px;
+  font-family: "Barlow", sans-serif;
+  font-size: 20px;
+  border-bottom: 1px solid gray;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  margin: 20px;
+}
+.title {
+  text-align: center;
+  font-family: "Libre Baskerville", serif;
+  font-weight: bolder;
+  font-size: 60px;
+  margin-bottom: 3px;
+}
+.googleBtn {
+  width: 260px;
+  height: 60px;
+  margin-top: 50px;
+  margin-left: 50px;
+  background: none;
+  font-size: 22px;
+  font-family: "Raleway", sans-serif;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+}
+#fcGoogle {
+  font-size: 30px;
+  margin-right: 7px;
+}
+#or {
+    margin-top: 30px;
     text-align: center;
-    width: 60%;
-    height: 40px;
-    font-family: "Barlow", sans-serif;
-    font-size: 20px;
-    border-bottom:  1px solid gray;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    margin: 20px;
+  font-family: "Libre Baskerville", serif;
+  font-size: 25px;
 }
-.title{
+.flipbutton {
+  margin-top: 20px;
+  color: rgba(27, 26, 26, 0.658);
+  text-decoration: underline;
+  text-align: center !important;
+}
+.flipbutton:hover {
+  cursor: pointer;
+}
+.signup-submit {
+  width: 30%;
+  height: 45px;
+  font-family: "Barlow", sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  background-color: black;
+  color: white;
+  border: none;
+}
+.logBtn {
 text-align: center;
-font-family: 'Libre Baskerville', serif;
-font-weight: bolder;
-font-size: 60px;
-margin-bottom: 30px;
-
 }
-.flipbutton{
-    margin-top: 20px;
-    color: rgba(27, 26, 26, 0.658);
-    text-decoration: underline;
-    text-align: center !important;
+#forgotID{
+    margin-top: 10px;
+    cursor: pointer;
 }
-.flipbutton:hover{
-cursor: pointer;
-}
-.signup-submit{
-    width: 30%;
-    height: 45px;
-    font-family: "Barlow", sans-serif;
-    font-size: 20px;
-    font-weight:900;
-    background-color: black;
-    color: white;
-    border: none;
-}
-
