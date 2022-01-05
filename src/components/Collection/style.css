@@ -1,4 +1,44 @@
-.slideshow img{
-width: 500px;
-height: 600px;
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Roboto+Slab:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
+.collection-header {
+  margin: 90px;
+}
+.collection-header h2 {
+  font-size: 50px;
+  font-weight: bolder;
+  font-family: "Roboto Slab", serif;
+  text-align: center;
+}
+.collection-header p {
+  font-family: "Nanum Gothic", sans-serif;
+  font-size: 25px;
+}
+.coll-control  {
+  text-align: center;
+}
+.msgBtn {
+align-self: center;
+  width: 300px;
+  height: 60px;
+  margin-top: 50px;
+  margin-left: 50px;
+  background: none;
+  font-size: 20px;
+  font-family: "Raleway", sans-serif;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+}
+.msg {
+text-align: center;
+}
+.msgBtn:hover {
+  background: #000;
+  border: none;
+  color: #ffff;
+}
+
+.slideshow img {
+  width: 500px;
+  height: 600px;
 }

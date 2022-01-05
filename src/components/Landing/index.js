@@ -32,7 +32,7 @@ const Home = () => {
           />
         </div>
       </div>
-      <div className="about">
+      <div className="about-blog-section">
         <div className="blogPic">
           <img
             src="https://www.dior.com/couture/var/dior/storage/images/horizon/news-savoir-faire/folder-news-and-events/cruise-2022-womens-campaign/slider-2/6/28406730-3-int-EN/6_1440_1200.jpg"
@@ -50,11 +50,9 @@ const Home = () => {
 
       <div className="concat">
         <hr />
-        <h3> Client services</h3>
+        <h3> User Service</h3>
 
-        <p>
-          <Link to="/"> FAQ </Link>
-        </p>
+       
         <form className="concat-form">
           <input
             type="text"

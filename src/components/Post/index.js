@@ -4,6 +4,7 @@ import axios from "axios";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import "./style.css";
 import NavBar from "../NavBar";
+import { MdOutlineDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
 
 const Post = () => {
@@ -211,7 +212,7 @@ const Post = () => {
                     </h4>
 
                     {state.user._id === element.createdBy._id && (
-                      <div>
+                      <div className="designerBtns">
                         <button onClick={deleteThePost} className="delPost">
                           Delete Post
                         </button>
@@ -244,15 +245,13 @@ const Post = () => {
                             <li key={comment._id}>
                               <div className="comment">
                                 <img src={comment.createdBy.avatar} />
-                                <h4>{comment.createdBy.username} </h4>
+                                <h4>{comment.createdBy.username}: </h4>
 
                                 <p>{comment.comment}</p>
                                 {state.user._id === comment.createdBy._id && (
-                                  <button
+                                  <MdOutlineDeleteForever className="deleteCom"
                                     onClick={() => deleteComment(comment._id)}
-                                  >
-                                    Delete comment
-                                  </button>
+                                  />
                                 )}
                               </div>
                             </li>

@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "../../reducers/Login";
 import "antd/dist/antd.css";
-import { Popconfirm} from "antd";
+import { AiOutlineLogout } from "react-icons/ai";
 import "./style.css";
 
 const NavBar = () => {
@@ -18,9 +18,8 @@ const NavBar = () => {
   });
 
   ////
-  const text = "Are you sure to delete this task?";
 
-  function confirm() {
+function logout() {
     try {
       dispatch(signOut());
       navigate("/");
@@ -45,20 +44,15 @@ const NavBar = () => {
             <Link to="/">Home</Link>
           </li>
           {state.token ? (
-            <li className="userProfile">
-              <Popconfirm
-                placement="bottomLeft"
-                title={text}
-                onConfirm={confirm}
-                okText="logout"
-                cancelText="No"
-              >
-                Hello :
+            <>
+              <li className="userProfile">
+                Hi :
                 <Link to={`/user/${state.user._id}`}>
-                  {state.user.username}
+                  {state.user.username.toUpperCase()}
                 </Link>
-              </Popconfirm>
-            </li>
+              </li>
+              <AiOutlineLogout onClick={logout}  className="logoutIcon"/>
+            </>
           ) : (
             <li>
               <Link to="/registration">Registration</Link>
