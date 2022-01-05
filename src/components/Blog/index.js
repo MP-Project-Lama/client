@@ -3,10 +3,11 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import NavBar from "../NavBar";
 import "./style.css";
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
 
 const Blog = () => {
   const [posts, setPosts] = useState([]);
+  const navigate =  useNavigate();
   const state = useSelector((state) => {
     return {
       token: state.Login.token,
@@ -43,31 +44,32 @@ const Blog = () => {
           <h2>- Blog - </h2>
         </div>
       </div>
-
       {state.role.role === "Designer" && (
-        <button className="addPost">
-          <Link to="/post"> Add Post </Link>
+        <button onClick={()=> navigate("/post")} className="addPost">
+          Add Post 
         </button>
       )}
 
       {posts.map((post) => {
         return (
           <div className="post" key={post._id}>
-            <Link to={`/post/${post._id}`}>
-              <ul>
+            <ul>
+              <Link to={`/post/${post._id}`}>
                 <li key={post._id}>
                   <img src={post.media[0]} />
                   <h3> {post.title} </h3>
                   <div>
                     <h4 className="creator">
-                    
-                      <span> By:</span> {post.createdBy.username}
+                      <span> By:</span>
+                      <Link to={`/designer/${post.createdBy._id}`}>
+                        {post.createdBy.username}
+                      </Link>
                     </h4>
                   </div>
                 </li>
-                <hr />
-              </ul>
-            </Link>
+              </Link>
+              <hr />
+            </ul>
           </div>
         );
       })}

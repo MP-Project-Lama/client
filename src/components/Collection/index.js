@@ -103,7 +103,7 @@ const Collection = () => {
           {collection.map((ele) => {
             return (
               <div>
-                <div>
+                <div className="collection-header">
                   <h2> {ele.title}</h2>
                   <p> {ele.desc}</p>
                 </div>
@@ -120,6 +120,17 @@ const Collection = () => {
                       </div>
                     );
                   })}
+                </div>
+                <div className="msg">
+                <button
+                
+                  className="msgBtn"
+                  onClick={() => {
+                    navigate(`/coll/edit/${id}`);
+                  }}
+                >
+                  Message the Designer
+                </button>
                 </div>
                 {state.user._id === ele.createdBy._id && (
                   <div className="coll-control">
