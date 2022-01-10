@@ -21,7 +21,10 @@
   font-family: "Cormorant Garamond", serif;
   text-align: center;
   font-size: 60px;
-  margin-top: 50px;
+  margin-top: 20px;
+}
+.navHeader  {
+ text-align: center;
 }
 .navBar a {
   text-decoration: none;
@@ -65,4 +68,55 @@
 }
 .logoutIcon{
   font-size: 30px;
+}
+
+
+@media only screen and (max-width: 400px) {
+.navBar{
+display: flex;
+flex-direction: column;
+}
+.navBar nav{
+margin : 0 20vh ;
+}
+.logo{
+  font-size: 33px;
+  margin-bottom: 1rem;
+}
+.navHeader {
+  text-align: center;
+}
+}
+
+
+@media only screen and (max-width: 600px) {
+.navBar{
+display: flex;
+flex-direction: column;
+}
+.navBar nav{
+margin : 0 20vh ;
+}
+.logo{
+  font-size: 33px;
+  margin-bottom: 1rem;
+}
+.navHeader {
+  text-align: center;
+}
+
+}
+
+
+
+@media only screen and (max-width: 1366px) {
+.navBar{
+  width: 600px;
+}
+.logo{
+  font-size: 27px; 
+}
+.navHeader h1 {
+ text-align: center;
+}
 }

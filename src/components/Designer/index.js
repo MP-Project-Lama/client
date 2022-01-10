@@ -32,7 +32,6 @@ const Designer = () => {
         }
       );
 
-      console.log("designer", res.data);
       setDesigner(res.data);
     } catch (error) {
       console.log(error);
@@ -106,10 +105,24 @@ const Designer = () => {
                         {ele.imgArr.map((img) => {
                           return (
                             <div className="designerImgs">
-                              <img src={img.img1} />
-                              <img src={img.img2} /> <img src={img.img3} />
-                              <img src={img.img4} /> <img src={img.img5} />
-                              <img src={img.img6} />
+                              <div className="imgDiv">
+                                <img src={img.img1} />
+                              </div>
+                              <div className="imgDiv">
+                                <img src={img.img2} />
+                              </div>
+                              <div className="imgDiv">
+                                <img src={img.img3} />
+                              </div>
+                              <div className="imgDiv">
+                                <img src={img.img4} />
+                              </div>
+                              <div className="imgDiv">
+                                <img src={img.img5} />
+                              </div>
+                              <div className="imgDiv">
+                                <img src={img.img6} />
+                              </div>
                             </div>
                           );
                         })}

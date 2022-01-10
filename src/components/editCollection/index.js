@@ -20,6 +20,8 @@ const EditCollection = () => {
   const [progress, setProgress] = useState(0);
   const { id } = useParams();
   const navigate = useNavigate();
+ const fileList = [];
+
 
   ////
   const state = useSelector((state) => {
@@ -79,8 +81,8 @@ const EditCollection = () => {
   ////////
 
   const handleChange = (e) => {
-    for (let i = 0; i < e.target.files.length; i++) {
-      const newImg = e.target.files[i];
+    for (let i = 0; i < e.fileList.length; i++) {
+      const newImg = e.fileList[i];
       newImg["id"] = Math.random();
       setImages((prevState) => [...prevState, newImg]);
     }
@@ -122,6 +124,7 @@ const EditCollection = () => {
 
   /// 
   const editLook = async ()=> {
+    handleUpload();
       await axios.put(`${process.env.REACT_APP_BASE_URL}/look/${id}`,{
         looks : urls
       }, {
@@ -138,39 +141,7 @@ const EditCollection = () => {
         collection.map((looks) => {
           return (
             <div>
-              {/* <input
-                type="text"
-                defaultValue={looks.title}
-                required
-                className="coll-input"
-                onChange={(e) => setTitle(e.target.value)}
-              />
-              <textarea
-                type="text"
-                defaultValue={looks.desc}
-                required
-                className="description-input"
-                onChange={(e) => setDesc(e.target.value)}
-              />
-
-              <input
-                type="text"
-                defaultValue={looks.material}
-                required
-                className="coll-input"
-                onChange={(e) => setMaterial(e.target.value)}
-              />
-              <input
-                type="text"
-                defaultValue={looks.category}
-                required
-                className="coll-input"
-                onChange={(e) => setCategory(e.target.value)}
-              />
-
-              <input id="files" type="file" multiple onChange={handleChange} />
-              <button onClick={handleUpload}> Upload Images</button>
-              <button onClick={editTheCollection}> Add Collection </button> */}
+              
               <Form
                 labelCol={{
                   span: 4,
@@ -228,18 +199,18 @@ const EditCollection = () => {
                     multiple
                     listType="picture"
                     className="upload-list-inline"
+                    defaultFileList={[...fileList]}
+                    onChange={handleChange}
                   >
-                    <Button onClick={handleChange} icon={<UploadOutlined />}>
-                      Upload files
-                    </Button>
+                    <Button icon={<UploadOutlined />}>Upload files</Button>
                   </Upload>
                 </Form.Item>
 
-                <Form.Item label="Button">
+                {/* <Form.Item label="Button">
                   <Button type="dashed" onClick={handleUpload}>
                     Upload files
                   </Button>
-                </Form.Item>
+                </Form.Item> */}
 
                 <Form.Item label="Button">
                   <Button onClick={editLook}>Add look</Button>

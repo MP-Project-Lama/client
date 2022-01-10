@@ -4,7 +4,7 @@ import axios from "axios";
 import "./style.css";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import { Button, Upload, Form, Select, Input } from "antd";
+import { Button, Upload, Form,  Input } from "antd";
 import "antd/dist/antd.css";
 import { UploadOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router";
@@ -84,9 +84,7 @@ const AddPost = () => {
 
   //// create the post
   const addThePost = async () => {
-    console.log(firstDesc);
     try {
-      handleUpload();
       await axios.post(
         `${process.env.REACT_APP_BASE_URL}/post`,
         {
@@ -151,24 +149,25 @@ const AddPost = () => {
           </Form.Item>
 
           <Form.Item label="Button">
-          <Upload
-            multiple
-            listType="picture"
-            className="upload-list-inline"
-            defaultFileList={[...fileList]}
-            onChange={handleChange}
-          >
-            <Button icon={<UploadOutlined />}>Upload files</Button>
-          </Upload>
+            <Upload
+              multiple
+              listType="picture"
+              className="upload-list-inline"
+              defaultFileList={[...fileList]}
+              onChange={handleChange}
+            >
+              <Button icon={<UploadOutlined />}>Upload files</Button>
+            </Upload>
           </Form.Item>
-
+          <Form.Item label="Button">
+            <Button onClick={handleUpload}>Set files</Button>
+          </Form.Item>
           <Form.Item label="Button">
             <Button type="primary" onClick={addThePost}>
               Add Post
             </Button>
           </Form.Item>
         </Form>
-
       </div>
     </div>
   );

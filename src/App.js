@@ -32,7 +32,7 @@ function App() {
         <Route path="/coll/edit/:id" element={<EditCollection />} />
         <Route path="/collection" element={<AddCollection />} />
         <Route path="/designer/:id" element={<Designer />} />
-        <Route path="/directmessage" element={<DirectMessage />} />
+        <Route path="/directmessage/:id" element={<DirectMessage />} />
         <Route path="/user/:id" element={<Profile />} />
         <Route path="/reset/:id" element={<ResetPassword />} />
         <Route path="/dashboard" element={<Dashboard />} />

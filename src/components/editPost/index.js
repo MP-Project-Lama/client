@@ -56,6 +56,7 @@ const EditPost = () => {
   ///
 
   const editPost = async () => {
+    handleUpload();
     await axios.put(
       `${process.env.REACT_APP_BASE_URL}/post/${id}`,
       {

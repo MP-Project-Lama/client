@@ -5,19 +5,25 @@
   padding: 0;
   box-sizing: border-box;
 }
-.registerCom {
-  background-image: url("https://static.kendam.com/photos/full/a7f55e8ba12be2dcbe99711bb765b58a_3343.jpg");
+.mainCom {
+width: 100%;
+/* min-height: 100%; */
+/* display: flex; */
+/* justify-content: center;
+align-items: center; */
+}
+.goBack {
+  font-size: 50px;
+  color:rgba(12, 12, 12, 0.658);
 }
 
 .flipper {
-  padding: 30px;
-  width: 55%;
+  /* width: 55%; */
   position: relative;
   transition: 0.6s;
   transform-style: preserve-3d;
   perspective: 1000px;
-  margin: 10vh 30vh;
-  /* border: 1px solid black; */
+  margin: 10vh 40vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -63,21 +69,18 @@
   margin-bottom: 3px;
 }
 .googleBtn {
-  width: 260px;
-  height: 60px;
+  width: 220px;
+  height: 50px;
   margin-top: 50px;
-  margin-left: 50px;
+  margin-left: 20px;
   background: none;
-  font-size: 22px;
+  font-size: 18px;
   font-family: "Raleway", sans-serif;
   border-radius: 40px;
   cursor: pointer;
   transition: 0.3s all ease-in-out;
 }
-#fcGoogle {
-  font-size: 30px;
-  margin-right: 7px;
-}
+
 #or {
     margin-top: 30px;
     text-align: center;
@@ -102,6 +105,10 @@
   background-color: black;
   color: white;
   border: none;
+  border-radius: 40px;
+}
+.flip-container{
+  /* background-color: royalblue; */
 }
 .logBtn {
 text-align: center;
@@ -109,4 +116,13 @@ text-align: center;
 #forgotID{
     margin-top: 10px;
     cursor: pointer;
+}
+
+
+@media only screen and (min-width: 600px) {
+  /* For tablets: */
+  .registerCom{width: 50%;}
+  .flip-container{width: 100%;}
+ 
+ 
 }

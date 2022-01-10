@@ -15,7 +15,7 @@
   display: block;
   width: 100%;
   top: 80%;
-  left: 25%;
+  left: 10%;
 font-size: 200px;
 font-family: 'Oswald', sans-serif;
 color: #fff;
@@ -28,7 +28,8 @@ color: #fff;
 
 }
 .about-p {
-    width: 30%;
+width: 30%;
+height: 700px;
 
 }
 .about-p p{
@@ -56,12 +57,15 @@ font-size: 40px;
  position: absolute;
   line-height: 1.2;
   display: block;
-  width: 100%;
+width: 30%;
   top: 23%;
   left: 27%;
 }
 .concatBtns ul {
     list-style-type: none;
+}
+.concatBtns li {
+    width: 35%;
 }
 .concatBtns button {
     width: 900px;
@@ -80,7 +84,10 @@ font-size: 40px;
     flex-direction: row;
 }
 .designerImgs img{
-    width: 30%;
-    height: 80%;
+  width: 100%;
   
+}
+.imgDiv {
+  width: 20%;
+    height: 80%;
 }
