@@ -20,8 +20,7 @@ const EditCollection = () => {
   const [progress, setProgress] = useState(0);
   const { id } = useParams();
   const navigate = useNavigate();
- const fileList = [];
-
+  const fileList = [];
 
   ////
   const state = useSelector((state) => {
@@ -36,7 +35,8 @@ const EditCollection = () => {
   useEffect(() => {
     getTheCollection();
   }, []);
-  ///
+
+  ///getTheCollection
   const getTheCollection = async () => {
     try {
       const res = await axios.get(
@@ -53,6 +53,7 @@ const EditCollection = () => {
     }
   };
 
+  /// editTheCollection
   const editTheCollection = async () => {
     await axios.put(
       `${process.env.REACT_APP_BASE_URL}/collection/${id}`,
@@ -78,8 +79,7 @@ const EditCollection = () => {
     });
     navigate("/collections");
   };
-  ////////
-
+  /// handleChange
   const handleChange = (e) => {
     for (let i = 0; i < e.fileList.length; i++) {
       const newImg = e.fileList[i];
@@ -87,6 +87,7 @@ const EditCollection = () => {
       setImages((prevState) => [...prevState, newImg]);
     }
   };
+  //handleUpload
   const handleUpload = (image) => {
     const promises = [];
     images.map((image) => {
@@ -122,18 +123,22 @@ const EditCollection = () => {
       .catch((error) => console.log(error));
   };
 
-  /// 
-  const editLook = async ()=> {
+  /// edit look
+  const editLook = async () => {
     handleUpload();
-      await axios.put(`${process.env.REACT_APP_BASE_URL}/look/${id}`,{
-        looks : urls
-      }, {
+    await axios.put(
+      `${process.env.REACT_APP_BASE_URL}/look/${id}`,
+      {
+        looks: urls,
+      },
+      {
         headers: {
           Authorization: `Bearer ${state.token}`,
         },
-      })
-      setLooks(urls)
-  }
+      }
+    );
+    setLooks(urls);
+  };
 
   return (
     <div>
@@ -141,7 +146,6 @@ const EditCollection = () => {
         collection.map((looks) => {
           return (
             <div>
-              
               <Form
                 labelCol={{
                   span: 4,

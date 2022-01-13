@@ -17,8 +17,8 @@ const NavBar = () => {
     };
   });
 
-  ////
 
+//// logout 
 function logout() {
     try {
       dispatch(signOut());
@@ -26,7 +26,8 @@ function logout() {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
+  
   return (
     <div>
       <div>

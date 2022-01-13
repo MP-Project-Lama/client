@@ -27,6 +27,9 @@ const AddCollection = () => {
       role: state.Login.role,
     };
   });
+
+
+  /// handlechange function
   const handleChange = (e) => {
     for (let i = 0; i < e.target.files.length; i++) {
       const newImg = e.target.files[i];
@@ -34,6 +37,7 @@ const AddCollection = () => {
       setImages((prevState) => [...prevState, newImg]);
     }
   };
+  /// handleupload function
   const handleUpload = (image) => {
     // console.log(images);
 
@@ -70,7 +74,9 @@ const AddCollection = () => {
       .then(() => console.log("images have been uploaded"))
       .catch((error) => console.log(error));
   };
-  ////
+
+
+  /// create a look
   const createLook = async () => {
     try {
       const res = await axios.post(
@@ -96,6 +102,7 @@ const AddCollection = () => {
     }
   };
 
+  /// create collection
   const addCollection = async () => {
     try {
       await axios.post(

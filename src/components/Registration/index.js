@@ -5,10 +5,10 @@ import PasswordChecklist from "react-password-checklist";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
-import { MdKeyboardBackspace } from "react-icons/md";
-import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import { useAlert } from "react-alert";
+import 'antd/dist/antd.css';
+
 import "./style.css";
 
 const popupTools = require("popup-tools");
@@ -32,8 +32,7 @@ const Registration = () => {
     };
   });
 
-  ///
- 
+ /// signup function
   const signup = async () => {
     let exist = false;
     users.filter((user) => {
@@ -49,6 +48,8 @@ const Registration = () => {
         timeout: 5000,
         type: 'info',
       });
+      
+
     } else {
       try {
         const res = await axios.post(
@@ -67,6 +68,7 @@ const Registration = () => {
     }
   };
 
+  /// login function 
   const login = async () => {
     try {
       const result = await axios.post(
@@ -100,6 +102,7 @@ const Registration = () => {
           timeout: 5000,
           type: "error",
         });
+
       }
 
       if (error.response.status === 400) {
@@ -108,6 +111,7 @@ const Registration = () => {
           timeout: 5000,
           type: "error",
         });
+
       }
     }
   };
@@ -115,6 +119,7 @@ const Registration = () => {
     document.querySelector("#flipper").classList.toggle("flip");
   };
 
+  /// reset password function
   const resetPassword = async () => {
     const { value: email } = await Swal.fire({
       title: "Reset Password",
@@ -131,6 +136,7 @@ const Registration = () => {
           email,
         });
         
+
        
         alert.show('Confirm your email to reset the password', {
           timeout: 5000,
@@ -139,6 +145,7 @@ const Registration = () => {
         navigate("/reset/:id");
       } catch (error) {
         
+
         alert.show('Somthing Went Wrong !', {
           timeout: 5000,
           type: 'error',
@@ -147,6 +154,7 @@ const Registration = () => {
     }
   };
 
+  /// login with google function 
  const googleLogin = () => {
    popupTools.popup(
      `${process.env.REACT_APP_BASE_URL}/auth/google`,
@@ -165,16 +173,9 @@ const Registration = () => {
  };
 
 
-
-
-  ///
-
   return (
     <div className="mainCom">
-      {/* <img
-        onClick={() => navigate("/")}
-        src="https://img.icons8.com/material/48/000000/circled-left--v1.png"
-      /> */}
+     
       <div className="inner">
         <div className="flip-container">
           {!state.token ? (
@@ -182,7 +183,6 @@ const Registration = () => {
               <div className="front">
                 <h2 className="title"> Login </h2>
                 <button className="googleBtn" onClick={googleLogin}>
-                  {/* <img src="https://img.icons8.com/color/30/000000/google-logo.png" /> */}
                   <img src="https://img.icons8.com/fluency/30/000000/google-logo.png" />
                   Login with google
                 </button>

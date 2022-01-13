@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import NavBar from "../NavBar";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import {  useParams, useNavigate } from "react-router-dom";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "./style.css";
 import Swal from "sweetalert2";
 
@@ -11,7 +12,7 @@ const Collection = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  ///
+
   const state = useSelector((state) => {
     return {
       token: state.Login.token,
@@ -25,7 +26,7 @@ const Collection = () => {
     getTheCollection();
   }, []);
 
-  ////
+ 
   //// get the collection
   const getTheCollection = async () => {
     try {
@@ -43,8 +44,7 @@ const Collection = () => {
     }
   };
 
-  ///
-
+/// remove collection
   const moveCollectionToTrash = async () => {
     try {
       Swal.fire({
@@ -89,8 +89,6 @@ const Collection = () => {
     }
   };
 
-  ////
-
   return (
     <div>
       {!state.token ? (
@@ -109,28 +107,40 @@ const Collection = () => {
                 </div>
 
                 <div className="slideshow">
-                  {ele.media.map((looks) => {
-                    // {console.log(looks);}
-                    return (
-                      <div>
-                        <img src={looks.look} />
-                        {console.log(looks.look)}
-                        <img src={looks.look[1]} />
-                        <img src={looks.look[2]} />
-                      </div>
-                    );
-                  })}
+                  <Splide
+                    options={{
+                      rewind: true,
+                      width: "100vw",
+                      height: "50vh",
+                      perPage: 3,
+                      autoplay: true,
+                    }}
+                  >
+                    {ele.media.map((looks) => {
+                      return (
+                        <div classNam="slides">
+                          <SplideSlide>
+                            <img src={looks.look} alt="models" />
+                            <img src={looks.look[1]} alt="models" />
+                            <img src={looks.look[2]} alt="models" />
+                          </SplideSlide>
+                          {/* <img src={looks.look} alt="models" />
+                        <img src={looks.look[1]} alt="models" />
+                        <img src={looks.look[2]} alt="models" /> */}
+                        </div>
+                      );
+                    })}
+                  </Splide>
                 </div>
                 <div className="msg">
-                <button
-                
-                  className="msgBtn"
-                  onClick={() => {
-                    navigate(`/coll/edit/${id}`);
-                  }}
-                >
-                  Message the Designer
-                </button>
+                  <button
+                    className="msgBtn"
+                    onClick={() => {
+                      navigate(`/coll/edit/${id}`);
+                    }}
+                  >
+                    Message the Designer
+                  </button>
                 </div>
                 {state.user._id === ele.createdBy._id && (
                   <div className="coll-control">

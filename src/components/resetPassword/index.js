@@ -13,7 +13,6 @@ const ResetPassword = () => {
   const [code, setCode] = useState("");
   const [message, setMessage] = useState("");
   const alert = useAlert();
-
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
@@ -31,7 +30,7 @@ const ResetPassword = () => {
   useEffect(() => {
     getUserInfo();
   }, []);
-  ////
+  
 
   const getUserInfo = async () => {
     try {

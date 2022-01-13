@@ -11,6 +11,8 @@ const Verification = () => {
   const alert = useAlert();
   const navigate = useNavigate();
 
+
+  /// verify
   const verify = async () => {
     if (code) {
       try {

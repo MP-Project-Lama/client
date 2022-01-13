@@ -95,64 +95,66 @@
   margin: 70px 30px;
 }
 .creator a {
-  font-family: "Montserrat", sans-serif;
+   font-family: "Montserrat", sans-serif;
   font-size: 30px;
   color: #b9944e;
 }
 
+
 @media only screen and (max-width: 600px) {
-  .header-img {
-    width: 100%;
-  }
+.header-img {
+  width: 100%;
+}
   .heaer-blog {
-    line-height: 1.2;
-    display: block;
-    width: 100%;
-    top: 50%;
-  }
+  line-height: 1.2;
+  display: block;
+  width: 100%;
+  top: 50%;
+}
 
   .heaer-blog h2 {
-    font-size: 20px;
-  }
-  .addPost {
-    width: 150px;
-    height: 30px;
-    border-radius: 30px;
-    font-size: 13px;
-  }
-  .post {
-    width: 75%;
-    margin: 20px 30px;
-  }
-  .post li {
-    display: flex;
-    flex-direction: column;
-  }
-  .post img {
-    width: 300px;
-    height: 200px;
-  }
-  .post h3 {
-    font-size: 20px;
-    margin: 10px 30px;
-  }
-  .creator {
-    font-size: 20px;
-  }
-  .post hr {
-    width: 100px;
-    margin: 20px 10px;
-  }
-  .creator a {
-    font-size: 15px;
-  }
+  font-size: 20px;
+}
+.addPost {
+  width: 150px;
+  height: 30px;
+  border-radius: 30px;
+  font-size: 13px;
+}
+.post {
+  width: 75%;
+  margin: 20px 30px;
+}
+.post li {
+  display: flex;
+  flex-direction: column;
+}
+.post img {
+  width: 300px;
+  height: 200px;
+}
+.post h3 {
+ 
+  font-size: 20px;
+  margin: 10px 30px;
+}
+.creator {
+  font-size: 20px;
+}
+.post hr {
+  width: 100px;
+  margin: 20px 10px;
+}
+.creator a {
+  font-size: 15px;
+}
 }
 
 @media only screen and (min-width: 600px) {
   .heaer-blog {
-    line-height: 1.2;
-    display: block;
-    width: 100%;
-    top: 40%;
-  }
+  line-height: 1.2;
+  display: block;
+  width: 100%;
+  top: 40%;
+}
 }

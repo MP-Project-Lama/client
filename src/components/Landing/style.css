@@ -123,7 +123,9 @@ hr {
 }
 .about-section , .about-blog {
   width: 90%;
-  
+}
+.about-blog p{
+  width: 100%;
 }
 .about-p , .fashiondary {
 font-size: 20px;
@@ -144,12 +146,10 @@ font-size: 20px;
  
   font-size: 10px;
 }
-
 .concat-submit {
   width: 60px;
   font-size: 10px;
   height: 20px;
 }
-
 
 }

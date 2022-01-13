@@ -33,6 +33,7 @@ const Blog = () => {
       console.log(error);
     }
   };
+  
   return (
     <div className="blog-container">
       <NavBar />
