@@ -3,12 +3,7 @@ import { storage } from "../firebase";
 import axios from "axios";
 import "./style.css";
 import { useSelector } from "react-redux";
-import { Button, Upload, Form, Select, Input } from "antd";
 import "antd/dist/antd.css";
-import { UploadOutlined } from "@ant-design/icons";
-const { Option } = Select;
-const { TextArea } = Input;
-
 
 const AddCollection = () => {
   const [desc, setDesc] = useState("");
@@ -40,7 +35,6 @@ const AddCollection = () => {
   /// handleupload function
   const handleUpload = (image) => {
     // console.log(images);
-
     const promises = [];
     images.map((image) => {
       const uploadTask = storage.ref(`images/${image.name}`).put(image);
@@ -131,87 +125,49 @@ const AddCollection = () => {
     <div>
       {state.role.role === "Designer" && (
         <div>
-          <div className="coll-inputs">
-            <Form
-              labelCol={{
-                span: 4,
-              }}
-              wrapperCol={{
-                span: 14,
-              }}
-            >
-              <Form.Item
-                label="Title"
-                name="Title"
-                onChange={(e) => setTitle(e.target.value)}
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your username!",
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
+          <div className="postForm">
+            <input
+              className="postTitle"
+              type="text"
+              placeholder="title"
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <div className="textareaDiv">
+              <textarea
+                className="postInput"
+                type="text"
+                placeholder="Enter the description here ..."
+                onChange={(e) => setDesc(e.target.value)}
+              />
+            </div>
+            <input
+              className="postTitle"
+              type="text"
+              placeholder="Material"
+              onChange={(e) => setMaterial(e.target.value)}
+            />
+            <input
+              className="postTitle"
+              type="text"
+              placeholder="Category"
+              onChange={(e) => setCategory(e.target.value)}
+            />
+            <div className="uploadBtns">
+              <input id="files" type="file" multiple onChange={handleChange} />
 
-              <Form.Item label="Description">
-                <Input.TextArea onChange={(e) => setDesc(e.target.value)} />
-              </Form.Item>
-              <Form.Item
-                label="Category"
-                name="Category"
-                onChange={(e) => setCategory(e.target.value)}
-                rules={[
-                  {
-                    required: true,
-                    message: "Please Enter The Category!",
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-
-              <Form.Item
-                label="Material"
-                name="Material"
-                onChange={(e) => setMaterial(e.target.value)}
-                rules={[
-                  {
-                    required: true,
-                    message: "Please Enter The Material!",
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item label="Button">
-                <Upload
-                  multiple
-                  listType="picture"
-                  className="upload-list-inline"
-                >
-                  <Button onClick={handleChange} icon={<UploadOutlined />}>
-                    Upload files
-                  </Button>
-                </Upload>
-              </Form.Item>
-
-              <Form.Item label="Button">
-                <Button type="dashed" onClick={handleUpload}>
-                  Upload files
-                </Button>
-              </Form.Item>
-
-              <Form.Item label="Button">
-                <Button onClick={createLook}>Add look</Button>
-              </Form.Item>
-
-              <Form.Item label="Button">
-                <Button type="primary" onClick={addCollection}>
-                  Add collection
-                </Button>
-              </Form.Item>
-            </Form>
+              <button onClick={handleUpload} className="submitPost">
+                Upload files
+              </button>
+              <button onClick={createLook} className="submitPost">
+                Add look
+              </button>
+            </div>
+            <input
+              type="submit"
+              value="Add Collection"
+              onClick={addCollection}
+              className="AddColl"
+            />
           </div>
 
           {/* <input id="files" type="file" multiple onChange={handleChange} /> */}

@@ -1,14 +1,31 @@
 .coll-inputs {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
-.description-input{
-    width: 700px;
-    height: 300px;
-
+.description-input {
+  width: 700px;
+  height: 300px;
 }
-.coll-input{
-    width: 400px;
-    height: 30px;
-
+.coll-input {
+  width: 400px;
+  height: 30px;
+}
+.submitCollection {
+  width: 200px;
+  height: 40px;
+  margin-top: 50px;
+  margin-left: 50px;
+  background: none;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+  color: black;
+  font-size: 20px;
+  text-decoration: none;
+  font-family: "Raleway", sans-serif;
+}
+.submitCollection:hover {
+  background: #000;
+  border: none;
+  color: #ffff;
 }

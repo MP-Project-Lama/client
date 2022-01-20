@@ -16,6 +16,7 @@ import DirectMessage from "./components/directMessage";
 import Profile from "./components/Profile";
 import ResetPassword from "./components/resetPassword";
 import Dashboard from "./components/Dashboard";
+import DesignerCollection from "./components/DesignerCollection";
 function App() {
   return (
     <div className="App">
@@ -32,6 +33,10 @@ function App() {
         <Route path="/coll/edit/:id" element={<EditCollection />} />
         <Route path="/collection" element={<AddCollection />} />
         <Route path="/designer/:id" element={<Designer />} />
+        <Route
+          path="/designer/collection/:id"
+          element={<DesignerCollection />}
+        />
         <Route path="/directmessage/:id" element={<DirectMessage />} />
         <Route path="/user/:id" element={<Profile />} />
         <Route path="/reset/:id" element={<ResetPassword />} />

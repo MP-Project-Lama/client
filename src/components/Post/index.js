@@ -21,6 +21,7 @@ const Post = () => {
       role: state.Login.role,
     };
   });
+  ///
   useEffect(() => {
     getThePost();
     getTheComments();
@@ -185,7 +186,6 @@ const Post = () => {
           <NavBar />
 
           {post.map((element, i) => {
-            // console.log(element.media[0]);
             return (
               <>
                 <div className="post-page">
@@ -224,15 +224,17 @@ const Post = () => {
                         >
                           Edit
                         </button>
+                    
                       </div>
                     )}
                     <div className="comment-section">
-                      <textArea
+                      <textarea
                         onChange={(e) => setComment(e.target.value)}
                         className="comment-area"
-                      >
-                        Share us your comment ...
-                      </textArea>
+                        placeholder="  Share us your comment ..."
+                      />
+
+                      {/* </textArea> */}
                       <button id="add" onClick={() => addComment()}>
                         Add
                       </button>
@@ -249,7 +251,8 @@ const Post = () => {
 
                                 <p>{comment.comment}</p>
                                 {state.user._id === comment.createdBy._id && (
-                                  <MdOutlineDeleteForever className="deleteCom"
+                                  <MdOutlineDeleteForever
+                                    className="deleteCom"
                                     onClick={() => deleteComment(comment._id)}
                                   />
                                 )}

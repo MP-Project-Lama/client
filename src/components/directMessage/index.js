@@ -28,8 +28,6 @@ function DirectMessage() {
     
   }, [])
 
-
-  ///
   useEffect(() => {
     socket = io(CONNECTION_PORT);
   }, [CONNECTION_PORT]);

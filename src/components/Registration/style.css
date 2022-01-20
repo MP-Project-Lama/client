@@ -7,10 +7,7 @@
 }
 .mainCom {
 width: 100%;
-/* min-height: 100%; */
-/* display: flex; */
-/* justify-content: center;
-align-items: center; */
+
 }
 .goBack {
   font-size: 50px;
@@ -18,7 +15,6 @@ align-items: center; */
 }
 
 .flipper {
-  /* width: 55%; */
   position: relative;
   transition: 0.6s;
   transform-style: preserve-3d;
@@ -69,7 +65,8 @@ align-items: center; */
   margin-bottom: 3px;
 }
 .googleBtn {
-  width: 220px;
+  /* width: 220px; */
+  width: 30%;
   height: 50px;
   margin-top: 50px;
   margin-left: 20px;
@@ -107,9 +104,7 @@ align-items: center; */
   border: none;
   border-radius: 40px;
 }
-.flip-container{
-  /* background-color: royalblue; */
-}
+
 .logBtn {
 text-align: center;
 }

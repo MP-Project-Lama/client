@@ -45,7 +45,8 @@ const Blog = () => {
           <h2>- Blog - </h2>
         </div>
       </div>
-      {state.role.role === "Designer" && (
+      {state.token &&
+      state.role.role === "Designer" && (
         <button onClick={()=> navigate("/post")} className="addPost">
           Add Post 
         </button>

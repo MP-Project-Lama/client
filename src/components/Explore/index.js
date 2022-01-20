@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "./style.css";
 
-
 const Explore = () => {
   const [collections, setCollections] = useState([]);
   const [designers, setDesigners] = useState([]);
@@ -20,7 +19,6 @@ const Explore = () => {
     };
   });
 
-  
   useEffect(() => {
     getAllCollections();
     getTheDesignrs();
@@ -86,7 +84,7 @@ const Explore = () => {
             />
           </video>
         </div>
-        {state.role.role === "Designer" && (
+        {state.token && state.role.role === "Designer" && (
           <div>
             <button className="addPost">
               <Link to="/collection"> Add Collection </Link>
@@ -100,25 +98,32 @@ const Explore = () => {
             <div className="collections">
               <Splide
                 options={{
-                  rewind: true,
                   width: "100vw",
                   height: "50vh",
                   perPage: 3,
                   autoplay: true,
+                  rewind: true,
                 }}
               >
                 {collections.length &&
                   collections.map((coll) => {
+                   
                     return (
                       <>
-                        {coll.media?.map((look) => {
+                        {coll.media?.map((look, i) => {
+                         {
+                           console.log(look)
+                         }
                           return (
-                            <SplideSlide>
+                            <SplideSlide className="SplideSlide" key={i}>
                               <Link to={`/collection/${coll._id}`}>
                                 <img
-                                  src={look?.look}
+                                  src={look?look.look[1]:""}
                                   alt="Image 1"
-                                  style={{ width: "600px", height: "500px" }}
+                                  style={{
+                                    width: "600px",
+                                    height: "500px",
+                                  }}
                                 />
                               </Link>
                             </SplideSlide>
@@ -142,9 +147,9 @@ const Explore = () => {
                 autoplay: true,
               }}
             >
-              {designers.map((designer) => {
+              {designers.map((designer, i) => {
                 return (
-                  <SplideSlide className="splide">
+                  <SplideSlide className="splide" key={i}>
                     <Link to={`/designer/${designer._id}`}>
                       <img
                         src={designer.photos.map((img) => img.headerBg)}
@@ -169,9 +174,9 @@ const Explore = () => {
                 autoplay: true,
               }}
             >
-              {weddingCollections.map((collection) => {
+              {weddingCollections.map((collection, i) => {
                 return (
-                  <SplideSlide>
+                  <SplideSlide key={i}>
                     <Link to={`/collection/${collection._id}`}>
                       <img
                         src={collection.media.map((look) => look.look)}
@@ -197,9 +202,9 @@ const Explore = () => {
                 autoplay: true,
               }}
             >
-              {menCollections.map((collection) => {
+              {menCollections.map((collection, i) => {
                 return (
-                  <SplideSlide>
+                  <SplideSlide key={i}>
                     <Link to={`/collection/${collection._id}`}>
                       <img
                         src={collection.media.map((look) => look.look)}

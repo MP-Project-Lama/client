@@ -37,9 +37,12 @@
 .collBtn {
   display: block;
 }
-.splide {
+ /* .splide {
   gap: 1rem;
-}
+} */
+.SplideSlide img{
+gap: 10px
+} 
 
 @media only screen and (max-width: 700px) {
 .addPost {

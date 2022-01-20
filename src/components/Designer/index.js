@@ -21,6 +21,7 @@ const Designer = () => {
     getTheDesignr();
   }, []);
 
+  /// Get The Designer
   const getTheDesignr = async () => {
     try {
       const res = await axios.get(
@@ -37,24 +38,6 @@ const Designer = () => {
       console.log(error);
     }
   };
-  ///
-
-  const getAllCollections = async () => {
-    const res = await axios.get(
-      `${process.env.REACT_APP_BASE_URL}/collections`
-    );
-    res.data.find((ele) => {
-      if (ele.createdBy._id ===  designer._id) {
-       
-       setCollection(ele.data)
-       
-      }
-     
-    });
-    console.log(collection);
-    
-  };
-
 
   return (
     <>
@@ -82,14 +65,18 @@ const Designer = () => {
                   <div className="concatBtns">
                     <ul>
                       <li>
-                        <button onClick={getAllCollections}> My Collections</button>
+                        <button
+                          onClick={() => navigate(`/designer/collection/${designer._id}`)}
+                        >
+                          
+                          My Collections
+                        </button>
                       </li>
 
                       <li>
                         <button> My Shows </button>
                       </li>
-                      <button onClick={()=> navigate("/directmessage")}>
-                       
+                      <button onClick={() => navigate("/directmessage")}>
                         Message Me
                       </button>
                     </ul>
@@ -106,7 +93,7 @@ const Designer = () => {
                           return (
                             <div className="designerImgs">
                               <div className="imgDiv">
-                                <img src={img.img1} />
+                                <img src={img.img1} className="designerImgs" />
                               </div>
                               <div className="imgDiv">
                                 <img src={img.img2} />

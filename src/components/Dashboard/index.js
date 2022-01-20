@@ -4,12 +4,9 @@ import { signIn } from "../../reducers/Login";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
-import { useAlert } from "react-alert";
 import "antd/dist/antd.css";
 import { Table, Tag, Space } from "antd";
 import { TiDelete } from "react-icons/ti";
-import "./style.css";
 
 
 const Dashboard = () => {
