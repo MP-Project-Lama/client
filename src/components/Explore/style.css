@@ -31,6 +31,29 @@
   width: 350px;
   height: 500px;
 }
+.addPost a{
+  color: #000;
+}
 .collBtn {
   display: block;
+}
+ /* .splide {
+  gap: 1rem;
+} */
+.SplideSlide img{
+gap: 10px
+} 
+
+@media only screen and (max-width: 700px) {
+.addPost {
+  width: 100px;
+  height: 30px;
+  border-radius: 30px;
+  font-size: 10px;
+}
+.sectionsDiv h3{
+  font-size: 15px;
+}
+
+
 }

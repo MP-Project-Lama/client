@@ -21,6 +21,7 @@ const Designer = () => {
     getTheDesignr();
   }, []);
 
+  /// Get The Designer
   const getTheDesignr = async () => {
     try {
       const res = await axios.get(
@@ -32,30 +33,11 @@ const Designer = () => {
         }
       );
 
-      console.log("designer", res.data);
       setDesigner(res.data);
     } catch (error) {
       console.log(error);
     }
   };
-  ///
-
-  const getAllCollections = async () => {
-    const res = await axios.get(
-      `${process.env.REACT_APP_BASE_URL}/collections`
-    );
-    res.data.find((ele) => {
-      if (ele.createdBy._id ===  designer._id) {
-       
-       setCollection(ele.data)
-       
-      }
-     
-    });
-    console.log(collection);
-    
-  };
-
 
   return (
     <>
@@ -83,14 +65,18 @@ const Designer = () => {
                   <div className="concatBtns">
                     <ul>
                       <li>
-                        <button onClick={getAllCollections}> My Collections</button>
+                        <button
+                          onClick={() => navigate(`/designer/collection/${designer._id}`)}
+                        >
+                          
+                          My Collections
+                        </button>
                       </li>
 
                       <li>
                         <button> My Shows </button>
                       </li>
-                      <button onClick={()=> navigate("/directmessage")}>
-                       
+                      <button onClick={() => navigate("/directmessage")}>
                         Message Me
                       </button>
                     </ul>
@@ -106,10 +92,24 @@ const Designer = () => {
                         {ele.imgArr.map((img) => {
                           return (
                             <div className="designerImgs">
-                              <img src={img.img1} />
-                              <img src={img.img2} /> <img src={img.img3} />
-                              <img src={img.img4} /> <img src={img.img5} />
-                              <img src={img.img6} />
+                              <div className="imgDiv">
+                                <img src={img.img1} className="designerImgs" />
+                              </div>
+                              <div className="imgDiv">
+                                <img src={img.img2} />
+                              </div>
+                              <div className="imgDiv">
+                                <img src={img.img3} />
+                              </div>
+                              <div className="imgDiv">
+                                <img src={img.img4} />
+                              </div>
+                              <div className="imgDiv">
+                                <img src={img.img5} />
+                              </div>
+                              <div className="imgDiv">
+                                <img src={img.img6} />
+                              </div>
                             </div>
                           );
                         })}

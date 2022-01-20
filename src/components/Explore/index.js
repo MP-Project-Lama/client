@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import NavBar from "../NavBar";
-import "./style.css";
 import { Link } from "react-router-dom";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
+import "./style.css";
 
 const Explore = () => {
   const [collections, setCollections] = useState([]);
@@ -19,7 +19,6 @@ const Explore = () => {
     };
   });
 
-  ///
   useEffect(() => {
     getAllCollections();
     getTheDesignrs();
@@ -85,39 +84,46 @@ const Explore = () => {
             />
           </video>
         </div>
-        {state.role.role === "Designer" && (
+        {state.token && state.role.role === "Designer" && (
           <div>
             <button className="addPost">
               <Link to="/collection"> Add Collection </Link>
             </button>
           </div>
         )}
-        <div>
+        <div className="sectionsDiv">
           <div className="collection-section">
             <h3> Collections </h3>
 
             <div className="collections">
               <Splide
                 options={{
-                  rewind: true,
                   width: "100vw",
                   height: "50vh",
                   perPage: 3,
                   autoplay: true,
+                  rewind: true,
                 }}
               >
                 {collections.length &&
                   collections.map((coll) => {
+                   
                     return (
                       <>
-                        {coll.media?.map((look) => {
+                        {coll.media?.map((look, i) => {
+                         {
+                           console.log(look)
+                         }
                           return (
-                            <SplideSlide>
+                            <SplideSlide className="SplideSlide" key={i}>
                               <Link to={`/collection/${coll._id}`}>
                                 <img
-                                  src={look?.look}
+                                  src={look?look.look[1]:""}
                                   alt="Image 1"
-                                  style={{ width: "600px", height: "500px" }}
+                                  style={{
+                                    width: "600px",
+                                    height: "500px",
+                                  }}
                                 />
                               </Link>
                             </SplideSlide>
@@ -131,7 +137,7 @@ const Explore = () => {
           </div>
 
           <div className="designers-section">
-            <h3> Our Designers  </h3>
+            <h3> Our Designers </h3>
             <Splide
               options={{
                 rewind: true,
@@ -141,10 +147,9 @@ const Explore = () => {
                 autoplay: true,
               }}
             >
-              {designers.map((designer) => {
+              {designers.map((designer, i) => {
                 return (
-               
-                  <SplideSlide>
+                  <SplideSlide className="splide" key={i}>
                     <Link to={`/designer/${designer._id}`}>
                       <img
                         src={designer.photos.map((img) => img.headerBg)}
@@ -159,7 +164,7 @@ const Explore = () => {
           </div>
 
           <div className="wedding-section">
-            <h3> Weddings  </h3>
+            <h3> Weddings </h3>
             <Splide
               options={{
                 rewind: true,
@@ -169,10 +174,9 @@ const Explore = () => {
                 autoplay: true,
               }}
             >
-              {weddingCollections.map((collection) => {
+              {weddingCollections.map((collection, i) => {
                 return (
-                 
-                  <SplideSlide>
+                  <SplideSlide key={i}>
                     <Link to={`/collection/${collection._id}`}>
                       <img
                         src={collection.media.map((look) => look.look)}
@@ -188,7 +192,7 @@ const Explore = () => {
 
           <div className="men-section">
             {/*  here  will show the men collections */}
-            <h3> Men Collections  </h3>
+            <h3> Men Collections </h3>
             <Splide
               options={{
                 rewind: true,
@@ -198,10 +202,9 @@ const Explore = () => {
                 autoplay: true,
               }}
             >
-              {menCollections.map((collection) => {
+              {menCollections.map((collection, i) => {
                 return (
-              
-                  <SplideSlide>
+                  <SplideSlide key={i}>
                     <Link to={`/collection/${collection._id}`}>
                       <img
                         src={collection.media.map((look) => look.look)}

@@ -2,27 +2,24 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import NavBar from "../NavBar";
-import {  useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
-import "./style.css";
 import Swal from "sweetalert2";
+const DesignerCollection = () => {
+     const [collection, setCollection] = useState([]);
+     const { id } = useParams();
+     const navigate = useNavigate();
 
-const Collection = () => {
-  const [collection, setCollection] = useState([]);
-  const { id } = useParams();
-  const navigate = useNavigate();
+     const state = useSelector((state) => {
+       return {
+         token: state.Login.token,
+         user: state.Login.user,
+         role: state.Login.role,
+       };
+     });
 
 
-  const state = useSelector((state) => {
-    return {
-      token: state.Login.token,
-      user: state.Login.user,
-      role: state.Login.role,
-    };
-  });
-
-  ////
-  useEffect(() => {
+     useEffect(() => {
     getTheCollection();
   }, []);
 
@@ -31,7 +28,7 @@ const Collection = () => {
   const getTheCollection = async () => {
     try {
       const res = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/collection/${id}`,
+        `${process.env.REACT_APP_BASE_URL}/collection/designer/${id}`,
         {
           headers: {
             Authorization: `Bearer ${state.token}`,
@@ -89,6 +86,7 @@ const Collection = () => {
     }
   };
 
+
   return (
     <div>
       {!state.token ? (
@@ -98,6 +96,7 @@ const Collection = () => {
       ) : (
         <div>
           <NavBar />
+         
           {collection.map((ele) => {
             return (
               <div>
@@ -165,9 +164,9 @@ const Collection = () => {
           })}
         </div>
       )}
-      ;
+      
     </div>
   );
 };
 
-export default Collection;
+export default DesignerCollection;

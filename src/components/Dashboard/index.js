@@ -4,12 +4,9 @@ import { signIn } from "../../reducers/Login";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
-import { useAlert } from "react-alert";
 import "antd/dist/antd.css";
 import { Table, Tag, Space } from "antd";
 import { TiDelete } from "react-icons/ti";
-import "./style.css";
 
 
 const Dashboard = () => {
@@ -34,7 +31,7 @@ const Dashboard = () => {
        getAllUsers(); 
     }, [])
 
-
+/// get all users
     const getAllUsers = async () => {
       try {
         const res = await axios.get(
@@ -52,7 +49,7 @@ const Dashboard = () => {
     };
 
 
-    ////
+/// remove user
     const removeUser = async (id) => {
       try {
         Swal.fire({
@@ -67,8 +64,7 @@ const Dashboard = () => {
         }).then(async (result) => {
           if (result.isConfirmed) {
             await axios.put(
-              `${process.env.REACT_APP_BASE_URL}/remove/${id}`,
-              {},
+              `${process.env.REACT_APP_BASE_URL}/remove/${id}`, {},
               {
                 headers: {
                   Authorization: `Bearer ${state.token}`,
@@ -99,33 +95,25 @@ const Dashboard = () => {
 
   return (
     <div>
-        {users.map((user)=> {
-            return (
-              <div>
-                <Table dataSource={users}>
-                  <ColumnGroup title="Name">
-                    <Column
-                      title="First Name"
-                      dataIndex="username"
-                      key="username"
-                    />
-                    <Column title="id" dataIndex="_id" key="id" />
-                  </ColumnGroup>
+      <Table dataSource={users}>
+        <div>
+          <ColumnGroup title="Name">
+            <Column title="First Name" dataIndex="username" key="username" />
+            <Column title="id" dataIndex="_id" key="id" />
+            <Column title="is Deleted" dataIndex="isDel" key="isDel" />
+          </ColumnGroup>
 
-                  <Column
-                    title="Remove"
-                    key="action"
-                    render={(text, record) => (
-                      <Space size="middle">
-                        <TiDelete onClick={removeUser(user._id)} />
-                      </Space>
-                    )}
-                  />
-                </Table>
-              </div>
-            );
-        })}
-     
+          <Column
+            title="Remove"
+            key="action"
+            render={(text, record) => (
+              <Space size="middle">
+                <TiDelete  />
+              </Space>
+            )}
+          />
+        </div>
+      </Table>
     </div>
   );
 };

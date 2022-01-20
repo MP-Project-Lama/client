@@ -17,8 +17,8 @@ const NavBar = () => {
     };
   });
 
-  ////
 
+//// logout 
 function logout() {
     try {
       dispatch(signOut());
@@ -26,11 +26,14 @@ function logout() {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
+  
   return (
     <div>
       <div>
-        <h1 className="logo">FASHIONDARY</h1>
+        <div className="navHeader">
+          <h1 className="logo">FASHIONDARY</h1>
+        </div>
       </div>
       <nav>
         <ul className="navBar">
@@ -51,7 +54,7 @@ function logout() {
                   {state.user.username.toUpperCase()}
                 </Link>
               </li>
-              <AiOutlineLogout onClick={logout}  className="logoutIcon"/>
+              <AiOutlineLogout onClick={logout} className="logoutIcon" />
             </>
           ) : (
             <li>

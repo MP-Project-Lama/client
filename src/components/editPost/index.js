@@ -19,7 +19,7 @@ const EditPost = () => {
   const [images, setImages] = useState([]);
   const [progress, setProgress] = useState(0);
   const navigate = useNavigate();
-   const fileList = [];
+  const fileList = [];
   ////
   const state = useSelector((state) => {
     return {
@@ -29,17 +29,13 @@ const EditPost = () => {
     };
   });
 
-  ///
-
   useEffect(() => {
     getThePost();
-    
   }, []);
 
-  ///
+  /// getThePost
   const getThePost = async () => {
     try {
-  
       const res = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/post/${id}`,
         {
@@ -53,9 +49,10 @@ const EditPost = () => {
       console.log(error);
     }
   };
-  ///
 
+  /// editPost
   const editPost = async () => {
+    handleUpload();
     await axios.put(
       `${process.env.REACT_APP_BASE_URL}/post/${id}`,
       {
@@ -79,7 +76,7 @@ const EditPost = () => {
     navigate("/blog");
   };
 
-  ///
+  /// handleChange
   const handleChange = (e) => {
     console.log(e.fileList, "<----");
     for (let i = 0; i < e.fileList.length; i++) {
@@ -89,49 +86,49 @@ const EditPost = () => {
     }
   };
 
- const handleUpload = (image) => {
-   const promises = [];
-   images.map((image) => {
-     const uploadTask = storage.ref(`images/${image.name}`).put(image);
-     promises.push(uploadTask);
-     uploadTask.on(
-       "state_changed",
-       (snapshot) => {
-         const progress = Math.round(
-           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-         );
-         setProgress(progress);
-       },
-       (error) => {
-         console.log(error);
-       },
-       async () => {
-         await storage
-           .ref("images")
-           .child(image.name)
-           .getDownloadURL()
-           .then((urls) => {
-             setUrls((prevState) => [...prevState, urls]);
-             console.log("image:===", image);
-             console.log("urls:===", urls);
-           })
-           .catch((err) => {
-             console.log("err firebase upload", err);
-           });
-       }
-     );
-   });
+  ///handleUpload
+  const handleUpload = (image) => {
+    const promises = [];
+    images.map((image) => {
+      const uploadTask = storage.ref(`images/${image.name}`).put(image);
+      promises.push(uploadTask);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setProgress(progress);
+        },
+        (error) => {
+          console.log(error);
+        },
+        async () => {
+          await storage
+            .ref("images")
+            .child(image.name)
+            .getDownloadURL()
+            .then((urls) => {
+              setUrls((prevState) => [...prevState, urls]);
+              console.log("image:===", image);
+              console.log("urls:===", urls);
+            })
+            .catch((err) => {
+              console.log("err firebase upload", err);
+            });
+        }
+      );
+    });
 
-   Promise.all(promises)
-     .then(() => console.log("images have been uploaded"))
-     .catch((error) => console.log("firebase promise error", error));
- };
+    Promise.all(promises)
+      .then(() => console.log("images have been uploaded"))
+      .catch((error) => console.log("firebase promise error", error));
+  };
   return (
     <div>
       {post.map((ele) => {
         return (
           <div>
-
             <Form
               labelCol={{
                 span: 4,
@@ -176,9 +173,7 @@ const EditPost = () => {
                   defaultFileList={[...fileList]}
                   onChange={handleChange}
                 >
-                  <Button icon={<UploadOutlined />}>
-                    Upload files
-                  </Button>
+                  <Button icon={<UploadOutlined />}>Upload files</Button>
                 </Upload>
               </Form.Item>
 

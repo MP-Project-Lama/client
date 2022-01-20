@@ -3,11 +3,10 @@ import { storage } from "../firebase";
 import axios from "axios";
 import "./style.css";
 import { useSelector } from "react-redux";
-import Swal from "sweetalert2";
-import { Button, Upload, Form, Select, Input } from "antd";
 import "antd/dist/antd.css";
-import { UploadOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
+import { GoCloudUpload } from "react-icons/go";
 
 const AddPost = () => {
   const [firstDesc, setFirstDesc] = useState("");
@@ -18,9 +17,7 @@ const AddPost = () => {
   const [images, setImages] = useState([]);
   const [progress, setProgress] = useState(0);
   const navigate = useNavigate();
-   const fileList = [];
 
-  ///
   const state = useSelector((state) => {
     return {
       user: state.Login.user,
@@ -29,64 +26,18 @@ const AddPost = () => {
     };
   });
 
-
-
-  /////
+  /// handleChange function
   const handleChange = (e) => {
-    console.log(e.fileList, "<----");
-    for (let i = 0; i < e.fileList.length; i++) {
-      const newImg = e.fileList[i];
+    for (let i = 0; i < e.target.files.length; i++) {
+      const newImg = e.target.files[i];
       newImg["id"] = Math.random();
       setImages((prevState) => [...prevState, newImg]);
     }
   };
 
-  const handleUpload = (image) => {
-    // console.log(images);
-    const promises = [];
-    images.map((image) => {
-      const uploadTask = storage.ref(`images/${image.name}`).put(image);
-      promises.push(uploadTask);
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress = Math.round(
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          );
-          setProgress(progress);
-        },
-        (error) => {
-          console.log(error);
-        },
-        async () => {
-          await storage
-            .ref("images")
-            .child(image.name)
-            .getDownloadURL()
-            .then((urls) => {
-              setUrls((prevState) => [...prevState, urls]);
-              console.log("image:===", image);
-              console.log("urls:===", urls);
-            })
-            .catch((err) => {
-              console.log("err firebase upload", err);
-            });
-        }
-      );
-    });
-
-    Promise.all(promises)
-      .then(() => console.log("images have been uploaded"))
-      .catch((error) => console.log("firebase promise error", error));
-  };
-
-  /////
-
-  //// create the post
+  /// create the post
   const addThePost = async () => {
-    console.log(firstDesc);
     try {
-      handleUpload();
       await axios.post(
         `${process.env.REACT_APP_BASE_URL}/post`,
         {
@@ -114,61 +65,102 @@ const AddPost = () => {
       console.log(error);
     }
   };
- 
+
+  /// handleUpload
+  const handleUpload = () => {
+    console.log("images", images);
+    const promises = [];
+    const urlsImgs = [];
+    images.map((image) => {
+      const uploadTask = storage.ref(`images/${image.name}`).put(image);
+      promises.push(uploadTask);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setProgress(progress);
+        },
+        (error) => {
+          console.log(error);
+        },
+        async () => {
+          await storage
+            .ref("images")
+            .child(image.name)
+            .getDownloadURL()
+            .then((urls) => {
+              urlsImgs.push(urls);
+              setUrls((prevState) => [...prevState, urls]);
+              console.log("image:===", image);
+              console.log("urls:===", urls);
+            });
+        }
+      );
+    });
+
+    Promise.all(promises)
+      .then(() => {
+        console.log("urls", urls);
+        console.log("images have been uploaded");
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <div>
-      <div>
-        <Form
-          labelCol={{
-            span: 4,
-          }}
-          wrapperCol={{
-            span: 14,
-          }}
-        >
-          <Form.Item
-            label="Title"
-            name="Title"
-            onChange={(e) => setTitle(e.target.value)}
-            rules={[
-              {
-                required: true,
-                message: "Please input your username!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item label="introduction">
-            <Input.TextArea onChange={(e) => setFirstDesc(e.target.value)} />
-          </Form.Item>
-          <Form.Item label="Description">
-            <Input.TextArea onChange={(e) => setSecDesc(e.target.value)} />
-          </Form.Item>
-          <Form.Item label="final">
-            <Input.TextArea onChange={(e) => setFinalDesc(e.target.value)} />
-          </Form.Item>
-
-          <Form.Item label="Button">
-          <Upload
+      <div className="postForm">
+        <input
+          className="postTitle"
+          type="text"
+          placeholder="title"
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <div className="textareaDiv">
+          <textarea
+            className="postInput"
+            type="text"
+            placeholder="Enter the intro here ..."
+            onChange={(e) => setFirstDesc(e.target.value)}
+          />
+        </div>
+        <div className="textareaDiv">
+          <textarea
+            className="postInput"
+            type="text"
+            placeholder="Enter the subject here ..."
+            onChange={(e) => setSecDesc(e.target.value)}
+          />
+        </div>
+        <div className="textareaDiv">
+          <textarea
+            className="postInput"
+            type="text"
+            placeholder="Enter the last part here ..."
+            onChange={(e) => setFinalDesc(e.target.value)}
+          />
+        </div>
+        <div className="uploadBtns">
+          <input
+            className="choosefile"
+            type="file"
             multiple
-            listType="picture"
-            className="upload-list-inline"
-            defaultFileList={[...fileList]}
             onChange={handleChange}
-          >
-            <Button icon={<UploadOutlined />}>Upload files</Button>
-          </Upload>
-          </Form.Item>
-
-          <Form.Item label="Button">
-            <Button type="primary" onClick={addThePost}>
-              Add Post
-            </Button>
-          </Form.Item>
-        </Form>
-
+          />
+          <input
+            type="submit"
+            value="add files"
+            onClick={handleUpload}
+            className="submitPost"
+          />
+        </div>
+        <input
+          type="submit"
+          value="Add Post"
+          onClick={addThePost}
+          className="AddColl"
+        />
       </div>
     </div>
   );

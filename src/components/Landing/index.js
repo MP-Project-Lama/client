@@ -1,21 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import NavBar from "../NavBar";
 import "./style.css";
 
 const Home = () => {
   return (
-    <div>
+    <div className="landing">
       <NavBar />
+        
+        <div className="home-bg">
+          <img
+            src="https://www.dior.com/couture/var/dior/storage/images/25778945/17-eng-GB/cdc-femme-gift-for-her6_1440_1200.jpg"
+            alt="background img"
+          />
+        </div>
+     
 
-      <div className="home-bg">
-        <img
-          src="https://www.dior.com/couture/var/dior/storage/images/25778945/17-eng-GB/cdc-femme-gift-for-her6_1440_1200.jpg"
-          alt="background img"
-        />
-      </div>
-
-      <div className="about">
+       <div className="about">
         <div className="about-section">
           <p className="fashiondary">
             <span>FASHIONDARY</span> is an Arabian platform , that gather
@@ -32,6 +32,7 @@ const Home = () => {
           />
         </div>
       </div>
+
       <div className="about-blog-section">
         <div className="blogPic">
           <img
@@ -52,7 +53,6 @@ const Home = () => {
         <hr />
         <h3> User Service</h3>
 
-       
         <form className="concat-form">
           <input
             type="text"
@@ -67,7 +67,11 @@ const Home = () => {
             className="concat-submit"
           />
         </form>
-      </div>
+      </div>  
+
+
+
+
     </div>
   );
 };

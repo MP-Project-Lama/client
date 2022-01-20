@@ -36,9 +36,35 @@ text-align: center;
   background: #000;
   border: none;
   color: #ffff;
+  
 }
 
 .slideshow img {
   width: 500px;
   height: 600px;
+}
+
+@media only screen and (max-width: 700px) {
+    .collection-header{
+      width: 80%;
+    }
+  .collection-header h2{
+    font-size: 25px;
+  }
+  .collection-header p{
+    font-size: 14px;
+  }
+  .slides{
+    display: flex;
+    flex-direction: column;
+
+ 
+  }
+ 
+  .slideshow img {
+    margin-top: 30px;
+    width: 150px;
+    height: 150px;
+  }
+
 }

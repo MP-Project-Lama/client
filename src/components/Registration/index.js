@@ -5,9 +5,10 @@ import PasswordChecklist from "react-password-checklist";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
-import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import { useAlert } from "react-alert";
+import 'antd/dist/antd.css';
+
 import "./style.css";
 
 const popupTools = require("popup-tools");
@@ -31,8 +32,7 @@ const Registration = () => {
     };
   });
 
-  ///
- 
+ /// signup function
   const signup = async () => {
     let exist = false;
     users.filter((user) => {
@@ -48,6 +48,8 @@ const Registration = () => {
         timeout: 5000,
         type: 'info',
       });
+      
+
     } else {
       try {
         const res = await axios.post(
@@ -66,6 +68,7 @@ const Registration = () => {
     }
   };
 
+  /// login function 
   const login = async () => {
     try {
       const result = await axios.post(
@@ -99,6 +102,7 @@ const Registration = () => {
           timeout: 5000,
           type: "error",
         });
+
       }
 
       if (error.response.status === 400) {
@@ -107,6 +111,7 @@ const Registration = () => {
           timeout: 5000,
           type: "error",
         });
+
       }
     }
   };
@@ -114,6 +119,7 @@ const Registration = () => {
     document.querySelector("#flipper").classList.toggle("flip");
   };
 
+  /// reset password function
   const resetPassword = async () => {
     const { value: email } = await Swal.fire({
       title: "Reset Password",
@@ -130,6 +136,7 @@ const Registration = () => {
           email,
         });
         
+
        
         alert.show('Confirm your email to reset the password', {
           timeout: 5000,
@@ -138,6 +145,7 @@ const Registration = () => {
         navigate("/reset/:id");
       } catch (error) {
         
+
         alert.show('Somthing Went Wrong !', {
           timeout: 5000,
           type: 'error',
@@ -146,6 +154,7 @@ const Registration = () => {
     }
   };
 
+  /// login with google function 
  const googleLogin = () => {
    popupTools.popup(
      `${process.env.REACT_APP_BASE_URL}/auth/google`,
@@ -164,100 +173,102 @@ const Registration = () => {
  };
 
 
-
-
-  ///
-
   return (
-    <div className="registerCom">
-      <div className="flip-container">
-        {!state.token ? (
-          <div className="flipper" id="flipper">
-            <div className="front">
-              <h2 className="title"> Login </h2>
-              <button className="googleBtn" onClick={googleLogin}>
-                <FcGoogle id="fcGoogle" />
-                Login with google
-              </button>
-              <h2 id="or"> - OR -</h2>
-              <input
-                type="email"
-                name="email"
-                placeholder="Email or Username"
-                required
-                className="inputs"
-                onChange={(e) => setIdentity(e.target.value)}
-              />
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                className="inputs"
-                required
-                onChange={(e) => setLoginPassword(e.target.value)}
-              />
-              <div className="logBtn">
-              <input
-                type="submit"
-                value="login"
-                className="signup-submit"
-                onClick={login}
-              />
-              </div>
-              <p id="forgotID" onClick={resetPassword}> forgot your password?</p>
-
-              <p className="flipbutton" onClick={flipCard}>
-                Not a member? Sign up here
-              </p>
-            </div>
-            <div className="back">
-              <h2 className="title">Register</h2>
-
-              <input
-                type="text"
-                placeholder="username"
-                className="inputs"
-                required
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              <input
-                type="text"
-                placeholder="Email"
-                className="inputs"
-                required
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                className="inputs"
-                required
-                onChange={(e) => setPassword(e.target.value)}
-              />
+    <div className="mainCom">
+     
+      <div className="inner">
+        <div className="flip-container">
+          {!state.token ? (
+            <div className="flipper" id="flipper">
+              <div className="front">
+                <h2 className="title"> Login </h2>
+                <button className="googleBtn" onClick={googleLogin}>
+                  <img src="https://img.icons8.com/fluency/30/000000/google-logo.png" />
+                  Login with google
+                </button>
+                <h2 id="or"> - OR -</h2>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email or Username"
+                  required
+                  className="inputs"
+                  onChange={(e) => setIdentity(e.target.value)}
+                />
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  className="inputs"
+                  required
+                  onChange={(e) => setLoginPassword(e.target.value)}
+                />
                 <div className="logBtn">
-              <input
-                type="submit"
-                className="signup-submit"
-                name="submit"
-                value="Signup"
-                onClick={() => {
-                  signup();
-                }}
-              />
-              </div>
+                  <input
+                    type="submit"
+                    value="login"
+                    className="signup-submit"
+                    onClick={login}
+                  />
+                </div>
+                <p id="forgotID" onClick={resetPassword}>
+                  forgot your password?
+                </p>
 
-              <p className="flipbutton" onClick={flipCard}>
-                Are you a member? Login here
-              </p>
+                <p className="flipbutton" onClick={flipCard}>
+                  Not a member? Sign up here
+                </p>
+              </div>
+              <div className="back">
+                <h2 className="title">Register</h2>
+
+                <input
+                  type="text"
+                  placeholder="username"
+                  className="inputs"
+                  required
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+                <input
+                  type="text"
+                  placeholder="Email"
+                  className="inputs"
+                  required
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <input
+                  type="password"
+                  placeholder="Password"
+                  className="inputs"
+                  required
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <div className="logBtn">
+                  <input
+                    type="submit"
+                    className="signup-submit"
+                    name="submit"
+                    value="Signup"
+                    onClick={() => {
+                      signup();
+                    }}
+                  />
+                </div>
+
+                <p className="flipbutton" onClick={flipCard}>
+                  Are you a member? Login here
+                </p>
+              </div>
             </div>
-          </div>
-        ) : (
-          <div>
-            <h1>
-              You Already Logged in , Go to <Link to="/"> Home </Link>
-            </h1>
-          </div>
-        )}
+          ) : (
+            <div>
+              <h1>
+                You Already Logged in , Go to <Link to="/"> Home </Link>
+              </h1>
+            </div>
+          )}
+        </div>
+        
       </div>
     </div>
   );

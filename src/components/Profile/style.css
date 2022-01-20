@@ -1,18 +1,33 @@
+.profilePage{
+    padding-bottom: 10px;
+}
 .profile {
-    border: 1px solid black;
-    width: 55%;
-    margin: 15%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  width: 40%;
+  margin: 7% 30%;
+  display: flex;
+  padding-bottom: 25px;
+  flex-direction: column;
+  align-items: center;
+}
+.userInfo{
+    font-size: 30px;
+}
+.userInfo span{
+    font-weight: bolder;
+}
+.profile img {
+  padding-top: 20px;
+  width: 270px;
+  height: 270px;
+  border-radius: 180px;
 
-   
+}
+.profile button {
+  margin-right: 30px;
+  margin-top: 25px;
 }
 
-.profile img {
-    width: 250px;
-    height: 250px;
-}
-.profile img {
-    border-radius: 180px;
+.userIcons , .userInfo span{
+      color: #B9944E;
 }

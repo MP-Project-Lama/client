@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import io from "socket.io-client";
 import NavBar from "../NavBar";
 
-
 let socket;
 const CONNECTION_PORT = process.env.REACT_APP_BASE_URL;
 
@@ -14,16 +13,20 @@ function DirectMessage() {
   const [messagesList, setMessagesList] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
 
-/////
-const state = useSelector((state) => {
-  return {
-    token: state.Login.token,
-    user: state.Login.user,
-  };
-});
+  
+  const state = useSelector((state) => {
+    return {
+      token: state.Login.token,
+      user: state.Login.user,
+    };
+  });
 
-////
 
+
+  useEffect(() => {
+   
+    
+  }, [])
 
   useEffect(() => {
     socket = io(CONNECTION_PORT);
@@ -35,35 +38,33 @@ const state = useSelector((state) => {
     });
   }, [messagesList]);
 
-useEffect(() => {
-    connectRoom();
- 
-}, [])
 
   const send = () => {
-    const messageContent = { username : state.user.username, content: message, room };
+    const messageContent = {
+      username: state.user.username,
+      content: message,
+      room,
+    };
 
     socket.emit("send_message", messageContent);
     setMessagesList([...messagesList, messageContent]);
-    
   };
 
   const connectRoom = () => {
-    if (state.token) {
-      console.log(room);
+    if (state.user.username && room) {
       socket.emit("join_room", { username: state.user.username, room });
       setLoggedIn(true);
       setRoom("");
     }
   };
-  
 
   return (
     <>
       {!loggedIn ? (
         <>
-        <NavBar/>
-         <h3>you have to register to message the designer </h3>
+          <NavBar />
+          <h3>you have to register to message the designer </h3>
+          <button onClick={connectRoom}>click</button>
         </>
       ) : (
         <>

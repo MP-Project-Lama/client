@@ -8,10 +8,8 @@
   box-sizing: border-box;
 }
 .post-container {
-  width: 70%;
-  margin: 90px 25%;
- 
- 
+  width: 60%;
+  margin: 90px auto;
 }
 .post-container h2 {
   font-size: 40px;
@@ -20,11 +18,11 @@
   margin-bottom: 200px;
 }
 .post-container img {
-  width: 900px;
-  height: 900px;
+  min-width: 55vw;
+  height: 95vh;
 }
 .post-container p {
-  width: 70%;
+  width: 80%;
   margin: 30px 0;
   font-size: 30px;
   font-family: "Dosis", sans-serif;

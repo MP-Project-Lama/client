@@ -33,6 +33,7 @@ const Blog = () => {
       console.log(error);
     }
   };
+  
   return (
     <div className="blog-container">
       <NavBar />
@@ -44,7 +45,8 @@ const Blog = () => {
           <h2>- Blog - </h2>
         </div>
       </div>
-      {state.role.role === "Designer" && (
+      {state.token &&
+      state.role.role === "Designer" && (
         <button onClick={()=> navigate("/post")} className="addPost">
           Add Post 
         </button>
@@ -56,7 +58,6 @@ const Blog = () => {
             <ul>
               <Link to={`/post/${post._id}`}>
                 <li key={post._id}>
-                  {console.log(post.media)}
                   <img src={post.media[0]} />
                   <h3> {post.title} </h3>
                   <div>
